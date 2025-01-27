@@ -51,6 +51,8 @@ namespace Vil_Management
             panelNav.Top = btnUpdate.Top;
             panelNav.Left = btnUpdate.Left;
             btnUpdate.BackColor = Color.FromArgb(46, 51, 73);
+            updateControl1.BringToFront();
+            labelTitle.Text = "Update Data";
         }
 
         private void btnTools_Click(object sender, EventArgs e)
@@ -59,6 +61,8 @@ namespace Vil_Management
             panelNav.Top = btnTools.Top;
             panelNav.Left = btnTools.Left;
             btnTools.BackColor = Color.FromArgb(46, 51, 73);
+            toolsControl1.BringToFront();
+            labelTitle.Text = "Tools";
         }
 
         private void btnContactUs_Click(object sender, EventArgs e)

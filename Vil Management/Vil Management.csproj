@@ -11,6 +11,11 @@
 
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="2.8.0" />
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
+    <PackageReference Include="EPPlus" Version="7.5.3" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.12.6" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.28.0" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="131.0.2903.48" />
   </ItemGroup>
 
   <ItemGroup>

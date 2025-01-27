@@ -519,7 +519,7 @@ namespace Vil_Management
             btnGnrtNmrlgy.Enabled = false;
             //progressBar1.Visible = true;
             loading.Visible = true;
-            
+
 
             List<string> modifiedItems = new List<string>();
 
@@ -532,7 +532,7 @@ namespace Vil_Management
                         string modifiedItem = item.ToString() + item2 + i.ToString("D4");
                         modifiedItems.Add(modifiedItem);
                         //dataGridView2.Rows.Add(modifiedItem);
-                        
+
                     }
                 }
             }
@@ -922,8 +922,50 @@ namespace Vil_Management
             cbPair.Items.Clear();
         }
 
+        private void btnCheckSum_Click(object sender, EventArgs e)
+        {
+            string inputNumber = tbCheckSum.Text;
+            // Validate if the input is a valid 10-digit number
+            if (inputNumber.Length != 10 || !long.TryParse(inputNumber, out _))
+            {
+                MessageBox.Show("Please enter a valid 10-digit number.");
+                return;
+            }
 
+            int sum = 0;
+            foreach (char digit in inputNumber)
+            {
+                sum += int.Parse(digit.ToString());
+            }
 
+            tbTotalSum2digit.Text = sum.ToString();
+            tbFinalSum.Text = sum.ToString();
 
+            // If the sum is a two-digit number, calculate the sum of its digits again
+            if (sum >= 10 && sum <= 99)
+            {
+                sum = SumOfDigits(sum);
+                tbFinalSum.Text = sum.ToString();
+            }
+
+            if (sum >= 10 && sum <= 99)
+            {
+                sum = SumOfDigits(sum);
+                tbFinalSum.Text = sum.ToString();
+            }
+
+        }
+
+        // Helper function to sum the digits of a number
+        private int SumOfDigits(int number)
+        {
+            int sum = 0;
+            while (number > 0)
+            {
+                sum += number % 10;
+                number /= 10;
+            }
+            return sum;
+        }
     }
 }

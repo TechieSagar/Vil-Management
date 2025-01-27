@@ -29,7 +29,12 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnCheckSum = new Button();
+            tbFinalSum = new TextBox();
+            tbTotalSum2digit = new TextBox();
+            tbCheckSum = new TextBox();
             label2 = new Label();
+            label12 = new Label();
             label1 = new Label();
             btnRefresh = new Button();
             cbSrsNmbrs = new ComboBox();
@@ -156,7 +161,12 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(37, 42, 64);
+            panel1.Controls.Add(btnCheckSum);
+            panel1.Controls.Add(tbFinalSum);
+            panel1.Controls.Add(tbTotalSum2digit);
+            panel1.Controls.Add(tbCheckSum);
             panel1.Controls.Add(label2);
+            panel1.Controls.Add(label12);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnRefresh);
             panel1.Controls.Add(cbSrsNmbrs);
@@ -167,21 +177,66 @@
             panel1.Size = new Size(530, 101);
             panel1.TabIndex = 0;
             // 
+            // btnCheckSum
+            // 
+            btnCheckSum.Location = new Point(314, 6);
+            btnCheckSum.Name = "btnCheckSum";
+            btnCheckSum.Size = new Size(94, 29);
+            btnCheckSum.TabIndex = 7;
+            btnCheckSum.Text = "Check Sum";
+            btnCheckSum.UseVisualStyleBackColor = true;
+            btnCheckSum.Click += btnCheckSum_Click;
+            // 
+            // tbFinalSum
+            // 
+            tbFinalSum.Enabled = false;
+            tbFinalSum.Location = new Point(465, 7);
+            tbFinalSum.Name = "tbFinalSum";
+            tbFinalSum.Size = new Size(41, 27);
+            tbFinalSum.TabIndex = 6;
+            tbFinalSum.TextAlign = HorizontalAlignment.Center;
+            // 
+            // tbTotalSum2digit
+            // 
+            tbTotalSum2digit.Enabled = false;
+            tbTotalSum2digit.Location = new Point(418, 7);
+            tbTotalSum2digit.Name = "tbTotalSum2digit";
+            tbTotalSum2digit.Size = new Size(41, 27);
+            tbTotalSum2digit.TabIndex = 6;
+            tbTotalSum2digit.TextAlign = HorizontalAlignment.Center;
+            // 
+            // tbCheckSum
+            // 
+            tbCheckSum.Location = new Point(163, 7);
+            tbCheckSum.Name = "tbCheckSum";
+            tbCheckSum.Size = new Size(145, 27);
+            tbCheckSum.TabIndex = 5;
+            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(256, 19);
+            label2.Location = new Point(256, 41);
             label2.Name = "label2";
             label2.Size = new Size(254, 20);
             label2.TabIndex = 4;
             label2.Text = "Available series to generate numbers";
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(14, 10);
+            label12.Name = "label12";
+            label12.Size = new Size(143, 20);
+            label12.TabIndex = 4;
+            label12.Text = "Check Number Sum ";
+            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(14, 19);
+            label1.Location = new Point(14, 41);
             label1.Name = "label1";
             label1.Size = new Size(163, 20);
             label1.TabIndex = 4;
@@ -190,7 +245,7 @@
             // btnRefresh
             // 
             btnRefresh.ForeColor = Color.Black;
-            btnRefresh.Location = new Point(418, 42);
+            btnRefresh.Location = new Point(418, 64);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(94, 29);
             btnRefresh.TabIndex = 3;
@@ -201,7 +256,7 @@
             // cbSrsNmbrs
             // 
             cbSrsNmbrs.FormattingEnabled = true;
-            cbSrsNmbrs.Location = new Point(256, 42);
+            cbSrsNmbrs.Location = new Point(256, 64);
             cbSrsNmbrs.Name = "cbSrsNmbrs";
             cbSrsNmbrs.Size = new Size(156, 28);
             cbSrsNmbrs.TabIndex = 2;
@@ -209,7 +264,7 @@
             // btnInsertSeries
             // 
             btnInsertSeries.ForeColor = Color.Black;
-            btnInsertSeries.Location = new Point(123, 42);
+            btnInsertSeries.Location = new Point(120, 64);
             btnInsertSeries.Name = "btnInsertSeries";
             btnInsertSeries.Size = new Size(94, 29);
             btnInsertSeries.TabIndex = 1;
@@ -219,7 +274,7 @@
             // 
             // tbInserSrs
             // 
-            tbInserSrs.Location = new Point(23, 43);
+            tbInserSrs.Location = new Point(20, 65);
             tbInserSrs.Name = "tbInserSrs";
             tbInserSrs.Size = new Size(94, 27);
             tbInserSrs.TabIndex = 0;
@@ -293,7 +348,7 @@
             // btnInsertNrlgy
             // 
             btnInsertNrlgy.ForeColor = Color.Black;
-            btnInsertNrlgy.Location = new Point(177, 41);
+            btnInsertNrlgy.Location = new Point(174, 42);
             btnInsertNrlgy.Name = "btnInsertNrlgy";
             btnInsertNrlgy.Size = new Size(94, 29);
             btnInsertNrlgy.TabIndex = 1;
@@ -303,7 +358,7 @@
             // 
             // tbNumerology
             // 
-            tbNumerology.Location = new Point(23, 43);
+            tbNumerology.Location = new Point(20, 43);
             tbNumerology.Name = "tbNumerology";
             tbNumerology.Size = new Size(148, 27);
             tbNumerology.TabIndex = 0;
@@ -1479,5 +1534,10 @@
         private DataGridViewTextBoxColumn Column19;
         private ProgressBar progressBar1;
         private Label loading;
+        private TextBox tbTotalSum2digit;
+        private TextBox tbCheckSum;
+        private Label label12;
+        private Button btnCheckSum;
+        private TextBox tbFinalSum;
     }
 }
