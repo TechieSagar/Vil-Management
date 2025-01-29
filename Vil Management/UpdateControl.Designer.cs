@@ -29,11 +29,17 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnUpdateTarget = new Button();
+            dataGridView1 = new DataGridView();
             btnUpdateVsearch = new Button();
+            btnUpdateEq = new Button();
+            btnUpdateDq = new Button();
             btnUpdateRetainedNo = new Button();
             btnUpdateRetention = new Button();
             btnUpdateTnps = new Button();
             btnUpdateSale = new Button();
+            tbUpdateEq = new TextBox();
+            tbUpdateDq = new TextBox();
             tbUpdateRetentionNo = new TextBox();
             tbUpdateRetention = new TextBox();
             tbUpdateVsearch = new TextBox();
@@ -46,17 +52,32 @@
             tbUpdateContest = new TextBox();
             dtpContest = new DateTimePicker();
             label2 = new Label();
+            ColumnSale = new DataGridViewTextBoxColumn();
+            ColumnSaleTarget = new DataGridViewTextBoxColumn();
+            ColumnTNPS = new DataGridViewTextBoxColumn();
+            ColumnVsearch = new DataGridViewTextBoxColumn();
+            ColumnRetention = new DataGridViewTextBoxColumn();
+            ColumnRetainedNo = new DataGridViewTextBoxColumn();
+            ColumnEq = new DataGridViewTextBoxColumn();
+            ColumnDq = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnUpdateTarget);
+            panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(btnUpdateVsearch);
+            panel1.Controls.Add(btnUpdateEq);
+            panel1.Controls.Add(btnUpdateDq);
             panel1.Controls.Add(btnUpdateRetainedNo);
             panel1.Controls.Add(btnUpdateRetention);
             panel1.Controls.Add(btnUpdateTnps);
             panel1.Controls.Add(btnUpdateSale);
+            panel1.Controls.Add(tbUpdateEq);
+            panel1.Controls.Add(tbUpdateDq);
             panel1.Controls.Add(tbUpdateRetentionNo);
             panel1.Controls.Add(tbUpdateRetention);
             panel1.Controls.Add(tbUpdateVsearch);
@@ -66,8 +87,28 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(25, 21);
             panel1.Name = "panel1";
-            panel1.Size = new Size(520, 333);
+            panel1.Size = new Size(520, 581);
             panel1.TabIndex = 0;
+            // 
+            // btnUpdateTarget
+            // 
+            btnUpdateTarget.Location = new Point(355, 47);
+            btnUpdateTarget.Name = "btnUpdateTarget";
+            btnUpdateTarget.Size = new Size(138, 29);
+            btnUpdateTarget.TabIndex = 4;
+            btnUpdateTarget.Text = "update target";
+            btnUpdateTarget.UseVisualStyleBackColor = true;
+            btnUpdateTarget.Click += btnUpdateTarget_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnSale, ColumnSaleTarget, ColumnTNPS, ColumnVsearch, ColumnRetention, ColumnRetainedNo, ColumnEq, ColumnDq });
+            dataGridView1.Location = new Point(28, 315);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(465, 263);
+            dataGridView1.TabIndex = 3;
             // 
             // btnUpdateVsearch
             // 
@@ -77,6 +118,27 @@
             btnUpdateVsearch.TabIndex = 2;
             btnUpdateVsearch.Text = "Update";
             btnUpdateVsearch.UseVisualStyleBackColor = true;
+            btnUpdateVsearch.Click += btnUpdateVsearch_Click;
+            // 
+            // btnUpdateEq
+            // 
+            btnUpdateEq.Location = new Point(255, 209);
+            btnUpdateEq.Name = "btnUpdateEq";
+            btnUpdateEq.Size = new Size(94, 29);
+            btnUpdateEq.TabIndex = 2;
+            btnUpdateEq.Text = "Update";
+            btnUpdateEq.UseVisualStyleBackColor = true;
+            btnUpdateEq.Click += btnUpdateEq_Click;
+            // 
+            // btnUpdateDq
+            // 
+            btnUpdateDq.Location = new Point(255, 241);
+            btnUpdateDq.Name = "btnUpdateDq";
+            btnUpdateDq.Size = new Size(94, 29);
+            btnUpdateDq.TabIndex = 2;
+            btnUpdateDq.Text = "Update";
+            btnUpdateDq.UseVisualStyleBackColor = true;
+            btnUpdateDq.Click += btnUpdateDq_Click;
             // 
             // btnUpdateRetainedNo
             // 
@@ -86,6 +148,7 @@
             btnUpdateRetainedNo.TabIndex = 2;
             btnUpdateRetainedNo.Text = "Update";
             btnUpdateRetainedNo.UseVisualStyleBackColor = true;
+            btnUpdateRetainedNo.Click += btnUpdateRetainedNo_Click;
             // 
             // btnUpdateRetention
             // 
@@ -95,6 +158,7 @@
             btnUpdateRetention.TabIndex = 2;
             btnUpdateRetention.Text = "Update";
             btnUpdateRetention.UseVisualStyleBackColor = true;
+            btnUpdateRetention.Click += btnUpdateRetention_Click;
             // 
             // btnUpdateTnps
             // 
@@ -104,6 +168,7 @@
             btnUpdateTnps.TabIndex = 2;
             btnUpdateTnps.Text = "Update";
             btnUpdateTnps.UseVisualStyleBackColor = true;
+            btnUpdateTnps.Click += btnUpdateTnps_Click;
             // 
             // btnUpdateSale
             // 
@@ -114,6 +179,22 @@
             btnUpdateSale.Text = "Update";
             btnUpdateSale.UseVisualStyleBackColor = true;
             btnUpdateSale.Click += btnUpdateSale_Click;
+            // 
+            // tbUpdateEq
+            // 
+            tbUpdateEq.Location = new Point(28, 211);
+            tbUpdateEq.Name = "tbUpdateEq";
+            tbUpdateEq.PlaceholderText = "Enter EQ progress";
+            tbUpdateEq.Size = new Size(221, 27);
+            tbUpdateEq.TabIndex = 1;
+            // 
+            // tbUpdateDq
+            // 
+            tbUpdateDq.Location = new Point(28, 243);
+            tbUpdateDq.Name = "tbUpdateDq";
+            tbUpdateDq.PlaceholderText = "Enter DQ progress";
+            tbUpdateDq.Size = new Size(221, 27);
+            tbUpdateDq.TabIndex = 1;
             // 
             // tbUpdateRetentionNo
             // 
@@ -193,6 +274,7 @@
             btnUpdateConest.TabIndex = 3;
             btnUpdateConest.Text = "Save";
             btnUpdateConest.UseVisualStyleBackColor = true;
+            btnUpdateConest.Click += btnUpdateConest_Click;
             // 
             // tbUpdateContest
             // 
@@ -220,6 +302,62 @@
             label2.TabIndex = 0;
             label2.Text = "Contest";
             // 
+            // ColumnSale
+            // 
+            ColumnSale.HeaderText = "Sale";
+            ColumnSale.MinimumWidth = 6;
+            ColumnSale.Name = "ColumnSale";
+            ColumnSale.Width = 125;
+            // 
+            // ColumnSaleTarget
+            // 
+            ColumnSaleTarget.HeaderText = "Target";
+            ColumnSaleTarget.MinimumWidth = 6;
+            ColumnSaleTarget.Name = "ColumnSaleTarget";
+            ColumnSaleTarget.Width = 125;
+            // 
+            // ColumnTNPS
+            // 
+            ColumnTNPS.HeaderText = "TNPS";
+            ColumnTNPS.MinimumWidth = 6;
+            ColumnTNPS.Name = "ColumnTNPS";
+            ColumnTNPS.Width = 125;
+            // 
+            // ColumnVsearch
+            // 
+            ColumnVsearch.HeaderText = "V Search";
+            ColumnVsearch.MinimumWidth = 6;
+            ColumnVsearch.Name = "ColumnVsearch";
+            ColumnVsearch.Width = 125;
+            // 
+            // ColumnRetention
+            // 
+            ColumnRetention.HeaderText = "Retention";
+            ColumnRetention.MinimumWidth = 6;
+            ColumnRetention.Name = "ColumnRetention";
+            ColumnRetention.Width = 125;
+            // 
+            // ColumnRetainedNo
+            // 
+            ColumnRetainedNo.HeaderText = "Retained Numbers";
+            ColumnRetainedNo.MinimumWidth = 6;
+            ColumnRetainedNo.Name = "ColumnRetainedNo";
+            ColumnRetainedNo.Width = 125;
+            // 
+            // ColumnEq
+            // 
+            ColumnEq.HeaderText = "Eq";
+            ColumnEq.MinimumWidth = 6;
+            ColumnEq.Name = "ColumnEq";
+            ColumnEq.Width = 125;
+            // 
+            // ColumnDq
+            // 
+            ColumnDq.HeaderText = "Dq";
+            ColumnDq.MinimumWidth = 6;
+            ColumnDq.Name = "ColumnDq";
+            ColumnDq.Width = 125;
+            // 
             // UpdateControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -231,6 +369,7 @@
             Size = new Size(1377, 759);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
@@ -256,5 +395,19 @@
         private Button btnUpdateConest;
         private TextBox tbUpdateContest;
         private DateTimePicker dtpContest;
+        private DataGridView dataGridView1;
+        private Button btnUpdateTarget;
+        private Button btnUpdateDq;
+        private TextBox tbUpdateDq;
+        private Button btnUpdateEq;
+        private TextBox tbUpdateEq;
+        private DataGridViewTextBoxColumn ColumnSale;
+        private DataGridViewTextBoxColumn ColumnSaleTarget;
+        private DataGridViewTextBoxColumn ColumnTNPS;
+        private DataGridViewTextBoxColumn ColumnVsearch;
+        private DataGridViewTextBoxColumn ColumnRetention;
+        private DataGridViewTextBoxColumn ColumnRetainedNo;
+        private DataGridViewTextBoxColumn ColumnEq;
+        private DataGridViewTextBoxColumn ColumnDq;
     }
 }

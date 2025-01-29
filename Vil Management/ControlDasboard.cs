@@ -14,28 +14,32 @@ using System.Globalization;
 using CsvHelper.Configuration;
 using CsvHelper;
 using Microsoft.Build.Utilities;
+using OfficeOpenXml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Vil_Management
 {
     public partial class ControlDasboard : UserControl
     {
-        private string filePath = "WalkinData.csv"; // Path to store CSV data
-        private string taskFilePath = "Tasks.csv"; // Path to store tasks in CSV
-
+        private string filePathWalkin = "WalkinData.csv"; // Path to store Walkin data
+        private string taskFilePath = "Tasks.csv"; // Path to store tasks in CSV file
         private string pendingCsvFile = "pending_tasks.csv"; // Path to store pending tasks
         private string completedCsvFile = "completed_tasks.csv"; // Path to store completed tasks
+        private string filePathDashboard = "Dashboard.xlsx"; // Path to store Dashboard Data
+        private string filePathContest = "Contest.csv"; // Path to store Contest Data
+        
+
         private List<TaskItem> pendingTasks = new List<TaskItem>();
         private List<TaskItem> completedTasks = new List<TaskItem>();
 
         public ControlDasboard()
         {
             InitializeComponent();
-            LoadCsvToGridview();
+            LoadCsvToGridview(); // Load data from 
             LoadTasks();
             DisplayTasks();
-            dataGridViewContest.Rows.Add("25-01-2025", "Cre Contenst");
-            dataGridViewContest.Rows.Add("20-01-2025", "Service ka sarataj");
-            dataGridViewContest.Rows.Add("10-01-2025", "MNP Content for cre");
+            LoadDashboardData();
+            LoadContestData();
 
         }
 
@@ -78,16 +82,16 @@ namespace Vil_Management
         private void AddDataToCsv(string number, string query)
         {
             // Check if the file exists, if not, create it and add headers
-            if (!File.Exists(filePath))
+            if (!File.Exists(filePathWalkin))
             {
-                using (StreamWriter sw = new StreamWriter(filePath))
+                using (StreamWriter sw = new StreamWriter(filePathWalkin))
                 {
                     sw.WriteLine("Date,Number,Query"); // Write headers if the file is new
                 }
             }
 
             // Append new data to the CSV file
-            using (StreamWriter sw = new StreamWriter(filePath, true))
+            using (StreamWriter sw = new StreamWriter(filePathWalkin, true))
             {
                 string currentDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 sw.WriteLine($"{currentDate},{number},{query}");
@@ -103,9 +107,9 @@ namespace Vil_Management
             var rows = new System.Collections.Generic.List<string[]>();
 
             // Read the CSV file
-            if (File.Exists(filePath))
+            if (File.Exists(filePathWalkin))
             {
-                using (StreamReader sr = new StreamReader(filePath))
+                using (StreamReader sr = new StreamReader(filePathWalkin))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -223,6 +227,7 @@ namespace Vil_Management
         // Display tasks in the ListBoxes
         private void DisplayTasks()
         {
+           
             // Display pending tasks in the pending ListBox
             listBoxPending.Items.Clear();
             foreach (var task in pendingTasks)
@@ -263,5 +268,125 @@ namespace Vil_Management
                 DisplayTasks();  // Update the ListBoxes
             }
         }
+
+        private void LoadDashboardData()
+        {
+            // Open the Excel file using EPPlus
+            string file = "Dashboard.xlsx";
+
+            // Ensure the file exists
+            if (!File.Exists(file))
+            {
+                //MessageBox.Show("Excel file not found.");
+                return;
+            }
+
+            FileInfo fileInfo = new FileInfo(file);
+             
+
+            try
+            {
+                using (var package = new ExcelPackage(fileInfo))
+                {
+                    // Ensure the workbook contains worksheets
+                    if (package.Workbook.Worksheets.Count == 0)
+                    {
+                        MessageBox.Show("No worksheets found in the Excel file.");
+                        return;
+                    }
+
+                    // Access the first worksheet
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+                    // Ensure the worksheet is not null
+                    if (worksheet == null)
+                    {
+                        MessageBox.Show("The worksheet is null or invalid.");
+                        return;
+                    }
+
+                    // Read the value from cell A1 (you can adjust this as needed)
+                    string sale = worksheet.Cells[2, 1].Text ?? "Default Value";   // Row 1, Column 1 (A1)
+                    string target = worksheet.Cells[2, 2].Text ?? "Default Value";
+                    string tnps = worksheet.Cells[2, 3].Text ?? "Default Value";
+                    string vSearch = worksheet.Cells[2, 4].Text ?? "Default Value";
+                    string retention = worksheet.Cells[2, 5].Text ?? "Default Value";
+                    //string retention = worksheet.Cells[2, 6].Text ?? "Default Value";
+                    string eq = worksheet.Cells[2, 7].Text ?? "Default Value";
+                    string dq = worksheet.Cells[2, 8].Text ?? "Default Value";
+                    //string sale = worksheet.Cells[1, 1].Text;
+
+                    //foreach(int i in worksheet.Rows)
+                    //{
+
+                    //}
+
+                    // Set the value to the TextBox
+                    labelSale.Text = sale + " Vs " + target;
+                    labelTnps.Text = tnps;
+                    labelVsearch.Text = vSearch + "%";
+                    labelRetention.Text = retention + "%";
+                    labelEq.Text = eq + "%";
+                    labelDq.Text = dq + "%";
+
+                    // set the progressbar value
+                    pbSale.Value = (int.Parse(sale) * 100) / int.Parse(target);
+                    pbTnps.Value = (int.Parse(tnps) * 100) / 10;
+                    pbVsearch.Value = (int.Parse(vSearch));
+                    pbRetention.Value = (int.Parse(retention));
+                    pbEq.Value = (int.Parse(eq));
+                    pbDq.Value = (int.Parse(dq));
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading Excel file: " + ex.Message);
+            }
+        }
+
+        private void LoadContestData()
+        {
+            // Create a list to store rows
+            var rows = new System.Collections.Generic.List<string[]>();
+
+            // Read the CSV file
+            if (File.Exists(filePathContest))
+            {
+                using (StreamReader sr = new StreamReader(filePathContest))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        var line = sr.ReadLine();
+                        var values = line.Split(',');
+                        rows.Add(values);
+                    }
+                }
+
+                // Remove the header row (first row in reversed list)
+                if (rows.Count > 0)
+                {
+                    rows.RemoveAt(0);  // Skip the header row
+                }
+
+                // Reverse the list (to display from the last entry to the top)
+                rows.Reverse();
+
+                // Bind the reversed data (without the header) to the DataGridView
+                dataGridViewContest.Rows.Clear(); // Clear existing rows
+
+                // Bind the reversed data (without the header) to the DataGridView
+                foreach (var row in rows)
+                {
+                    dataGridViewContest.Rows.Add(row[0], row[1]);
+                }
+                //alkin.DataSource = rows.Select(r => new { Date = r[0], Number = r[1], Query = r[2] }).ToList();
+            }
+            else
+            {
+                //MessageBox.Show("Walkin file not found.");
+            }
+        }
+
     }
 }

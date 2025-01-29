@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OfficeOpenXml;
 
@@ -11,7 +6,9 @@ namespace Vil_Management
 {
     public partial class UpdateControl : UserControl
     {
-        string filePathDashboard = "Dashboard.csv";
+        //string filePathDashboard = "Dashboard.csv";
+        string filePathContest = "Contest.csv";
+        DataGridView dataGrid;
 
 
         public UpdateControl()
@@ -22,146 +19,183 @@ namespace Vil_Management
         private void btnUpdateSale_Click(object sender, EventArgs e)
         {
             string data = tbUpdateSale.Text;
-            bool fileExists = File.Exists(filePathDashboard);
-            // Open the CSV file for appending
-            using (StreamWriter writer = new StreamWriter(filePathDashboard, append: true))
-            {
-                // If the file doesn't exist, write the header row (skip if header already exists)
-                if (!fileExists)
-                {
-                    // Write headers to the file
-                    writer.WriteLine();  // Update with your columns
-                }
+            dataGridView1.Rows[0].Cells[0].Value = data;
 
-                // Write the data from the TextBox to the CSV
-                // Assuming that the data is comma-separated
-                writer.WriteLine(data[0]);
-                tbUpdateTarget.Text = data;
-            }
+            saveData(data, 1);
 
-            // Optionally, you can give feedback to the user that data was saved
-            MessageBox.Show("Data saved to CSV!");
+
         }
 
-        public void AppendDataToExcel(string filePath)
+        private void btnUpdateTarget_Click(object sender, EventArgs e)
         {
-            // Sample data to append (replace this with your actual data)
-            List<string[]> newData = new List<string[]>()
-                {
-                    new string[] { "4", "David", "40" }
-                };
+            string data = tbUpdateTarget.Text;
+            dataGridView1.Rows[0].Cells[1].Value = data;
 
-            // Ensure EPPlus is used with license context
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // or LicenseContext.NonCommercial
+            saveData(data, 2);
+        }
 
+        private void btnUpdateTnps_Click(object sender, EventArgs e)
+        {
+            string data = tbUpdateTnps.Text;
+            dataGridView1.Rows[0].Cells[2].Value = data;
+            saveData(data, 3);
+        }
+
+        private void btnUpdateVsearch_Click(object sender, EventArgs e)
+        {
+            string data = tbUpdateVsearch.Text;
+            dataGridView1.Rows[0].Cells[3].Value = data;
+            saveData(data, 4);
+        }
+
+        private void btnUpdateRetention_Click(object sender, EventArgs e)
+        {
+            string data = tbUpdateRetention.Text;
+            dataGridView1.Rows[0].Cells[4].Value = data;
+            saveData(data, 5);
+        }
+        private void btnUpdateRetainedNo_Click(object sender, EventArgs e)
+        {
+            string data = tbUpdateRetentionNo.Text;
+            dataGridView1.Rows[0].Cells[5].Value = data;
+            saveData(data, 6);
+        }
+
+        private void btnUpdateEq_Click(object sender, EventArgs e)
+        {
+            string data = tbUpdateEq.Text;
+            dataGridView1.Rows[0].Cells[6].Value = data;
+            saveData(data, 7);
+        }
+
+
+        private void btnUpdateDq_Click(object sender, EventArgs e)
+        {
+            string data = tbUpdateDq.Text;
+            dataGridView1.Rows[0].Cells[7].Value = data;
+            saveData(data, 8);
+        }
+
+
+        private void saveData(string testData, int columnNo)
+        {
+            string filePath = "Dashboard.xlsx";
             FileInfo fileInfo = new FileInfo(filePath);
-
-            if (fileInfo.Exists)
+            using (var package = new ExcelPackage(fileInfo))
             {
-                // Open the existing Excel file
-                using (var package = new ExcelPackage(fileInfo))
+                ExcelWorksheet workSheet;
+
+                // Check if the file exists
+                if (fileInfo.Exists)
                 {
-                    var worksheet = package.Workbook.Worksheets[0]; // Access the first worksheet
-
-                    // Find the last used row in the worksheet
-                    int lastRow = worksheet.Dimension?.End.Row ?? 0;
-
-                    // Append new data starting from the next row
-                    for (int i = 0; i < newData.Count; i++)
-                    {
-                        for (int j = 0; j < newData[i].Length; j++)
-                        {
-                            worksheet.Cells[lastRow + i + 1, j + 1].Value = newData[i][j];
-                        }
-                    }
-
-                    // Save the updated Excel file
-                    package.Save();
+                    // Open the existing file
+                    workSheet = package.Workbook.Worksheets[0] ?? package.Workbook.Worksheets.Add("Sheet1");
+                    Console.WriteLine("File opened successfully.");
                 }
+                else
+                {
+                    // Create a new worksheet
+                    workSheet = package.Workbook.Worksheets.Add("Sheet1");
+                    workSheet.Cells[1, 1].Value = "Sale";
+                    workSheet.Cells[1, 2].Value = "Target";
+                    workSheet.Cells[1, 3].Value = "TNPS";
+                    workSheet.Cells[1, 4].Value = "V - Search";
+                    workSheet.Cells[1, 5].Value = "Retention";
+                    workSheet.Cells[1, 6].Value = "Retained Number";
+                    workSheet.Cells[1, 7].Value = "EQ";
+                    workSheet.Cells[1, 8].Value = "DQ";
+                    Console.WriteLine("New file created.");
+                }
+
+                //workSheet.Cells[i + 1, columnNumber].Value = data[i];
+                workSheet.Cells[2, columnNo].Value = testData;
+
+                package.Save();
+
+                Console.WriteLine($"Excel file saved at: {filePath}");
+            }
+        }
+
+        private void saveDataNo(string testData, int columnNo)
+        {
+            string filePath = "Dashboard.xlsx";
+            FileInfo fileInfo = new FileInfo(filePath);
+            using (var package = new ExcelPackage(fileInfo))
+            {
+                ExcelWorksheet workSheet;
+
+                // Check if the file exists
+                if (fileInfo.Exists)
+                {
+                    // Open the existing file
+                    workSheet = package.Workbook.Worksheets[0] ?? package.Workbook.Worksheets.Add("Sheet1");
+                    Console.WriteLine("File opened successfully.");
+                }
+                else
+                {
+                    // Create a new worksheet
+                    workSheet = package.Workbook.Worksheets.Add("Sheet1");
+                    Console.WriteLine("New file created.");
+                    MessageBox.Show("File is not available");
+                }
+
+                //workSheet.Cells[i + 1, columnNumber].Value = data[i];
+                //workSheet.Cells[2, columnNo].Value = testData;
+                // Find the next empty row in the specified column
+                int row = workSheet.Dimension?.Rows + 1 ?? 1; // If the worksheet is empty, start from row 1
+
+                // Loop through the data and append it to the specified column
+                //foreach (var value in testData)
+                //{
+                //    // Append data to the next available row in the specified column
+                //    workSheet.Cells[row++, columnNo].Value = value;
+                //}
+
+                workSheet.Cells[row++, columnNo].Value = testData;
+                package.Save();
+
+                Console.WriteLine($"Excel file saved at: {filePath}");
+            }
+        }
+
+        private void btnUpdateConest_Click(object sender, EventArgs e)
+        {
+            // Get the input data from TextBox and DateTimePicker
+            string contest = tbUpdateContest.Text;
+            string date = dtpContest.Text;
+
+            if (!string.IsNullOrEmpty(contest) && !string.IsNullOrEmpty(date))
+            {
+                AddDataToCsv(date, contest); // Add data to CSV
+                //LoadCsvToGridview(); // Load data to DataGridView
             }
             else
             {
-                // If the file doesn't exist, create a new one and add data
-                CreateNewExcelFileWithSpecificColumns(filePath, newData);
+                MessageBox.Show("Please enter valid data.");
             }
         }
 
-        public void AppendDataToSpecificColumns(string filePath)
+        private void AddDataToCsv(string date, string contest)
         {
-            // Sample data to append (replace this with your actual data)
-            List<string[]> newData = new List<string[]>()
-    {
-        new string[] { "4", "David", "40" },
-        new string[] { "5", "Eve", "28" }
-    };
-
-            // Specify the columns where data will be appended (e.g., Column 1 for ID, Column 2 for Name, Column 3 for Age)
-            int columnId = 1;   // Column A
-            int columnName = 2; // Column B
-            int columnAge = 3;  // Column C
-
-            // Ensure EPPlus is used with license context
-            ExcelPackage.LicenseContext = LicenseContext.Commercial; // or LicenseContext.NonCommercial
-
-            FileInfo fileInfo = new FileInfo(filePath);
-
-            if (fileInfo.Exists)
+            // Check if the file exists, if not, create it and add headers
+            if (!File.Exists(filePathContest))
             {
-                // Open the existing Excel file
-                using (var package = new ExcelPackage(fileInfo))
+                using (StreamWriter sw = new StreamWriter(filePathContest))
                 {
-                    var worksheet = package.Workbook.Worksheets[0]; // Access the first worksheet
-
-                    // Find the last used row in the worksheet
-                    int lastRow = worksheet.Dimension?.End.Row ?? 0;
-
-                    // Append new data to specified columns
-                    for (int i = 0; i < newData.Count; i++)
-                    {
-                        // ID in column 1 (A), Name in column 2 (B), Age in column 3 (C)
-                        worksheet.Cells[lastRow + i + 1, columnId].Value = newData[i][0]; // ID
-                        worksheet.Cells[lastRow + i + 1, columnName].Value = newData[i][1]; // Name
-                        worksheet.Cells[lastRow + i + 1, columnAge].Value = newData[i][2]; // Age
-                    }
-
-                    // Save the updated Excel file
-                    package.Save();
+                    sw.WriteLine("Date,Contest"); // Write headers if the file is new
                 }
             }
-            else
+
+            // Append new data to the CSV file
+            using (StreamWriter sw = new StreamWriter(filePathContest, true))
             {
-                // If the file doesn't exist, create a new one and add data
-                CreateNewExcelFileWithSpecificColumns(filePath, newData);
+
+                sw.WriteLine($"{date},{contest}");
             }
+
+            MessageBox.Show("Data added successfully!");
         }
 
-        public void CreateNewExcelFileWithSpecificColumns(string filePath, List<string[]> data)
-        {
-            // Create a new Excel file
-            ExcelPackage.LicenseContext = LicenseContext.Commercial; // or LicenseContext.NonCommercial
-
-            using (var package = new ExcelPackage())
-            {
-                // Add a worksheet to the package
-                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
-
-                // Specify the columns for headers (e.g., Column A for ID, Column B for Name, Column C for Age)
-                worksheet.Cells[1, 1].Value = "ID";
-                worksheet.Cells[1, 2].Value = "Name";
-                worksheet.Cells[1, 3].Value = "Age";
-
-                // Loop through the data and write it to the worksheet
-                for (int row = 0; row < data.Count; row++)
-                {
-                    worksheet.Cells[row + 2, 1].Value = data[row][0]; // ID in Column A
-                    worksheet.Cells[row + 2, 2].Value = data[row][1]; // Name in Column B
-                    worksheet.Cells[row + 2, 3].Value = data[row][2]; // Age in Column C
-                }
-
-                // Save the new Excel file
-                FileInfo fileInfo = new FileInfo(filePath);
-                package.SaveAs(fileInfo);
-            }
-        }
+       
     }
 }

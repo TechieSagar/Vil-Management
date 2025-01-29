@@ -222,9 +222,9 @@
             // controlDasboard1
             // 
             controlDasboard1.BackColor = Color.FromArgb(46, 51, 73);
-            controlDasboard1.Location = new Point(267, 56);
+            controlDasboard1.Location = new Point(265, 54);
             controlDasboard1.Name = "controlDasboard1";
-            controlDasboard1.Size = new Size(1157, 807);
+            controlDasboard1.Size = new Size(1179, 807);
             controlDasboard1.TabIndex = 2;
             // 
             // numberSystemControl11
@@ -238,14 +238,14 @@
             // updateControl1
             // 
             updateControl1.BackColor = Color.FromArgb(46, 51, 73);
-            updateControl1.Location = new Point(269, 72);
+            updateControl1.Location = new Point(255, 60);
             updateControl1.Name = "updateControl1";
             updateControl1.Size = new Size(1721, 949);
             updateControl1.TabIndex = 4;
             // 
             // toolsControl1
             // 
-            toolsControl1.Location = new Point(247, 57);
+            toolsControl1.Location = new Point(248, 60);
             toolsControl1.Name = "toolsControl1";
             toolsControl1.Size = new Size(1419, 802);
             toolsControl1.TabIndex = 5;
@@ -256,13 +256,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1475, 875);
-            Controls.Add(toolsControl1);
-            Controls.Add(updateControl1);
             Controls.Add(panelNav);
             Controls.Add(labelTitle);
             Controls.Add(panelSide);
             Controls.Add(controlDasboard1);
             Controls.Add(numberSystemControl11);
+            Controls.Add(toolsControl1);
+            Controls.Add(updateControl1);
             ForeColor = Color.FromArgb(158, 176, 161);
             Name = "Form1";
             Text = "Form1";
