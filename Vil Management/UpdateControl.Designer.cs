@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
             btnUpdateTarget = new Button();
-            dataGridView1 = new DataGridView();
             btnUpdateVsearch = new Button();
             btnUpdateEq = new Button();
             btnUpdateDq = new Button();
@@ -47,11 +47,7 @@
             tbUpdateTarget = new TextBox();
             tbUpdateSale = new TextBox();
             label1 = new Label();
-            panel2 = new Panel();
-            btnUpdateConest = new Button();
-            tbUpdateContest = new TextBox();
-            dtpContest = new DateTimePicker();
-            label2 = new Label();
+            dataGridView1 = new DataGridView();
             ColumnSale = new DataGridViewTextBoxColumn();
             ColumnSaleTarget = new DataGridViewTextBoxColumn();
             ColumnTNPS = new DataGridViewTextBoxColumn();
@@ -60,6 +56,11 @@
             ColumnRetainedNo = new DataGridViewTextBoxColumn();
             ColumnEq = new DataGridViewTextBoxColumn();
             ColumnDq = new DataGridViewTextBoxColumn();
+            panel2 = new Panel();
+            btnUpdateConest = new Button();
+            tbUpdateContest = new TextBox();
+            dtpContest = new DateTimePicker();
+            label2 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
@@ -68,7 +69,6 @@
             // panel1
             // 
             panel1.Controls.Add(btnUpdateTarget);
-            panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(btnUpdateVsearch);
             panel1.Controls.Add(btnUpdateEq);
             panel1.Controls.Add(btnUpdateDq);
@@ -87,11 +87,12 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(25, 21);
             panel1.Name = "panel1";
-            panel1.Size = new Size(520, 581);
+            panel1.Size = new Size(520, 333);
             panel1.TabIndex = 0;
             // 
             // btnUpdateTarget
             // 
+            btnUpdateTarget.ForeColor = Color.Black;
             btnUpdateTarget.Location = new Point(355, 47);
             btnUpdateTarget.Name = "btnUpdateTarget";
             btnUpdateTarget.Size = new Size(138, 29);
@@ -100,18 +101,9 @@
             btnUpdateTarget.UseVisualStyleBackColor = true;
             btnUpdateTarget.Click += btnUpdateTarget_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnSale, ColumnSaleTarget, ColumnTNPS, ColumnVsearch, ColumnRetention, ColumnRetainedNo, ColumnEq, ColumnDq });
-            dataGridView1.Location = new Point(28, 315);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(465, 263);
-            dataGridView1.TabIndex = 3;
-            // 
             // btnUpdateVsearch
             // 
+            btnUpdateVsearch.ForeColor = Color.Black;
             btnUpdateVsearch.Location = new Point(255, 113);
             btnUpdateVsearch.Name = "btnUpdateVsearch";
             btnUpdateVsearch.Size = new Size(94, 29);
@@ -122,6 +114,7 @@
             // 
             // btnUpdateEq
             // 
+            btnUpdateEq.ForeColor = Color.Black;
             btnUpdateEq.Location = new Point(255, 209);
             btnUpdateEq.Name = "btnUpdateEq";
             btnUpdateEq.Size = new Size(94, 29);
@@ -132,6 +125,7 @@
             // 
             // btnUpdateDq
             // 
+            btnUpdateDq.ForeColor = Color.Black;
             btnUpdateDq.Location = new Point(255, 241);
             btnUpdateDq.Name = "btnUpdateDq";
             btnUpdateDq.Size = new Size(94, 29);
@@ -142,6 +136,7 @@
             // 
             // btnUpdateRetainedNo
             // 
+            btnUpdateRetainedNo.ForeColor = Color.Black;
             btnUpdateRetainedNo.Location = new Point(255, 176);
             btnUpdateRetainedNo.Name = "btnUpdateRetainedNo";
             btnUpdateRetainedNo.Size = new Size(94, 29);
@@ -152,6 +147,7 @@
             // 
             // btnUpdateRetention
             // 
+            btnUpdateRetention.ForeColor = Color.Black;
             btnUpdateRetention.Location = new Point(255, 143);
             btnUpdateRetention.Name = "btnUpdateRetention";
             btnUpdateRetention.Size = new Size(94, 29);
@@ -162,6 +158,7 @@
             // 
             // btnUpdateTnps
             // 
+            btnUpdateTnps.ForeColor = Color.Black;
             btnUpdateTnps.Location = new Point(255, 78);
             btnUpdateTnps.Name = "btnUpdateTnps";
             btnUpdateTnps.Size = new Size(94, 29);
@@ -172,6 +169,7 @@
             // 
             // btnUpdateSale
             // 
+            btnUpdateSale.ForeColor = Color.Black;
             btnUpdateSale.Location = new Point(255, 46);
             btnUpdateSale.Name = "btnUpdateSale";
             btnUpdateSale.Size = new Size(94, 29);
@@ -255,52 +253,24 @@
             label1.TabIndex = 0;
             label1.Text = "Performance";
             // 
-            // panel2
+            // dataGridView1
             // 
-            panel2.Controls.Add(btnUpdateConest);
-            panel2.Controls.Add(tbUpdateContest);
-            panel2.Controls.Add(dtpContest);
-            panel2.Controls.Add(label2);
-            panel2.Location = new Point(578, 23);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(553, 331);
-            panel2.TabIndex = 1;
-            // 
-            // btnUpdateConest
-            // 
-            btnUpdateConest.Location = new Point(286, 45);
-            btnUpdateConest.Name = "btnUpdateConest";
-            btnUpdateConest.Size = new Size(117, 65);
-            btnUpdateConest.TabIndex = 3;
-            btnUpdateConest.Text = "Save";
-            btnUpdateConest.UseVisualStyleBackColor = true;
-            btnUpdateConest.Click += btnUpdateConest_Click;
-            // 
-            // tbUpdateContest
-            // 
-            tbUpdateContest.Location = new Point(31, 83);
-            tbUpdateContest.Name = "tbUpdateContest";
-            tbUpdateContest.PlaceholderText = "Contest Description";
-            tbUpdateContest.Size = new Size(248, 27);
-            tbUpdateContest.TabIndex = 2;
-            // 
-            // dtpContest
-            // 
-            dtpContest.Location = new Point(29, 46);
-            dtpContest.Name = "dtpContest";
-            dtpContest.Size = new Size(250, 27);
-            dtpContest.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(217, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(96, 31);
-            label2.TabIndex = 0;
-            label2.Text = "Contest";
+            dataGridView1.BackgroundColor = Color.FromArgb(46, 51, 73);
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnSale, ColumnSaleTarget, ColumnTNPS, ColumnVsearch, ColumnRetention, ColumnRetainedNo, ColumnEq, ColumnDq });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.Location = new Point(25, 360);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(1106, 137);
+            dataGridView1.TabIndex = 3;
             // 
             // ColumnSale
             // 
@@ -358,12 +328,62 @@
             ColumnDq.Name = "ColumnDq";
             ColumnDq.Width = 125;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(btnUpdateConest);
+            panel2.Controls.Add(tbUpdateContest);
+            panel2.Controls.Add(dtpContest);
+            panel2.Controls.Add(label2);
+            panel2.Location = new Point(578, 23);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(553, 331);
+            panel2.TabIndex = 1;
+            // 
+            // btnUpdateConest
+            // 
+            btnUpdateConest.ForeColor = Color.Black;
+            btnUpdateConest.Location = new Point(286, 45);
+            btnUpdateConest.Name = "btnUpdateConest";
+            btnUpdateConest.Size = new Size(117, 65);
+            btnUpdateConest.TabIndex = 3;
+            btnUpdateConest.Text = "Save";
+            btnUpdateConest.UseVisualStyleBackColor = true;
+            btnUpdateConest.Click += btnUpdateConest_Click;
+            // 
+            // tbUpdateContest
+            // 
+            tbUpdateContest.Location = new Point(31, 83);
+            tbUpdateContest.Name = "tbUpdateContest";
+            tbUpdateContest.PlaceholderText = "Contest Description";
+            tbUpdateContest.Size = new Size(248, 27);
+            tbUpdateContest.TabIndex = 2;
+            // 
+            // dtpContest
+            // 
+            dtpContest.Format = DateTimePickerFormat.Short;
+            dtpContest.Location = new Point(29, 46);
+            dtpContest.Name = "dtpContest";
+            dtpContest.Size = new Size(250, 27);
+            dtpContest.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(217, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(96, 31);
+            label2.TabIndex = 0;
+            label2.Text = "Contest";
+            // 
             // UpdateControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             Controls.Add(panel2);
+            Controls.Add(dataGridView1);
             Controls.Add(panel1);
             Name = "UpdateControl";
             Size = new Size(1377, 759);

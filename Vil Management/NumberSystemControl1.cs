@@ -20,62 +20,21 @@ namespace Vil_Management
     public partial class NumberSystemControl1 : UserControl
     {
 
-        private string numberSeriesPath = @"C:\YourPath\numberSeries.csv";
-        private string nSeriesPath = @"C:\YourPath\nSeries.csv";
-        private string n2DigitPath = @"C:\YourPath\nMid2digit.csv";
+        private string numberSeriesPath = "numbersDatabase\\numberSeries.csv";
+        private string nSeriesPath = "numbersDatabase\\nSeries.csv";
+        private string n2DigitPath = "numbersDatabase\\nMid2digit.csv";
 
+        int[] numberSeriesSingle = { };
         //private TextBox inputDatxtInputData;
         private int digitCount = 0;
         //ErrorProvider errorProvider = null;
         private const int RowLimit = 30000;
-
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
         public NumberSystemControl1()
         {
             InitializeComponent();
-            InitializeBackgroundWorker();
             LoadData(cbNmbrlgySrs, nSeriesPath);
             LoadData(cbSrsNmbrs, numberSeriesPath);
             LoadData(cbMid2Digit, n2DigitPath);
-        }
-
-        // Set up the BackgroundWorker
-        private void InitializeBackgroundWorker()
-        {
-            backgroundWorker.WorkerReportsProgress = true;
-            backgroundWorker.DoWork += BackgroundWorker_DoWork;
-            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
-        }
-
-        // The background task (runs in the background thread)
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // Simulate a long-running task
-            for (int i = 0; i <= 100; i++)
-            {
-                // Simulate work by sleeping for 50ms
-                Thread.Sleep(50); // Simulate processing work
-
-                // Report progress back to the UI thread
-                backgroundWorker.ReportProgress(i);
-            }
-        }
-
-        // This event handler updates the ProgressBar
-        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            // Update the ProgressBar with the current progress
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        // This event handler runs when the background task completes
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // Hide the ProgressBar and update the label when the task is complete
-            progressBar1.Visible = false;
-            loading.Text = "Generated";
-            loading.Visible = false;
         }
 
         private void btnInsertSeries_Click(object sender, EventArgs e)
@@ -95,7 +54,11 @@ namespace Vil_Management
 
             // load data after save
             LoadData(cbSrsNmbrs, numberSeriesPath);
-
+            if (cbSrsNmbrs.Items.Count > 0)
+            {
+                // Set the selected item to the last item
+                cbSrsNmbrs.SelectedIndex = cbSrsNmbrs.Items.Count - 1;
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -142,8 +105,9 @@ namespace Vil_Management
                     writer.WriteLine(text);
                 }
 
-                MessageBox.Show("Data saved to CSV file.");
+                //MessageBox.Show("Data saved to CSV file.");
                 tb.Clear();  // Clear the TextBox after saving
+
             }
             else
             {
@@ -181,6 +145,13 @@ namespace Vil_Management
         private void btnInsertNrlgy_Click(object sender, EventArgs e)
         {
             SaveData(tbNumerology, nSeriesPath);
+            LoadData(cbNmbrlgySrs, nSeriesPath);
+
+            if (cbNmbrlgySrs.Items.Count > 0)
+            {
+                // Set the selected item to the last item
+                cbNmbrlgySrs.SelectedIndex = cbNmbrlgySrs.Items.Count - 1;
+            }
         }
 
         private void tbInserSrs_TextChanged(object sender, EventArgs e)
@@ -249,7 +220,7 @@ namespace Vil_Management
                             }
                         }
 
-                        MessageBox.Show("Entry deleted successfully.");
+                        //MessageBox.Show("Entry deleted successfully.");
                         cb.SelectedIndex = -1; // Clear the TextBox after deletion
                         LoadData(cb, csvPath);
                     }
@@ -260,7 +231,7 @@ namespace Vil_Management
                 }
                 else
                 {
-                    MessageBox.Show("CSV file not found.");
+                    MessageBox.Show("Data file not found.");
                 }
             }
             else
@@ -283,14 +254,22 @@ namespace Vil_Management
                 MessageBox.Show("You can only enter up to 2 digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // Truncate the text to 4 digits
-                tbInsertMid2digit.Text = tbInsertMid2digit.Text.Substring(0, 4);
+                tbInsertMid2digit.Text = tbInsertMid2digit.Text.Substring(0, 2);
                 tbInsertMid2digit.SelectionStart = tbInsertMid2digit.Text.Length; // Set cursor to the end of the text
             }
         }
 
         private void btnInsertMid2Digit_Click(object sender, EventArgs e)
         {
+
             SaveData(tbInsertMid2digit, n2DigitPath);
+            LoadData(cbMid2Digit, n2DigitPath);
+
+            if (cbMid2Digit.Items.Count > 0)
+            {
+                // Set the selected item to the last item
+                cbMid2Digit.SelectedIndex = cbMid2Digit.Items.Count - 1;
+            }
         }
 
         private void btnClrMid2Digit_Click(object sender, EventArgs e)
@@ -340,7 +319,7 @@ namespace Vil_Management
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-
+            dataGridView1.Rows.Clear();
             List<string> modifiedItems = new List<string>();
 
             if (tbUpto6Digit.Text.Length == 6)
@@ -400,8 +379,6 @@ namespace Vil_Management
                 MessageBox.Show("Please enter the required digits in ");
             }
 
-
-            dataGridView1.Rows.Clear();
 
             foreach (var item in modifiedItems)
             {
@@ -518,7 +495,7 @@ namespace Vil_Management
             // Show the ProgressBar and Label
             btnGnrtNmrlgy.Enabled = false;
             //progressBar1.Visible = true;
-            loading.Visible = true;
+            //loading.Visible = true;
 
 
             List<string> modifiedItems = new List<string>();
@@ -545,14 +522,19 @@ namespace Vil_Management
             }
 
             MessageBox.Show("Generated");
+            //btnGnrtNmrlgy.BackColor = (Color.FromArgb(24, 30, 54));
 
             if (dataGridView2 != null)
             {
                 btnCopy1.Visible = true;
                 dataGridView2.Visible = true;
+                //btnGnrtNmrlgy.BackColor = (Color.FromArgb(24, 30, 54));
+                btnClrList2.Visible = true;
+
             }
 
             btnGnrtNmrlgy.Enabled = true;
+            //btnGnrtNmrlgy.BackColor = (Color.FromArgb(24, 30, 54));
         }
 
         private void btnFilterDigit_Click(object sender, EventArgs e)
@@ -597,6 +579,7 @@ namespace Vil_Management
             {
                 dataGridView3.Visible = true;
                 btnCopy2.Visible = true;
+                btnClrList3.Visible = true;
             }
 
 
@@ -686,6 +669,7 @@ namespace Vil_Management
             {
                 dataGridView4.Visible = true;
                 btnCopy3.Visible = true;
+                btnClrList4.Visible = true;
             }
 
             MessageBox.Show("Filtered by sum.");
@@ -735,6 +719,7 @@ namespace Vil_Management
             {
                 dataGridView5.Visible = true;
                 btnCopy4.Visible = true;
+                btnClrList5.Visible = true;
             }
 
 
@@ -847,7 +832,11 @@ namespace Vil_Management
             if (!itemExists)
             {
                 cbPair.Items.Add(inputText);
-                cbPair.SelectedIndex = 0;
+                if (cbPair.Items.Count > 0)
+                {
+                    // Set the selected item to the last item
+                    cbPair.SelectedIndex = cbPair.Items.Count - 1;
+                }
             }
             else
             {
@@ -888,6 +877,7 @@ namespace Vil_Management
                 {
                     dataGridView6.Visible = true;
                     btnCopy5.Visible = true;
+                    btnClrList6.Visible = true;
                 }
             }
         }
@@ -966,6 +956,112 @@ namespace Vil_Management
                 number /= 10;
             }
             return sum;
+        }
+
+        private void btnSingleGenerate_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            List<string> numbersList = new List<string>();
+
+            if (cbSrsNmbrs.SelectedItem != null)
+            {
+                string selectedValue = (string)cbSrsNmbrs.SelectedItem;
+
+                if (tbUpto6Digit.Text.Length == 5)
+                {
+                    for (int i = 0; i < 10; ++i)
+                    {
+                        string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString() + tbUpto6Digit.Text;
+                        numbersList.Add(updatedItem);
+                    }
+                }
+
+                else if (tbUpto6Digit.Text.Length == 4)
+                {
+                    for (int i = 0; i < 100; ++i)
+                    {
+                        string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString("D2") + tbUpto6Digit.Text;
+                        numbersList.Add(updatedItem);
+                    }
+                }
+
+                else if (tbUpto6Digit.Text.Length == 3)
+                {
+                    for (int i = 0; i < 1000; ++i)
+                    {
+                        string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString("D3") + tbUpto6Digit.Text;
+                        numbersList.Add(updatedItem);
+                    }
+                }
+
+                else if (tbUpto6Digit.Text.Length == 2)
+                {
+                    for (int i = 0; i < 10000; ++i)
+                    {
+                        string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString("D4") + tbUpto6Digit.Text;
+                        numbersList.Add(updatedItem);
+                    }
+                }
+
+            }
+
+            foreach (var item in numbersList)
+            {
+                dataGridView1.Rows.Add(item);
+            }
+
+        }
+
+        private void btnClrList_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView2);
+        }
+
+        private void ClearDataGridRows(DataGridView dataGridView)
+        {
+            if (dataGridView.Rows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("Do you really want to clear ??", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    MessageBox.Show("Data has been cleared.");
+                    dataGridView.Rows.Clear();
+                }
+                else if (result == DialogResult.No)
+                {
+                    // User clicked No
+
+                }
+
+            }
+        }
+
+        private void btnApplyFilter_Click(object sender, EventArgs e)
+        {
+            CopyDataToDataGridView(dataGridView1, dataGridView2);
+            if (dataGridView2 != null)
+            {
+                btnCopy1.Visible = true;
+                dataGridView2.Visible = true;
+                btnClrList2.Visible = true;
+
+            }
+
+        }
+
+        private void tbCheckSum_TextChanged(object sender, EventArgs e)
+        {
+            if (tbCheckSum.Text.Length > 10)
+            {
+                // Show error message if the length exceeds 4 digits
+                MessageBox.Show("You can only enter up to 4 digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Truncate the text to 4 digits
+                tbCheckSum.Text = tbCheckSum.Text.Substring(0, 10);
+                tbCheckSum.SelectionStart = tbCheckSum.Text.Length; // Set cursor to the end of the text
+            }
         }
     }
 }

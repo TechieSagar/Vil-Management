@@ -1,33 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using System.Xml.Linq;
-using System.Formats.Asn1;
-using System.Globalization;
-using CsvHelper.Configuration;
-using CsvHelper;
-using Microsoft.Build.Utilities;
 using OfficeOpenXml;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Vil_Management
 {
     public partial class ControlDasboard : UserControl
     {
-        private string filePathWalkin = "WalkinData.csv"; // Path to store Walkin data
-        private string taskFilePath = "Tasks.csv"; // Path to store tasks in CSV file
-        private string pendingCsvFile = "pending_tasks.csv"; // Path to store pending tasks
-        private string completedCsvFile = "completed_tasks.csv"; // Path to store completed tasks
-        private string filePathDashboard = "Dashboard.xlsx"; // Path to store Dashboard Data
-        private string filePathContest = "Contest.csv"; // Path to store Contest Data
-        
+        private string filePathWalkin = "database\\WalkinData.csv"; // Path to store Walkin data
+        private string pendingCsvFile = "database\\pending_tasks.csv"; // Path to store pending tasks
+        private string completedCsvFile = "database\\completed_tasks.csv"; // Path to store completed tasks
+        private string filePathDashboard = "database\\Dashboard.xlsx"; // Path to store Dashboard Data
+        private string filePathContest = "database\\Contest.csv"; // Path to store Contest Data
 
         private List<TaskItem> pendingTasks = new List<TaskItem>();
         private List<TaskItem> completedTasks = new List<TaskItem>();
@@ -140,7 +123,7 @@ namespace Vil_Management
             }
             else
             {
-                //MessageBox.Show("Walkin file not found.");
+                MessageBox.Show("Walkin file not found.");
             }
         }
 
@@ -227,7 +210,7 @@ namespace Vil_Management
         // Display tasks in the ListBoxes
         private void DisplayTasks()
         {
-           
+
             // Display pending tasks in the pending ListBox
             listBoxPending.Items.Clear();
             foreach (var task in pendingTasks)
@@ -248,7 +231,7 @@ namespace Vil_Management
             if (listBoxCompleted.SelectedItem != null)
             {
                 //var selectedTask = (TaskItem)listBoxCompleted.Items[0];
-                foreach(var items in completedTasks)
+                foreach (var items in completedTasks)
                 {
                     pendingTasks.Add((TaskItem)items);
                 }
@@ -269,20 +252,18 @@ namespace Vil_Management
             }
         }
 
-        private void LoadDashboardData()
+        public void LoadDashboardData()
         {
-            // Open the Excel file using EPPlus
-            string file = "Dashboard.xlsx";
 
             // Ensure the file exists
-            if (!File.Exists(file))
+            if (!File.Exists(filePathDashboard))
             {
                 //MessageBox.Show("Excel file not found.");
                 return;
             }
 
-            FileInfo fileInfo = new FileInfo(file);
-             
+            FileInfo fileInfo = new FileInfo(filePathDashboard);
+
 
             try
             {
@@ -321,8 +302,10 @@ namespace Vil_Management
 
                     //}
 
-                    // Set the value to the TextBox
-                    labelSale.Text = sale + " Vs " + target;
+                    // Set the value to the Labels
+                    //saleValue = int.Parse(sale);
+                    labelSale.Text = sale + " / " + target;
+                    //labelTarget.Text = " / " + target;
                     labelTnps.Text = tnps;
                     labelVsearch.Text = vSearch + "%";
                     labelRetention.Text = retention + "%";
@@ -336,7 +319,7 @@ namespace Vil_Management
                     pbRetention.Value = (int.Parse(retention));
                     pbEq.Value = (int.Parse(eq));
                     pbDq.Value = (int.Parse(dq));
-                    
+
                 }
             }
             catch (Exception ex)
@@ -384,9 +367,25 @@ namespace Vil_Management
             }
             else
             {
-                //MessageBox.Show("Walkin file not found.");
+                MessageBox.Show("Walkin file not found.");
             }
         }
 
+        private void btnDeleteSelected_Click(object sender, EventArgs e)
+        {
+            var selectedTask = (TaskItem)listBoxCompleted.SelectedItem;
+            // Remove the selected task from pending tasks
+            completedTasks.Remove(selectedTask);
+
+            SaveTasks();  // Save to CSV
+            DisplayTasks();  // Update the ListBoxes
+        }
+
+        public string LabelSaleText
+        {
+            get { return labelSale.Text; }
+        }
+
     }
+
 }

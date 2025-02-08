@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NumberSystemControl1));
             panel1 = new Panel();
             btnCheckSum = new Button();
             tbFinalSum = new TextBox();
@@ -142,8 +147,13 @@
             btnCopy3 = new Button();
             btnCopy4 = new Button();
             btnCopy5 = new Button();
-            progressBar1 = new ProgressBar();
-            loading = new Label();
+            btnSingleGenerate = new Button();
+            btnClrList3 = new Button();
+            btnClrList4 = new Button();
+            btnClrList6 = new Button();
+            btnClrList5 = new Button();
+            btnClrList2 = new Button();
+            btnApplyFilter = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -179,6 +189,7 @@
             // 
             // btnCheckSum
             // 
+            btnCheckSum.ForeColor = Color.Black;
             btnCheckSum.Location = new Point(314, 6);
             btnCheckSum.Name = "btnCheckSum";
             btnCheckSum.Size = new Size(94, 29);
@@ -211,6 +222,7 @@
             tbCheckSum.Name = "tbCheckSum";
             tbCheckSum.Size = new Size(145, 27);
             tbCheckSum.TabIndex = 5;
+            tbCheckSum.TextChanged += tbCheckSum_TextChanged;
             // 
             // label2
             // 
@@ -489,9 +501,9 @@
             label7.ForeColor = Color.White;
             label7.Location = new Point(14, 49);
             label7.Name = "label7";
-            label7.Size = new Size(163, 20);
+            label7.Size = new Size(159, 20);
             label7.TabIndex = 4;
-            label7.Text = "Enter the starting series";
+            label7.Text = "Enter the ending series";
             // 
             // radioButton4d
             // 
@@ -552,10 +564,36 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9, Column10, Column11, Column12, Column13, Column14 });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Location = new Point(16, 287);
             dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(530, 224);
             dataGridView1.TabIndex = 2;
@@ -1083,10 +1121,21 @@
             // 
             // dataGridView2
             // 
+            dataGridView2.BorderStyle = BorderStyle.None;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.ColumnHeadersVisible = false;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column15 });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView2.Location = new Point(251, 561);
             dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.Size = new Size(177, 188);
             dataGridView2.TabIndex = 6;
@@ -1097,14 +1146,17 @@
             Column15.HeaderText = "Column15";
             Column15.MinimumWidth = 6;
             Column15.Name = "Column15";
-            Column15.Width = 125;
+            Column15.Width = 176;
             // 
             // dataGridView3
             // 
+            dataGridView3.BorderStyle = BorderStyle.None;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.ColumnHeadersVisible = false;
             dataGridView3.Columns.AddRange(new DataGridViewColumn[] { Column16 });
             dataGridView3.Location = new Point(434, 561);
             dataGridView3.Name = "dataGridView3";
+            dataGridView3.RowHeadersVisible = false;
             dataGridView3.RowHeadersWidth = 51;
             dataGridView3.Size = new Size(179, 188);
             dataGridView3.TabIndex = 7;
@@ -1115,14 +1167,17 @@
             Column16.HeaderText = "Column16";
             Column16.MinimumWidth = 6;
             Column16.Name = "Column16";
-            Column16.Width = 125;
+            Column16.Width = 178;
             // 
             // dataGridView4
             // 
+            dataGridView4.BorderStyle = BorderStyle.None;
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView4.ColumnHeadersVisible = false;
             dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column17 });
             dataGridView4.Location = new Point(619, 561);
             dataGridView4.Name = "dataGridView4";
+            dataGridView4.RowHeadersVisible = false;
             dataGridView4.RowHeadersWidth = 51;
             dataGridView4.Size = new Size(179, 188);
             dataGridView4.TabIndex = 7;
@@ -1133,14 +1188,17 @@
             Column17.HeaderText = "Column17";
             Column17.MinimumWidth = 6;
             Column17.Name = "Column17";
-            Column17.Width = 125;
+            Column17.Width = 178;
             // 
             // dataGridView5
             // 
+            dataGridView5.BorderStyle = BorderStyle.None;
             dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView5.ColumnHeadersVisible = false;
             dataGridView5.Columns.AddRange(new DataGridViewColumn[] { Column18 });
             dataGridView5.Location = new Point(804, 561);
             dataGridView5.Name = "dataGridView5";
+            dataGridView5.RowHeadersVisible = false;
             dataGridView5.RowHeadersWidth = 51;
             dataGridView5.Size = new Size(179, 188);
             dataGridView5.TabIndex = 7;
@@ -1151,14 +1209,17 @@
             Column18.HeaderText = "Column18";
             Column18.MinimumWidth = 6;
             Column18.Name = "Column18";
-            Column18.Width = 125;
+            Column18.Width = 178;
             // 
             // dataGridView6
             // 
+            dataGridView6.BorderStyle = BorderStyle.None;
             dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView6.ColumnHeadersVisible = false;
             dataGridView6.Columns.AddRange(new DataGridViewColumn[] { Column19 });
             dataGridView6.Location = new Point(989, 561);
             dataGridView6.Name = "dataGridView6";
+            dataGridView6.RowHeadersVisible = false;
             dataGridView6.RowHeadersWidth = 51;
             dataGridView6.Size = new Size(179, 188);
             dataGridView6.TabIndex = 7;
@@ -1169,17 +1230,18 @@
             Column19.HeaderText = "Column19";
             Column19.MinimumWidth = 6;
             Column19.Name = "Column19";
-            Column19.Width = 125;
+            Column19.Width = 178;
             // 
             // btnGnrtNmrlgy
             // 
+            btnGnrtNmrlgy.BackColor = SystemColors.Control;
             btnGnrtNmrlgy.ForeColor = Color.Black;
             btnGnrtNmrlgy.Location = new Point(569, 424);
             btnGnrtNmrlgy.Name = "btnGnrtNmrlgy";
             btnGnrtNmrlgy.Size = new Size(175, 29);
             btnGnrtNmrlgy.TabIndex = 8;
             btnGnrtNmrlgy.Text = "Generate Numerology";
-            btnGnrtNmrlgy.UseVisualStyleBackColor = true;
+            btnGnrtNmrlgy.UseVisualStyleBackColor = false;
             btnGnrtNmrlgy.Click += btnGnrtNmrlgy_Click;
             // 
             // btnFilterDigit
@@ -1289,13 +1351,14 @@
             // 
             // btnCopy1
             // 
+            btnCopy1.BackColor = SystemColors.Control;
             btnCopy1.ForeColor = Color.Black;
             btnCopy1.Location = new Point(251, 526);
             btnCopy1.Name = "btnCopy1";
             btnCopy1.Size = new Size(94, 29);
             btnCopy1.TabIndex = 10;
             btnCopy1.Text = "Copy Data";
-            btnCopy1.UseVisualStyleBackColor = true;
+            btnCopy1.UseVisualStyleBackColor = false;
             btnCopy1.Visible = false;
             btnCopy1.Click += btnCopy1_Click;
             // 
@@ -1347,33 +1410,119 @@
             btnCopy5.Visible = false;
             btnCopy5.Click += btnCopy5_Click;
             // 
-            // progressBar1
+            // btnSingleGenerate
             // 
-            progressBar1.Location = new Point(16, 561);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(217, 37);
-            progressBar1.TabIndex = 11;
-            progressBar1.Visible = false;
+            btnSingleGenerate.ForeColor = Color.Black;
+            btnSingleGenerate.Location = new Point(239, 252);
+            btnSingleGenerate.Name = "btnSingleGenerate";
+            btnSingleGenerate.Size = new Size(175, 29);
+            btnSingleGenerate.TabIndex = 13;
+            btnSingleGenerate.Text = "Generate By Current Series";
+            btnSingleGenerate.UseVisualStyleBackColor = true;
+            btnSingleGenerate.Click += btnSingleGenerate_Click;
             // 
-            // loading
+            // btnClrList3
             // 
-            loading.AutoSize = true;
-            loading.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            loading.ForeColor = Color.FromArgb(0, 126, 249);
-            loading.Location = new Point(16, 617);
-            loading.Name = "loading";
-            loading.Size = new Size(193, 50);
-            loading.TabIndex = 12;
-            loading.Text = "Loading...";
-            loading.Visible = false;
+            btnClrList3.ForeColor = Color.Black;
+            btnClrList3.Image = (Image)resources.GetObject("btnClrList3.Image");
+            btnClrList3.ImageAlign = ContentAlignment.MiddleRight;
+            btnClrList3.Location = new Point(534, 526);
+            btnClrList3.Name = "btnClrList3";
+            btnClrList3.Size = new Size(79, 29);
+            btnClrList3.TabIndex = 14;
+            btnClrList3.Text = "Clear";
+            btnClrList3.TextAlign = ContentAlignment.MiddleLeft;
+            btnClrList3.UseVisualStyleBackColor = true;
+            btnClrList3.Visible = false;
+            btnClrList3.Click += btnClrList_Click;
+            // 
+            // btnClrList4
+            // 
+            btnClrList4.ForeColor = Color.Black;
+            btnClrList4.Image = (Image)resources.GetObject("btnClrList4.Image");
+            btnClrList4.ImageAlign = ContentAlignment.MiddleRight;
+            btnClrList4.Location = new Point(719, 526);
+            btnClrList4.Name = "btnClrList4";
+            btnClrList4.Size = new Size(79, 29);
+            btnClrList4.TabIndex = 14;
+            btnClrList4.Text = "Clear";
+            btnClrList4.TextAlign = ContentAlignment.MiddleLeft;
+            btnClrList4.UseVisualStyleBackColor = true;
+            btnClrList4.Visible = false;
+            btnClrList4.Click += btnClrList_Click;
+            // 
+            // btnClrList6
+            // 
+            btnClrList6.ForeColor = Color.Black;
+            btnClrList6.Image = (Image)resources.GetObject("btnClrList6.Image");
+            btnClrList6.ImageAlign = ContentAlignment.MiddleRight;
+            btnClrList6.Location = new Point(1089, 526);
+            btnClrList6.Name = "btnClrList6";
+            btnClrList6.Size = new Size(79, 29);
+            btnClrList6.TabIndex = 14;
+            btnClrList6.Text = "Clear";
+            btnClrList6.TextAlign = ContentAlignment.MiddleLeft;
+            btnClrList6.UseVisualStyleBackColor = true;
+            btnClrList6.Visible = false;
+            btnClrList6.Click += btnClrList_Click;
+            // 
+            // btnClrList5
+            // 
+            btnClrList5.ForeColor = Color.Black;
+            btnClrList5.Image = (Image)resources.GetObject("btnClrList5.Image");
+            btnClrList5.ImageAlign = ContentAlignment.MiddleRight;
+            btnClrList5.Location = new Point(904, 526);
+            btnClrList5.Name = "btnClrList5";
+            btnClrList5.Size = new Size(79, 29);
+            btnClrList5.TabIndex = 14;
+            btnClrList5.Text = "Clear";
+            btnClrList5.TextAlign = ContentAlignment.MiddleLeft;
+            btnClrList5.UseVisualStyleBackColor = true;
+            btnClrList5.Visible = false;
+            btnClrList5.Click += btnClrList_Click;
+            // 
+            // btnClrList2
+            // 
+            btnClrList2.BackColor = SystemColors.Control;
+            btnClrList2.ForeColor = Color.Black;
+            btnClrList2.Image = (Image)resources.GetObject("btnClrList2.Image");
+            btnClrList2.ImageAlign = ContentAlignment.MiddleRight;
+            btnClrList2.Location = new Point(349, 526);
+            btnClrList2.Name = "btnClrList2";
+            btnClrList2.Size = new Size(79, 29);
+            btnClrList2.TabIndex = 14;
+            btnClrList2.Text = "Clear";
+            btnClrList2.TextAlign = ContentAlignment.MiddleLeft;
+            btnClrList2.UseVisualStyleBackColor = false;
+            btnClrList2.Visible = false;
+            btnClrList2.Click += btnClrList_Click;
+            // 
+            // btnApplyFilter
+            // 
+            btnApplyFilter.ForeColor = Color.Black;
+            btnApplyFilter.Image = (Image)resources.GetObject("btnApplyFilter.Image");
+            btnApplyFilter.ImageAlign = ContentAlignment.MiddleRight;
+            btnApplyFilter.Location = new Point(420, 251);
+            btnApplyFilter.Name = "btnApplyFilter";
+            btnApplyFilter.Size = new Size(126, 29);
+            btnApplyFilter.TabIndex = 15;
+            btnApplyFilter.Text = "  Apply Filter";
+            btnApplyFilter.TextAlign = ContentAlignment.MiddleLeft;
+            btnApplyFilter.UseVisualStyleBackColor = true;
+            btnApplyFilter.Click += btnApplyFilter_Click;
             // 
             // NumberSystemControl1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            Controls.Add(loading);
-            Controls.Add(progressBar1);
+            Controls.Add(btnApplyFilter);
+            Controls.Add(btnClrList5);
+            Controls.Add(btnClrList6);
+            Controls.Add(btnClrList4);
+            Controls.Add(btnClrList2);
+            Controls.Add(btnClrList3);
+            Controls.Add(btnSingleGenerate);
             Controls.Add(btnCopy5);
             Controls.Add(btnCopy4);
             Controls.Add(btnCopy3);
@@ -1398,7 +1547,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "NumberSystemControl1";
-            Size = new Size(1185, 752);
+            Size = new Size(1185, 767);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -1418,7 +1567,6 @@
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -1532,12 +1680,17 @@
         private DataGridViewTextBoxColumn Column17;
         private DataGridViewTextBoxColumn Column18;
         private DataGridViewTextBoxColumn Column19;
-        private ProgressBar progressBar1;
-        private Label loading;
         private TextBox tbTotalSum2digit;
         private TextBox tbCheckSum;
         private Label label12;
         private Button btnCheckSum;
         private TextBox tbFinalSum;
+        private Button btnSingleGenerate;
+        private Button btnClrList3;
+        private Button btnClrList4;
+        private Button btnClrList6;
+        private Button btnClrList5;
+        private Button btnClrList2;
+        private Button btnApplyFilter;
     }
 }

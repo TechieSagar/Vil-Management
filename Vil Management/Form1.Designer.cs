@@ -76,9 +76,9 @@
             btnContactUs.ForeColor = Color.FromArgb(0, 126, 249);
             btnContactUs.Image = (Image)resources.GetObject("btnContactUs.Image");
             btnContactUs.ImageAlign = ContentAlignment.MiddleLeft;
-            btnContactUs.Location = new Point(32, 374);
+            btnContactUs.Location = new Point(0, 374);
             btnContactUs.Name = "btnContactUs";
-            btnContactUs.Size = new Size(218, 42);
+            btnContactUs.Size = new Size(250, 42);
             btnContactUs.TabIndex = 2;
             btnContactUs.Text = "    Contact Us";
             btnContactUs.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -94,9 +94,9 @@
             btnTools.ForeColor = Color.FromArgb(0, 126, 249);
             btnTools.Image = (Image)resources.GetObject("btnTools.Image");
             btnTools.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTools.Location = new Point(32, 326);
+            btnTools.Location = new Point(0, 326);
             btnTools.Name = "btnTools";
-            btnTools.Size = new Size(218, 42);
+            btnTools.Size = new Size(250, 42);
             btnTools.TabIndex = 2;
             btnTools.Text = "    Tools";
             btnTools.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -112,9 +112,9 @@
             btnUpdate.ForeColor = Color.FromArgb(0, 126, 249);
             btnUpdate.Image = (Image)resources.GetObject("btnUpdate.Image");
             btnUpdate.ImageAlign = ContentAlignment.MiddleLeft;
-            btnUpdate.Location = new Point(32, 278);
+            btnUpdate.Location = new Point(0, 278);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(218, 42);
+            btnUpdate.Size = new Size(250, 42);
             btnUpdate.TabIndex = 2;
             btnUpdate.Text = "    Update";
             btnUpdate.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -130,9 +130,9 @@
             btnNumberSystem.ForeColor = Color.FromArgb(0, 126, 249);
             btnNumberSystem.Image = (Image)resources.GetObject("btnNumberSystem.Image");
             btnNumberSystem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNumberSystem.Location = new Point(32, 230);
+            btnNumberSystem.Location = new Point(0, 230);
             btnNumberSystem.Name = "btnNumberSystem";
-            btnNumberSystem.Size = new Size(218, 42);
+            btnNumberSystem.Size = new Size(250, 42);
             btnNumberSystem.TabIndex = 2;
             btnNumberSystem.Text = "    Number System";
             btnNumberSystem.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -148,9 +148,9 @@
             btnDashboard.ForeColor = Color.FromArgb(0, 126, 249);
             btnDashboard.Image = (Image)resources.GetObject("btnDashboard.Image");
             btnDashboard.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDashboard.Location = new Point(32, 182);
+            btnDashboard.Location = new Point(0, 182);
             btnDashboard.Name = "btnDashboard";
-            btnDashboard.Size = new Size(218, 42);
+            btnDashboard.Size = new Size(250, 42);
             btnDashboard.TabIndex = 2;
             btnDashboard.Text = "    Dashboard";
             btnDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -216,7 +216,7 @@
             panelNav.BackColor = Color.FromArgb(0, 126, 249);
             panelNav.Location = new Point(0, 182);
             panelNav.Name = "panelNav";
-            panelNav.Size = new Size(8, 42);
+            panelNav.Size = new Size(3, 42);
             panelNav.TabIndex = 1;
             // 
             // controlDasboard1
@@ -245,6 +245,7 @@
             // 
             // toolsControl1
             // 
+            toolsControl1.BackColor = Color.FromArgb(46, 51, 73);
             toolsControl1.Location = new Point(248, 60);
             toolsControl1.Name = "toolsControl1";
             toolsControl1.Size = new Size(1419, 802);

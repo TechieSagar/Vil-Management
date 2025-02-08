@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Microsoft.Build.Utilities;
 
 namespace Vil_Management
 {
@@ -23,6 +24,11 @@ namespace Vil_Management
             panelNav.Top = btnDashboard.Top;
             panelNav.Left = btnDashboard.Left;
             btnDashboard.BackColor = Color.FromArgb(46, 51, 73);
+
+            //LoadTasks();
+            //DisplayTasks();
+            //LoadDashboardData();
+            //LoadContestData();
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
@@ -33,6 +39,8 @@ namespace Vil_Management
             btnDashboard.BackColor = Color.FromArgb(46, 51, 73);
             controlDasboard1.BringToFront();
             labelTitle.Text = "Dashboard";
+
+            controlDasboard1.LoadDashboardData();
         }
 
         private void btnNumberSystem_Click(object sender, EventArgs e)
@@ -71,6 +79,16 @@ namespace Vil_Management
             panelNav.Top = btnContactUs.Top;
             panelNav.Left = btnContactUs.Left;
             btnContactUs.BackColor = Color.FromArgb(46, 51, 73);
+
+            string developerInfo = "Developer: Sagar Kumar\n" +
+                                    "Version: 1.0.0\n" +
+                                    "Build Date: January 2025\n" +
+                                    "Contact: sagar20101@yahoo.com\n\n" +
+                                    "Number: 7015723549\n";
+
+            // Show info in a MessageBox
+            MessageBox.Show(developerInfo, "Developer Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void btnDashboard_Leave(object sender, EventArgs e)

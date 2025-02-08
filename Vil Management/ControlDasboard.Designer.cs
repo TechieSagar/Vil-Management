@@ -29,19 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlDasboard));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            labelDq = new Label();
             labelEq = new Label();
             labelVsearch = new Label();
             labelRetention = new Label();
             labelTnps = new Label();
             labelSale = new Label();
+            pbDq = new ProgressBar();
+            pbEq = new ProgressBar();
+            pbVsearch = new ProgressBar();
+            pbRetention = new ProgressBar();
+            pbTnps = new ProgressBar();
             pbSale = new ProgressBar();
+            label10 = new Label();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
@@ -49,6 +56,7 @@
             label5 = new Label();
             label1 = new Label();
             panel2 = new Panel();
+            btnDeleteSelected = new Button();
             label16 = new Label();
             label15 = new Label();
             btnSwap = new Button();
@@ -79,13 +87,6 @@
             panel6 = new Panel();
             label18 = new Label();
             label19 = new Label();
-            pbTnps = new ProgressBar();
-            pbRetention = new ProgressBar();
-            pbVsearch = new ProgressBar();
-            pbEq = new ProgressBar();
-            label10 = new Label();
-            labelDq = new Label();
-            pbDq = new ProgressBar();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -123,6 +124,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(546, 279);
             panel1.TabIndex = 0;
+            // 
+            // labelDq
+            // 
+            labelDq.AutoSize = true;
+            labelDq.ForeColor = Color.FromArgb(255, 255, 128);
+            labelDq.Location = new Point(136, 234);
+            labelDq.Name = "labelDq";
+            labelDq.Size = new Size(58, 20);
+            labelDq.TabIndex = 4;
+            labelDq.Text = "label10";
             // 
             // labelEq
             // 
@@ -167,12 +178,48 @@
             // labelSale
             // 
             labelSale.AutoSize = true;
+            labelSale.FlatStyle = FlatStyle.Flat;
             labelSale.ForeColor = Color.FromArgb(255, 255, 128);
-            labelSale.Location = new Point(135, 59);
+            labelSale.Location = new Point(136, 59);
             labelSale.Name = "labelSale";
-            labelSale.Size = new Size(58, 20);
+            labelSale.Size = new Size(17, 20);
             labelSale.TabIndex = 4;
-            labelSale.Text = "label10";
+            labelSale.Text = "0";
+            // 
+            // pbDq
+            // 
+            pbDq.Location = new Point(258, 234);
+            pbDq.Name = "pbDq";
+            pbDq.Size = new Size(238, 20);
+            pbDq.TabIndex = 3;
+            // 
+            // pbEq
+            // 
+            pbEq.Location = new Point(258, 198);
+            pbEq.Name = "pbEq";
+            pbEq.Size = new Size(238, 20);
+            pbEq.TabIndex = 3;
+            // 
+            // pbVsearch
+            // 
+            pbVsearch.Location = new Point(258, 162);
+            pbVsearch.Name = "pbVsearch";
+            pbVsearch.Size = new Size(238, 20);
+            pbVsearch.TabIndex = 3;
+            // 
+            // pbRetention
+            // 
+            pbRetention.Location = new Point(258, 127);
+            pbRetention.Name = "pbRetention";
+            pbRetention.Size = new Size(238, 20);
+            pbRetention.TabIndex = 3;
+            // 
+            // pbTnps
+            // 
+            pbTnps.Location = new Point(258, 93);
+            pbTnps.Name = "pbTnps";
+            pbTnps.Size = new Size(238, 20);
+            pbTnps.TabIndex = 3;
             // 
             // pbSale
             // 
@@ -180,6 +227,17 @@
             pbSale.Name = "pbSale";
             pbSale.Size = new Size(238, 20);
             pbSale.TabIndex = 3;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F);
+            label10.ForeColor = Color.FromArgb(0, 126, 249);
+            label10.Location = new Point(50, 234);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 20);
+            label10.TabIndex = 1;
+            label10.Text = "DQ - ";
             // 
             // label9
             // 
@@ -251,6 +309,7 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(24, 30, 54);
+            panel2.Controls.Add(btnDeleteSelected);
             panel2.Controls.Add(label16);
             panel2.Controls.Add(label15);
             panel2.Controls.Add(btnSwap);
@@ -262,8 +321,18 @@
             panel2.Controls.Add(label2);
             panel2.Location = new Point(577, 15);
             panel2.Name = "panel2";
-            panel2.Size = new Size(546, 362);
+            panel2.Size = new Size(568, 362);
             panel2.TabIndex = 0;
+            // 
+            // btnDeleteSelected
+            // 
+            btnDeleteSelected.Image = (Image)resources.GetObject("btnDeleteSelected.Image");
+            btnDeleteSelected.Location = new Point(517, 59);
+            btnDeleteSelected.Name = "btnDeleteSelected";
+            btnDeleteSelected.Size = new Size(33, 29);
+            btnDeleteSelected.TabIndex = 10;
+            btnDeleteSelected.UseVisualStyleBackColor = true;
+            btnDeleteSelected.Click += btnDeleteSelected_Click;
             // 
             // label16
             // 
@@ -293,7 +362,7 @@
             btnSwap.FlatAppearance.BorderSize = 0;
             btnSwap.FlatStyle = FlatStyle.Flat;
             btnSwap.Image = (Image)resources.GetObject("btnSwap.Image");
-            btnSwap.Location = new Point(487, 57);
+            btnSwap.Location = new Point(470, 58);
             btnSwap.Name = "btnSwap";
             btnSwap.Size = new Size(31, 29);
             btnSwap.TabIndex = 2;
@@ -305,7 +374,7 @@
             btnCheck.FlatAppearance.BorderSize = 0;
             btnCheck.FlatStyle = FlatStyle.Flat;
             btnCheck.Image = (Image)resources.GetObject("btnCheck.Image");
-            btnCheck.Location = new Point(450, 57);
+            btnCheck.Location = new Point(433, 57);
             btnCheck.Name = "btnCheck";
             btnCheck.Size = new Size(31, 29);
             btnCheck.TabIndex = 2;
@@ -319,10 +388,11 @@
             listBoxCompleted.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxCompleted.ForeColor = Color.PaleGreen;
             listBoxCompleted.FormattingEnabled = true;
+            listBoxCompleted.HorizontalScrollbar = true;
             listBoxCompleted.ItemHeight = 28;
             listBoxCompleted.Location = new Point(317, 127);
             listBoxCompleted.Name = "listBoxCompleted";
-            listBoxCompleted.Size = new Size(197, 196);
+            listBoxCompleted.Size = new Size(197, 224);
             listBoxCompleted.TabIndex = 8;
             // 
             // listBoxPending
@@ -332,6 +402,7 @@
             listBoxPending.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxPending.ForeColor = Color.IndianRed;
             listBoxPending.FormattingEnabled = true;
+            listBoxPending.HorizontalScrollbar = true;
             listBoxPending.ItemHeight = 28;
             listBoxPending.Location = new Point(13, 127);
             listBoxPending.Name = "listBoxPending";
@@ -344,7 +415,7 @@
             btnAddTask.FlatAppearance.BorderSize = 0;
             btnAddTask.FlatStyle = FlatStyle.Flat;
             btnAddTask.ForeColor = Color.Black;
-            btnAddTask.Location = new Point(354, 57);
+            btnAddTask.Location = new Point(337, 58);
             btnAddTask.Name = "btnAddTask";
             btnAddTask.Size = new Size(90, 29);
             btnAddTask.TabIndex = 2;
@@ -357,7 +428,7 @@
             tbAddTask.Location = new Point(13, 59);
             tbAddTask.Name = "tbAddTask";
             tbAddTask.PlaceholderText = "Enter Title Here";
-            tbAddTask.Size = new Size(335, 27);
+            tbAddTask.Size = new Size(318, 27);
             tbAddTask.TabIndex = 1;
             // 
             // label2
@@ -390,40 +461,40 @@
             dataGridViewWalkin.BackgroundColor = Color.FromArgb(24, 30, 54);
             dataGridViewWalkin.BorderStyle = BorderStyle.None;
             dataGridViewWalkin.CausesValidation = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 126, 249);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewWalkin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = Color.FromArgb(0, 126, 249);
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dataGridViewWalkin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewWalkin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewWalkin.ColumnHeadersVisible = false;
             dataGridViewWalkin.Columns.AddRange(new DataGridViewColumn[] { Date, Number, Query });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 126, 249);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dataGridViewWalkin.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Window;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(0, 126, 249);
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            dataGridViewWalkin.DefaultCellStyle = dataGridViewCellStyle9;
             dataGridViewWalkin.GridColor = Color.FromArgb(24, 30, 54);
             dataGridViewWalkin.Location = new Point(12, 147);
             dataGridViewWalkin.Name = "dataGridViewWalkin";
             dataGridViewWalkin.RowHeadersVisible = false;
             dataGridViewWalkin.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(24, 30, 54);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(0, 126, 249);
-            dataGridViewWalkin.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewWalkin.Size = new Size(525, 263);
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(24, 30, 54);
+            dataGridViewCellStyle10.ForeColor = Color.FromArgb(0, 126, 249);
+            dataGridViewWalkin.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewWalkin.Size = new Size(522, 263);
             dataGridViewWalkin.TabIndex = 7;
             // 
             // Date
             // 
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Date.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Date.DefaultCellStyle = dataGridViewCellStyle8;
             Date.HeaderText = "Date";
             Date.MinimumWidth = 6;
             Date.Name = "Date";
@@ -535,7 +606,7 @@
             panel4.Controls.Add(panel6);
             panel4.Location = new Point(577, 394);
             panel4.Name = "panel4";
-            panel4.Size = new Size(546, 343);
+            panel4.Size = new Size(568, 343);
             panel4.TabIndex = 0;
             // 
             // dataGridViewContest
@@ -546,21 +617,21 @@
             dataGridViewContest.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewContest.ColumnHeadersVisible = false;
             dataGridViewContest.Columns.AddRange(new DataGridViewColumn[] { DateContest, DescriptionContest });
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(24, 30, 54);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(255, 192, 192);
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dataGridViewContest.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(24, 30, 54);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = Color.FromArgb(255, 192, 192);
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+            dataGridViewContest.DefaultCellStyle = dataGridViewCellStyle11;
             dataGridViewContest.Location = new Point(12, 102);
             dataGridViewContest.Name = "dataGridViewContest";
             dataGridViewContest.RowHeadersVisible = false;
             dataGridViewContest.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(0, 126, 249);
-            dataGridViewContest.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            dataGridViewContest.Size = new Size(520, 227);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(0, 126, 249);
+            dataGridViewContest.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewContest.Size = new Size(521, 227);
             dataGridViewContest.TabIndex = 8;
             // 
             // DateContest
@@ -619,62 +690,6 @@
             label19.TabIndex = 0;
             label19.Text = "Date";
             // 
-            // pbTnps
-            // 
-            pbTnps.Location = new Point(258, 93);
-            pbTnps.Name = "pbTnps";
-            pbTnps.Size = new Size(238, 20);
-            pbTnps.TabIndex = 3;
-            // 
-            // pbRetention
-            // 
-            pbRetention.Location = new Point(258, 127);
-            pbRetention.Name = "pbRetention";
-            pbRetention.Size = new Size(238, 20);
-            pbRetention.TabIndex = 3;
-            // 
-            // pbVsearch
-            // 
-            pbVsearch.Location = new Point(258, 162);
-            pbVsearch.Name = "pbVsearch";
-            pbVsearch.Size = new Size(238, 20);
-            pbVsearch.TabIndex = 3;
-            // 
-            // pbEq
-            // 
-            pbEq.Location = new Point(258, 198);
-            pbEq.Name = "pbEq";
-            pbEq.Size = new Size(238, 20);
-            pbEq.TabIndex = 3;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 9F);
-            label10.ForeColor = Color.FromArgb(0, 126, 249);
-            label10.Location = new Point(50, 234);
-            label10.Name = "label10";
-            label10.Size = new Size(45, 20);
-            label10.TabIndex = 1;
-            label10.Text = "DQ - ";
-            // 
-            // labelDq
-            // 
-            labelDq.AutoSize = true;
-            labelDq.ForeColor = Color.FromArgb(255, 255, 128);
-            labelDq.Location = new Point(136, 234);
-            labelDq.Name = "labelDq";
-            labelDq.Size = new Size(58, 20);
-            labelDq.TabIndex = 4;
-            labelDq.Text = "label10";
-            // 
-            // pbDq
-            // 
-            pbDq.Location = new Point(258, 234);
-            pbDq.Name = "pbDq";
-            pbDq.Size = new Size(238, 20);
-            pbDq.TabIndex = 3;
-            // 
             // ControlDasboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -685,7 +700,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ControlDasboard";
-            Size = new Size(1144, 754);
+            Size = new Size(1176, 754);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -740,8 +755,6 @@
         private Label label18;
         private Label label19;
         private DataGridView dataGridViewContest;
-        private DataGridViewTextBoxColumn DateContest;
-        private DataGridViewTextBoxColumn DescriptionContest;
         private Button btnSwap;
         private ProgressBar pbSale;
         private Label labelEq;
@@ -756,5 +769,8 @@
         private Label labelDq;
         private ProgressBar pbDq;
         private Label label10;
+        private Button btnDeleteSelected;
+        private DataGridViewTextBoxColumn DateContest;
+        private DataGridViewTextBoxColumn DescriptionContest;
     }
 }
