@@ -62,6 +62,7 @@
             btnInsertMid2Digit = new Button();
             tbInsertMid2digit = new TextBox();
             panel4 = new Panel();
+            btnGenerateByMid = new Button();
             btnGenerate = new Button();
             tbUpto6Digit = new TextBox();
             label7 = new Label();
@@ -154,6 +155,7 @@
             btnClrList5 = new Button();
             btnClrList2 = new Button();
             btnApplyFilter = new Button();
+            btnDoubleZero = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -463,6 +465,7 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(37, 42, 64);
+            panel4.Controls.Add(btnGenerateByMid);
             panel4.Controls.Add(btnGenerate);
             panel4.Controls.Add(tbUpto6Digit);
             panel4.Controls.Add(label7);
@@ -476,22 +479,33 @@
             panel4.Size = new Size(530, 101);
             panel4.TabIndex = 1;
             // 
+            // btnGenerateByMid
+            // 
+            btnGenerateByMid.ForeColor = Color.Black;
+            btnGenerateByMid.Location = new Point(402, 46);
+            btnGenerateByMid.Name = "btnGenerateByMid";
+            btnGenerateByMid.Size = new Size(108, 29);
+            btnGenerateByMid.TabIndex = 8;
+            btnGenerateByMid.Text = "by mid";
+            btnGenerateByMid.UseVisualStyleBackColor = true;
+            btnGenerateByMid.Click += btnGenerateByMid_Click;
+            // 
             // btnGenerate
             // 
             btnGenerate.ForeColor = Color.Black;
-            btnGenerate.Location = new Point(343, 45);
+            btnGenerate.Location = new Point(223, 47);
             btnGenerate.Name = "btnGenerate";
-            btnGenerate.Size = new Size(167, 29);
+            btnGenerate.Size = new Size(173, 29);
             btnGenerate.TabIndex = 5;
-            btnGenerate.Text = "Generate";
+            btnGenerate.Text = "Generate by ending";
             btnGenerate.UseVisualStyleBackColor = true;
             btnGenerate.Click += btnGenerate_Click;
             // 
             // tbUpto6Digit
             // 
-            tbUpto6Digit.Location = new Point(183, 46);
+            tbUpto6Digit.Location = new Point(129, 48);
             tbUpto6Digit.Name = "tbUpto6Digit";
-            tbUpto6Digit.Size = new Size(125, 27);
+            tbUpto6Digit.Size = new Size(88, 27);
             tbUpto6Digit.TabIndex = 3;
             tbUpto6Digit.TextChanged += tbUpto6Digit_TextChanged;
             // 
@@ -501,9 +515,9 @@
             label7.ForeColor = Color.White;
             label7.Location = new Point(14, 49);
             label7.Name = "label7";
-            label7.Size = new Size(159, 20);
+            label7.Size = new Size(109, 20);
             label7.TabIndex = 4;
-            label7.Text = "Enter the ending series";
+            label7.Text = "Enter the digits";
             // 
             // radioButton4d
             // 
@@ -1434,7 +1448,7 @@
             btnClrList3.TextAlign = ContentAlignment.MiddleLeft;
             btnClrList3.UseVisualStyleBackColor = true;
             btnClrList3.Visible = false;
-            btnClrList3.Click += btnClrList_Click;
+            btnClrList3.Click += btnClrList3_Click;
             // 
             // btnClrList4
             // 
@@ -1449,7 +1463,7 @@
             btnClrList4.TextAlign = ContentAlignment.MiddleLeft;
             btnClrList4.UseVisualStyleBackColor = true;
             btnClrList4.Visible = false;
-            btnClrList4.Click += btnClrList_Click;
+            btnClrList4.Click += btnClrList4_Click;
             // 
             // btnClrList6
             // 
@@ -1464,7 +1478,7 @@
             btnClrList6.TextAlign = ContentAlignment.MiddleLeft;
             btnClrList6.UseVisualStyleBackColor = true;
             btnClrList6.Visible = false;
-            btnClrList6.Click += btnClrList_Click;
+            btnClrList6.Click += btnClrList6_Click;
             // 
             // btnClrList5
             // 
@@ -1479,7 +1493,7 @@
             btnClrList5.TextAlign = ContentAlignment.MiddleLeft;
             btnClrList5.UseVisualStyleBackColor = true;
             btnClrList5.Visible = false;
-            btnClrList5.Click += btnClrList_Click;
+            btnClrList5.Click += btnClrList5_Click;
             // 
             // btnClrList2
             // 
@@ -1495,7 +1509,7 @@
             btnClrList2.TextAlign = ContentAlignment.MiddleLeft;
             btnClrList2.UseVisualStyleBackColor = false;
             btnClrList2.Visible = false;
-            btnClrList2.Click += btnClrList_Click;
+            btnClrList2.Click += btnClrList2_Click;
             // 
             // btnApplyFilter
             // 
@@ -1511,11 +1525,22 @@
             btnApplyFilter.UseVisualStyleBackColor = true;
             btnApplyFilter.Click += btnApplyFilter_Click;
             // 
+            // btnDoubleZero
+            // 
+            btnDoubleZero.Location = new Point(16, 526);
+            btnDoubleZero.Name = "btnDoubleZero";
+            btnDoubleZero.Size = new Size(203, 29);
+            btnDoubleZero.TabIndex = 16;
+            btnDoubleZero.Text = "****00**00";
+            btnDoubleZero.UseVisualStyleBackColor = true;
+            btnDoubleZero.Click += btnDoubleZero_Click;
+            // 
             // NumberSystemControl1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
+            Controls.Add(btnDoubleZero);
             Controls.Add(btnApplyFilter);
             Controls.Add(btnClrList5);
             Controls.Add(btnClrList6);
@@ -1692,5 +1717,7 @@
         private Button btnClrList5;
         private Button btnClrList2;
         private Button btnApplyFilter;
+        private Button btnDoubleZero;
+        private Button btnGenerateByMid;
     }
 }

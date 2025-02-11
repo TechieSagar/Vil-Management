@@ -28,7 +28,7 @@ namespace Vil_Management
         //private TextBox inputDatxtInputData;
         private int digitCount = 0;
         //ErrorProvider errorProvider = null;
-        private const int RowLimit = 30000;
+        private int RowLimit = 30000;
         public NumberSystemControl1()
         {
             InitializeComponent();
@@ -376,7 +376,7 @@ namespace Vil_Management
             }
             else if (tbUpto6Digit.Text.Length == 0)
             {
-                MessageBox.Show("Please enter the required digits in ");
+                MessageBox.Show("Please enter the required digits");
             }
 
 
@@ -393,6 +393,8 @@ namespace Vil_Management
             {
                 btnCopy.Visible = false;
             }
+
+            tbUpto6Digit.Clear();
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
@@ -445,6 +447,15 @@ namespace Vil_Management
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(tbUpto6Digit.Text))
+            {
+                RowLimit = 30000;
+            }
+            else
+            {
+                RowLimit = int.Parse(tbUpto6Digit.Text);
+            }
+
             // Start from the first column (index 0)
             int currentColumn = 0;
 
@@ -489,52 +500,58 @@ namespace Vil_Management
             MessageBox.Show("Data has been successfully distributed across columns.");
         }
 
-        private void btnGnrtNmrlgy_Click(object sender, EventArgs e)
+        private async void btnGnrtNmrlgy_Click(object sender, EventArgs e)
         {
-
-            // Show the ProgressBar and Label
             btnGnrtNmrlgy.Enabled = false;
-            //progressBar1.Visible = true;
-            //loading.Visible = true;
 
+            // Pre-allocate capacity for generating items
+            List<string> modifiedItems = new List<string>(1000000); // Pre-allocate large capacity
 
-            List<string> modifiedItems = new List<string>();
-
-            foreach (var item in cbNmbrlgySrs.Items)
+            // Start the number generation process in a background thread without waiting (immediate start)
+            Task task = Task.Run(() =>
             {
-                foreach (var item2 in cbMid2Digit.Items)
+                // Use Parallel.For to parallelize the work across multiple CPU cores
+                Parallel.ForEach(cbNmbrlgySrs.Items.Cast<object>(), item =>
                 {
-                    for (int i = 0; i < 10000; i++)
+                    foreach (var item2 in cbMid2Digit.Items)
                     {
-                        string modifiedItem = item.ToString() + item2 + i.ToString("D4");
-                        modifiedItems.Add(modifiedItem);
-                        //dataGridView2.Rows.Add(modifiedItem);
+                        for (int i = 0; i < 10000; i++)
+                        {
+                            string modifiedItem = item.ToString() + item2 + i.ToString("D4");
 
+                            // Avoid lock and add to list directly (fast)
+                            modifiedItems.Add(modifiedItem);
+                        }
                     }
-                }
-            }
+                });
 
-            dataGridView1.Rows.Clear();
+                // After generating the items, update the DataGridView in bulk
+                dataGridView1.Invoke((MethodInvoker)delegate
+                {
+                    dataGridView1.Rows.Clear();  // Clear old rows
+                });
 
-            foreach (var item in modifiedItems)
-            {
-                dataGridView2.Rows.Add(item);
-            }
+                // Add all items in a single bulk operation (faster than adding one by one)
+                dataGridView2.Invoke((MethodInvoker)delegate
+                {
+                    foreach (var item in modifiedItems)
+                    {
+                        dataGridView2.Rows.Add(item);
+                    }
+                });
 
-            MessageBox.Show("Generated");
-            //btnGnrtNmrlgy.BackColor = (Color.FromArgb(24, 30, 54));
+                // Enable the button and show the completion message (in the UI thread)
+                btnGnrtNmrlgy.Invoke((MethodInvoker)delegate
+                {
+                    btnGnrtNmrlgy.Enabled = true;
+                    MessageBox.Show("Generated");
+                });
+            });
 
-            if (dataGridView2 != null)
-            {
-                btnCopy1.Visible = true;
-                dataGridView2.Visible = true;
-                //btnGnrtNmrlgy.BackColor = (Color.FromArgb(24, 30, 54));
-                btnClrList2.Visible = true;
-
-            }
-
-            btnGnrtNmrlgy.Enabled = true;
-            //btnGnrtNmrlgy.BackColor = (Color.FromArgb(24, 30, 54));
+            // This button becomes visible without waiting for task completion
+            btnCopy1.Visible = true;
+            dataGridView2.Visible = true;
+            btnClrList2.Visible = true;
         }
 
         private void btnFilterDigit_Click(object sender, EventArgs e)
@@ -626,19 +643,19 @@ namespace Vil_Management
         {
             CopyDataToDataGridView(dataGridView3, dataGridView4);
 
-            int requiredSum = 0;  // Example: Required sum after filtering (change as needed)
+            List<int> requiredSums = new List<int>();  // List to store selected sums
 
-            if (checkBox10.Checked) requiredSum = 0;
-            if (checkBox11.Checked) requiredSum = 1;
-            if (checkBox12.Checked) requiredSum = 2;
-            if (checkBox13.Checked) requiredSum = 3;
-            if (checkBox14.Checked) requiredSum = 4;
-            if (checkBox15.Checked) requiredSum = 5;
-            if (checkBox16.Checked) requiredSum = 6;
-            if (checkBox17.Checked) requiredSum = 7;
-            if (checkBox18.Checked) requiredSum = 8;
-            if (checkBox19.Checked) requiredSum = 9;
-
+            // Add the corresponding sum values to the list based on checked checkboxes
+            if (checkBox10.Checked) requiredSums.Add(0);
+            if (checkBox11.Checked) requiredSums.Add(1);
+            if (checkBox12.Checked) requiredSums.Add(2);
+            if (checkBox13.Checked) requiredSums.Add(3);
+            if (checkBox14.Checked) requiredSums.Add(4);
+            if (checkBox15.Checked) requiredSums.Add(5);
+            if (checkBox16.Checked) requiredSums.Add(6);
+            if (checkBox17.Checked) requiredSums.Add(7);
+            if (checkBox18.Checked) requiredSums.Add(8);
+            if (checkBox19.Checked) requiredSums.Add(9);
 
             // Loop through all the rows in DataGridView in reverse order to avoid index shifting when removing rows
             for (int i = dataGridView4.Rows.Count - 1; i >= 0; i--)
@@ -657,8 +674,8 @@ namespace Vil_Management
                         sum = CalculateDigitSum(sum.ToString());
                     }
 
-                    // If the sum matches the required sum, keep the row, otherwise remove it
-                    if (sum != requiredSum)
+                    // If the sum is not in the list of required sums, remove the row
+                    if (!requiredSums.Contains(sum))
                     {
                         dataGridView4.Rows.RemoveAt(i);
                     }
@@ -673,7 +690,6 @@ namespace Vil_Management
             }
 
             MessageBox.Show("Filtered by sum.");
-
         }
 
         // Helper method to calculate the sum of digits of a number (string version)
@@ -690,6 +706,26 @@ namespace Vil_Management
             return value.ToString().Where(c => Char.IsDigit(c)) // Filter only digits
                                     .Select(c => int.Parse(c.ToString())) // Convert characters to integers
                                     .Sum(); // Sum the digits
+        }
+
+        // Get the selected digits as a string
+        private int GetRequiredSum()
+        {
+            int requiredSum = 0;
+
+            // Check which checkboxes are checked and add the corresponding digits to the selectedDigits string
+            if (checkBox10.Checked) requiredSum = 0;
+            if (checkBox11.Checked) requiredSum = 1;
+            if (checkBox12.Checked) requiredSum = 2;
+            if (checkBox13.Checked) requiredSum = 3;
+            if (checkBox14.Checked) requiredSum = 4;
+            if (checkBox15.Checked) requiredSum = 5;
+            if (checkBox16.Checked) requiredSum = 6;
+            if (checkBox17.Checked) requiredSum = 7;
+            if (checkBox18.Checked) requiredSum = 8;
+            if (checkBox19.Checked) requiredSum = 9;
+
+            return requiredSum;
         }
 
         private void btnFltrRptvDgts_Click(object sender, EventArgs e)
@@ -774,37 +810,37 @@ namespace Vil_Management
 
         private void CopyDataToDataGridView(DataGridView source, DataGridView destination)
         {
-            // Temporarily disable layout updates for the destination DataGridView to improve performance
-            destination.SuspendLayout();
-
-            // Clear the destination DataGridView first (if needed)
+            // Clear destination DataGridView first
             destination.Rows.Clear();
 
-            // Make sure the destination DataGridView has the same number of columns as the source DataGridView
-            destination.ColumnCount = source.ColumnCount;
+            // Create a list to hold rows that will be added to the destination
+            var rows = new List<DataGridViewRow>();
 
-            // Loop through the rows of the source DataGridView and add them to the destination
-            foreach (DataGridViewRow sourceRow in source.Rows)
+            // Run the parallel task for copying rows from source to rows list
+            Parallel.ForEach(source.Rows.Cast<DataGridViewRow>(), (sourceRow) =>
             {
-                // Skip the empty rows (such as the new row)
-                if (sourceRow.IsNewRow) continue;
-
-                // Create a new row for the destination DataGridView
-                DataGridViewRow destRow = new DataGridViewRow();
-
-                // Loop through each cell in the row and copy the value to the destination DataGridView
-                for (int i = 0; i < sourceRow.Cells.Count; i++)
+                if (!sourceRow.IsNewRow) // Skip the new row (if any)
                 {
-                    var cellValue = sourceRow.Cells[i].Value;
-                    destRow.Cells.Add(new DataGridViewTextBoxCell { Value = cellValue });
+                    // Create a new row for the destination DataGridView
+                    var destinationRow = (DataGridViewRow)sourceRow.Clone();
+
+                    // Copy each cell value from the source row to the destination row
+                    for (int i = 0; i < sourceRow.Cells.Count; i++)
+                    {
+                        destinationRow.Cells[i].Value = sourceRow.Cells[i].Value;
+                    }
+
+                    // Add the new row to the list (we add rows later on the UI thread)
+                    rows.Add(destinationRow);
                 }
+            });
 
-                // Add the row to the destination DataGridView
-                destination.Rows.Add(destRow);
-            }
-
-            // Re-enable layout updates after the copy is done
-            destination.ResumeLayout();
+            // After parallel task is done, add rows to destination DataGridView on the UI thread
+            this.Invoke((MethodInvoker)(() =>
+            {
+                destination.Rows.Clear(); // Clear the destination DataGridView before adding new rows
+                destination.Rows.AddRange(rows.ToArray());
+            }));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -1012,10 +1048,6 @@ namespace Vil_Management
 
         }
 
-        private void btnClrList_Click(object sender, EventArgs e)
-        {
-            ClearDataGridRows(dataGridView2);
-        }
 
         private void ClearDataGridRows(DataGridView dataGridView)
         {
@@ -1062,6 +1094,108 @@ namespace Vil_Management
                 tbCheckSum.Text = tbCheckSum.Text.Substring(0, 10);
                 tbCheckSum.SelectionStart = tbCheckSum.Text.Length; // Set cursor to the end of the text
             }
+        }
+
+        private void btnClrList2_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView2);
+        }
+
+        private void btnClrList3_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView3);
+        }
+
+        private void btnClrList4_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView4);
+        }
+
+        private void btnClrList5_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView5);
+        }
+
+        private void btnClrList6_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView6);
+        }
+
+        private void btnDoubleZero_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            List<string> modifiedItems = new List<string>();
+
+            foreach (var item in cbSrsNmbrs.Items)
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    string number = item.ToString() + "00" + i.ToString("D2") + "00";
+                    modifiedItems.Add(number);
+                }
+
+            }
+
+            foreach (var item in modifiedItems)
+            {
+                dataGridView1.Rows.Add(item);
+            }
+
+        }
+
+        private void btnGenerateByMid_Click(object sender, EventArgs e)
+        {
+            String digits = tbUpto6Digit.Text;
+
+            //dataGridView1.Rows.Clear();
+            List<string> modifiedItems = new List<string>();
+
+            if (tbUpto6Digit.Text.Length == 5)
+            {
+                foreach (var item in cbSrsNmbrs.Items)
+                {
+                    for(int i=0; i<10; i++)
+                    {
+                        string modifiedItem = item.ToString() + digits + i.ToString();
+                        modifiedItems.Add(modifiedItem);
+                    }
+                }
+            } else if (tbUpto6Digit.Text.Length == 4)
+            {
+                foreach (var item in cbSrsNmbrs.Items)
+                {
+                    for (int i = 0; i < 100; i++)
+                    {
+                        string modifiedItem = item.ToString() + digits + i.ToString("D2");
+                        modifiedItems.Add(modifiedItem);
+                    }
+                }
+            }
+            else if (tbUpto6Digit.Text.Length == 3)
+            {
+                foreach (var item in cbSrsNmbrs.Items)
+                {
+                    for (int i = 0; i < 1000; i++)
+                    {
+                        string modifiedItem = item.ToString() + digits + i.ToString("D3");
+                        modifiedItems.Add(modifiedItem);
+                    }
+                }
+            }
+            else if (tbUpto6Digit.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter the required digits");
+            }
+
+            dataGridView1.Rows.Clear();
+            foreach (var item in modifiedItems)
+            {
+                dataGridView1.Rows.Add(item);
+            }
+
+            MessageBox.Show("Numbers generated successfully.");
+
+            tbUpto6Digit.Clear();
         }
     }
 }
