@@ -830,6 +830,8 @@ namespace Vil_Management
                         destinationRow.Cells[i].Value = sourceRow.Cells[i].Value;
                     }
 
+                    //destinationRow.Cells[0].Value = sourceRow.Cells[0].Value;
+
                     // Add the new row to the list (we add rows later on the UI thread)
                     rows.Add(destinationRow);
                 }
@@ -1072,14 +1074,27 @@ namespace Vil_Management
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            CopyDataToDataGridView(dataGridView1, dataGridView2);
-            if (dataGridView2 != null)
+            //CopyDataToDataGridView(dataGridView1, dataGridView2);
+            dataGridView2.SuspendLayout();
+            dataGridView2.Rows.Clear();
+            var rowsCount = dataGridView1.Rows.Count;
+            Parallel.For(0, rowsCount, i =>
             {
-                btnCopy1.Visible = true;
-                dataGridView2.Visible = true;
-                btnClrList2.Visible = true;
+                if (!dataGridView1.Rows[i].IsNewRow)
+                {
+                    var cellValue = dataGridView1.Rows[i].Cells[0].Value ?? DBNull.Value;
 
-            }
+                    dataGridView2.Invoke(new Action(() =>
+                    {
+                        dataGridView2.Rows.Add(cellValue);
+                    }));
+                }
+            });
+            dataGridView2.ResumeLayout();
+
+            btnCopy1.Visible = true;
+            dataGridView2.Visible = true;
+            btnClrList2.Visible = true;
 
         }
 
