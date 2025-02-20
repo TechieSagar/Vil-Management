@@ -165,10 +165,22 @@
   <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column17.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="Column17.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column19.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column19.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -236,6 +248,17 @@
         BLBSOyJWcCBOoLt1QXJwqVbEDcRFdKduRhdOW0gOnn0VcfNSemg204ruNATOiV0EBx/MEQ+AjxS4cKCz
         luhhD9ccbFy1swnVxiZV+1RqDZ2xTLf/YMPJxjUHm9DsbFKzBVIb6IxlmpG6+KvIMjpjmY/IUcXmP95z
         Tp/87hvR6Z7cDzr88V1bIDGI/vs/vAK9EdYy4D9FSwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnClrDatGrid1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAEJSURBVEhL7ZQxS8NQFIUPaP+FHV0ckiHgYN5TCm7dUro4
+        iEIXnd2c+ne69Ff0PwiKUggtpbSIdimKpzQhycvNo4hJnXLgI+Tewz08bl6AWrX+VVRwqOCVxofLCxzK
+        +aDGAzVYIcN8gI9ravxYjDGtxu9qJgrf5gnaVPgqmBLuzsjpG3njZLVOkxw/kY9B0W+QBJxSYSWbOYIj
+        MnwmP5Zkz4sDwpfsXfrNECqcUGMhG1aSwe9zcvIaP2/dos8SMpLFndz7TNW/KvYtgOc4psZMNqz89STG
+        Tj5l0xqQ24mxI+mXIVGQwiU11tKQUvbrSoP2fU/SoOpv/EBmRKrs37Wd08WBnF+rVnXaAPaSk4TTqDUt
+        AAAAAElFTkSuQmCC
 </value>
   </data>
 </root>

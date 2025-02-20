@@ -1169,13 +1169,14 @@ namespace Vil_Management
             {
                 foreach (var item in cbSrsNmbrs.Items)
                 {
-                    for(int i=0; i<10; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         string modifiedItem = item.ToString() + digits + i.ToString();
                         modifiedItems.Add(modifiedItem);
                     }
                 }
-            } else if (tbUpto6Digit.Text.Length == 4)
+            }
+            else if (tbUpto6Digit.Text.Length == 4)
             {
                 foreach (var item in cbSrsNmbrs.Items)
                 {
@@ -1211,6 +1212,11 @@ namespace Vil_Management
             MessageBox.Show("Numbers generated successfully.");
 
             tbUpto6Digit.Clear();
+        }
+
+        private void btnClrDatGrid1_Click(object sender, EventArgs e)
+        {
+            ClearDataGridRows(dataGridView1);
         }
     }
 }
