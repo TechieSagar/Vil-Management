@@ -648,6 +648,7 @@ namespace Vil_Management
             // Add the corresponding sum values to the list based on checked checkboxes
             if (checkBox10.Checked) requiredSums.Add(0);
             if (checkBox11.Checked) requiredSums.Add(1);
+            if (checkBox11.Checked) requiredSums.Add(10);
             if (checkBox12.Checked) requiredSums.Add(2);
             if (checkBox13.Checked) requiredSums.Add(3);
             if (checkBox14.Checked) requiredSums.Add(4);
@@ -665,10 +666,11 @@ namespace Vil_Management
                 if (row.Cells[0].Value != null)
                 {
                     string rowData = row.Cells[0].Value.ToString();
+   
                     int sum = CalculateDigitSum(rowData);
 
                     // Check if the sum is a two-digit number (between 10 and 99)
-                    if (sum >= 10 && sum <= 99)
+                    if (sum >=10 && sum <= 99)
                     {
                         // Recalculate sum of digits if the sum is a two-digit number
                         sum = CalculateDigitSum(sum.ToString());
