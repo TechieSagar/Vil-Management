@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,12 +30,15 @@ namespace Vil_Management
         private int digitCount = 0;
         //ErrorProvider errorProvider = null;
         private int RowLimit = 30000;
+
+        public List<string> modifiedItems = new List<string>(10000000);
+        public List<string> filteredData = new List<string>(10000000);
         public NumberSystemControl1()
         {
             InitializeComponent();
             LoadData(cbNmbrlgySrs, nSeriesPath);
             LoadData(cbSrsNmbrs, numberSeriesPath);
-            LoadData(cbMid2Digit, n2DigitPath);
+            //LoadData(cbMid2Digit, n2DigitPath);
         }
 
         private void btnInsertSeries_Click(object sender, EventArgs e)
@@ -248,38 +252,38 @@ namespace Vil_Management
 
         private void tbInsertMid2digit_TextChanged(object sender, EventArgs e)
         {
-            if (tbInsertMid2digit.Text.Length > 2)
-            {
-                // Show error message if the length exceeds 4 digits
-                MessageBox.Show("You can only enter up to 2 digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //if (tbInsertMid2digit.Text.Length > 2)
+            //{
+            //    // Show error message if the length exceeds 4 digits
+            //    MessageBox.Show("You can only enter up to 2 digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                // Truncate the text to 4 digits
-                tbInsertMid2digit.Text = tbInsertMid2digit.Text.Substring(0, 2);
-                tbInsertMid2digit.SelectionStart = tbInsertMid2digit.Text.Length; // Set cursor to the end of the text
-            }
+            //    // Truncate the text to 4 digits
+            //    tbInsertMid2digit.Text = tbInsertMid2digit.Text.Substring(0, 2);
+            //    tbInsertMid2digit.SelectionStart = tbInsertMid2digit.Text.Length; // Set cursor to the end of the text
+            //}
         }
 
         private void btnInsertMid2Digit_Click(object sender, EventArgs e)
         {
 
-            SaveData(tbInsertMid2digit, n2DigitPath);
-            LoadData(cbMid2Digit, n2DigitPath);
+            //SaveData(tbInsertMid2digit, n2DigitPath);
+            //LoadData(cbMid2Digit, n2DigitPath);
 
-            if (cbMid2Digit.Items.Count > 0)
-            {
-                // Set the selected item to the last item
-                cbMid2Digit.SelectedIndex = cbMid2Digit.Items.Count - 1;
-            }
+            //if (cbMid2Digit.Items.Count > 0)
+            //{
+            //    // Set the selected item to the last item
+            //    cbMid2Digit.SelectedIndex = cbMid2Digit.Items.Count - 1;
+            //}
         }
 
         private void btnClrMid2Digit_Click(object sender, EventArgs e)
         {
-            ClearComboBox(n2DigitPath, cbMid2Digit);
+            //ClearComboBox(n2DigitPath, cbMid2Digit);
         }
 
         private void btnRfrshMid2Digit_Click(object sender, EventArgs e)
         {
-            LoadData(cbMid2Digit, n2DigitPath);
+            //LoadData(cbMid2Digit, n2DigitPath);
         }
 
         private void tbUpto6Digit_TextChanged(object sender, EventArgs e)
@@ -502,10 +506,10 @@ namespace Vil_Management
 
         private async void btnGnrtNmrlgy_Click(object sender, EventArgs e)
         {
-            btnGnrtNmrlgy.Enabled = false;
+            //btnGnrtNmrlgy.Enabled = false;
 
             // Pre-allocate capacity for generating items
-            List<string> modifiedItems = new List<string>(1000000); // Pre-allocate large capacity
+            //List<string> modifiedItems = new List<string>(1000000); // Pre-allocate large capacity
 
             // Start the number generation process in a background thread without waiting (immediate start)
             Task task = Task.Run(() =>
@@ -513,141 +517,155 @@ namespace Vil_Management
                 // Use Parallel.For to parallelize the work across multiple CPU cores
                 Parallel.ForEach(cbNmbrlgySrs.Items.Cast<object>(), item =>
                 {
-                    foreach (var item2 in cbMid2Digit.Items)
+                    //foreach (var item2 in cbMid2Digit.Items)
+                    for (int j = 0; j <= 99; ++j)
                     {
                         for (int i = 0; i < 10000; i++)
                         {
-                            string modifiedItem = item.ToString() + item2 + i.ToString("D4");
+                            string modifiedItem = item.ToString() + j.ToString("D2") + i.ToString("D4");
 
                             // Avoid lock and add to list directly (fast)
                             modifiedItems.Add(modifiedItem);
+
                         }
                     }
                 });
 
-                // After generating the items, update the DataGridView in bulk
-                dataGridView1.Invoke((MethodInvoker)delegate
-                {
-                    dataGridView1.Rows.Clear();  // Clear old rows
-                });
+                //MessageBox.Show("Generated");
+
+                //DataTable dataTable = new DataTable();
+                //dataTable.Columns.Add("Items", typeof(string));  // Define a single column for the strings
+
+                //// After generating the items, update the DataGridView in bulk
+                //dataGridView1.Invoke((MethodInvoker)delegate
+                //{
+                //    dataGridView1.Rows.Clear();  // Clear old rows
+                //});
 
                 // Add all items in a single bulk operation (faster than adding one by one)
-                dataGridView2.Invoke((MethodInvoker)delegate
-                {
-                    foreach (var item in modifiedItems)
-                    {
-                        dataGridView2.Rows.Add(item);
-                    }
-                });
+                //dataGridView2.Invoke((MethodInvoker)delegate
+                //{
+                //    foreach (var item in modifiedItems)
+                //    {
+                //        dataGridView2.Rows.Add(item);
+                //    }
+                //});
 
                 // Enable the button and show the completion message (in the UI thread)
-                btnGnrtNmrlgy.Invoke((MethodInvoker)delegate
-                {
-                    btnGnrtNmrlgy.Enabled = true;
-                    MessageBox.Show("Generated");
-                });
+                //btnGnrtNmrlgy.Invoke((MethodInvoker)delegate
+                //{
+                //    btnGnrtNmrlgy.Enabled = true;
+                //    MessageBox.Show("Generated");
+                //});
+
+                MessageBox.Show("Generated");
+                btnGnrtNmrlgy.Enabled = false;
             });
 
             // This button becomes visible without waiting for task completion
-            btnCopy1.Visible = true;
-            dataGridView2.Visible = true;
-            btnClrList2.Visible = true;
+            //btnCopy1.Visible = true;
+            //dataGridView2.Visible = true;
+            //btnClrList2.Visible = true;
         }
+
 
         private void btnFilterDigit_Click(object sender, EventArgs e)
         {
-            //foreach (string item in columnDataArray)
+            List<string> rowDataList = new List<string>();
+
+            // Collecting data from DataGridView (only the first column)
+            //foreach (DataGridViewRow row in dataGridView2.Rows)
             //{
-            //    // Add a new row with one cell (one column per array element)
-            //    dataGridView2.Rows.Add(item);
+            //    if (row.Cells[0].Value != null)
+            //    {
+            //        rowDataList.Add(row.Cells[0].Value.ToString());
+            //    }
             //}
-            CopyDataToDataGridView(dataGridView2, dataGridView3);
+            rowDataList.AddRange(modifiedItems);
 
 
-            // Get the selected digits based on the checkboxes
             string selectedDigits = GetSelectedDigits();
+            HashSet<char> selectedDigitSet = new HashSet<char>(selectedDigits); // Set for fast lookup
 
-            // Loop through the DataGridView rows in reverse order to avoid index shifting when deleting rows
-            for (int i = dataGridView3.Rows.Count - 1; i >= 0; i--)
-            {
-                var row = dataGridView3.Rows[i];
+            // Filter rows based on selected digits
+            filteredData = rowDataList
+                .Where(data => !ContainsUnwantedDigits(data, selectedDigitSet)) // Faster check with HashSet
+                .ToList();
 
-                // Check if the row has a valid cell in the first column (column index 0)
-                if (row.Cells[0].Value != null)
-                {
-                    string rowData = row.Cells[0].Value.ToString();
+            // Clear DataGridView and add all filtered data at once
+            //dataGridView3.Rows.Clear();
+            //foreach (var data in filteredData)
+            //{
+            //    dataGridView3.Rows.Add(data); // Add rows to DataGridView
+            //}
 
-                    // Check if row contains any unwanted digits
-                    if (ContainsUnwantedDigits(rowData, selectedDigits))
-                    {
-                        // Remove the row if it contains any unwanted digits
-                        dataGridView3.Rows.RemoveAt(i);
-                    }
-                }
-                else
-                {
-                    // Optional: Handle cases where the cell is null (empty or no data)
-                    // If you want to remove rows with no data, you can use this:
-                    // dataGridView1.Rows.RemoveAt(i);
-                }
-            }
+            //var rows = filteredData.Select(item => new DataGridViewRow
+            //{
+            //    Cells = { new DataGridViewTextBoxCell { Value = item } }
+            //}).ToArray();
 
-            if (dataGridView3.Visible == false)
-            {
-                dataGridView3.Visible = true;
-                btnCopy2.Visible = true;
-                btnClrList3.Visible = true;
-            }
+            //// Add all rows at once using AddRange
+            //dataGridView3.Rows.AddRange(rows);
+
+            //if (dataGridView3.Visible == false)
+            //{
+            //    dataGridView3.Visible = true;
+            //    btnCopy2.Visible = true;
+            //    btnClrList3.Visible = true;
+            //}
 
 
             MessageBox.Show("Required digits are filtered.");
+            btnFilterDigit.Enabled = false;
         }
 
-        // Get the selected digits as a string
+        // Method to get selected digits from checkboxes
         private string GetSelectedDigits()
         {
-            string selectedDigits = string.Empty;
+            StringBuilder selectedDigits = new StringBuilder();
 
-            // Check which checkboxes are checked and add the corresponding digits to the selectedDigits string
-            if (checkBox0.Checked) selectedDigits += "0";
-            if (checkBox1.Checked) selectedDigits += "1";
-            if (checkBox2.Checked) selectedDigits += "2";
-            if (checkBox3.Checked) selectedDigits += "3";
-            if (checkBox4.Checked) selectedDigits += "4";
-            if (checkBox5.Checked) selectedDigits += "5";
-            if (checkBox6.Checked) selectedDigits += "6";
-            if (checkBox7.Checked) selectedDigits += "7";
-            if (checkBox8.Checked) selectedDigits += "8";
-            if (checkBox9.Checked) selectedDigits += "9";
+            if (checkBox0.Checked) selectedDigits.Append("0");
+            if (checkBox1.Checked) selectedDigits.Append("1");
+            if (checkBox2.Checked) selectedDigits.Append("2");
+            if (checkBox3.Checked) selectedDigits.Append("3");
+            if (checkBox4.Checked) selectedDigits.Append("4");
+            if (checkBox5.Checked) selectedDigits.Append("5");
+            if (checkBox6.Checked) selectedDigits.Append("6");
+            if (checkBox7.Checked) selectedDigits.Append("7");
+            if (checkBox8.Checked) selectedDigits.Append("8");
+            if (checkBox9.Checked) selectedDigits.Append("9");
 
-            return selectedDigits;
+            return selectedDigits.ToString();
         }
 
-        // Check if the row data contains any unwanted digits
-        private bool ContainsUnwantedDigits(string rowData, string selectedDigits)
+        // Optimized method to check unwanted digits
+        private bool ContainsUnwantedDigits(string rowData, HashSet<char> selectedDigitSet)
         {
-            // Loop through each character in the row data and check if it is not in the selected digits
             foreach (char c in rowData)
             {
-                if (!selectedDigits.Contains(c.ToString())) // If the digit is not selected, return true
+                if (!selectedDigitSet.Contains(c)) // Check if the digit is not in the selected set
                 {
-                    return true; // The row contains unwanted digit, so return true
+                    return true; // Unwanted digit found
                 }
             }
 
-            // If all digits are in the selected digits, return false
-            return false;
+            return false; // All digits are in the selected set
         }
+
 
         private void btnFilterSum_Click(object sender, EventArgs e)
         {
-            CopyDataToDataGridView(dataGridView3, dataGridView4);
+            //CopyDataToDataGridView(dataGridView3, dataGridView4);
+
+            List<string> rowDataList = new List<string>();
+
+            rowDataList.AddRange(filteredData);
 
             List<int> requiredSums = new List<int>();  // List to store selected sums
 
             // Add the corresponding sum values to the list based on checked checkboxes
             if (checkBox10.Checked) requiredSums.Add(0);
-            if (checkBox11.Checked) requiredSums.Add(1);
+            //if (checkBox11.Checked) requiredSums.Add(1);
             if (checkBox11.Checked) requiredSums.Add(10);
             if (checkBox12.Checked) requiredSums.Add(2);
             if (checkBox13.Checked) requiredSums.Add(3);
@@ -658,30 +676,75 @@ namespace Vil_Management
             if (checkBox18.Checked) requiredSums.Add(8);
             if (checkBox19.Checked) requiredSums.Add(9);
 
-            // Loop through all the rows in DataGridView in reverse order to avoid index shifting when removing rows
-            for (int i = dataGridView4.Rows.Count - 1; i >= 0; i--)
+            List<string> filteredRows = new List<string>();
+
+            foreach (string rowData in rowDataList)
             {
-                var row = dataGridView4.Rows[i];
+                int sum = CalculateDigitSum(rowData);
 
-                if (row.Cells[0].Value != null)
+                // Check if the sum is a two-digit number (between 10 and 99)
+                if (sum >= 10 && sum <= 99)
                 {
-                    string rowData = row.Cells[0].Value.ToString();
-   
-                    int sum = CalculateDigitSum(rowData);
-
-                    // Check if the sum is a two-digit number (between 10 and 99)
-                    if (sum >=10 && sum <= 99)
-                    {
-                        // Recalculate sum of digits if the sum is a two-digit number
-                        sum = CalculateDigitSum(sum.ToString());
-                    }
-
-                    // If the sum is not in the list of required sums, remove the row
-                    if (!requiredSums.Contains(sum))
-                    {
-                        dataGridView4.Rows.RemoveAt(i);
-                    }
+                    // Recalculate sum of digits if the sum is a two-digit number
+                    sum = CalculateDigitSum(sum.ToString());
                 }
+
+                // If the sum is in the list of required sums, add it to the filtered list
+                if (requiredSums.Contains(sum))
+                {
+                    filteredRows.Add(rowData);
+                }
+            }
+
+            //for (int i = 0; i < rowDataList.Count; i++) {
+            //    string rowData = rowDataList[i];
+            //    int sum = CalculateDigitSum(rowData);
+            //    // Check if the sum is a two-digit number (between 10 and 99)
+            //    if (sum >= 10 && sum <= 99)
+            //    {
+            //        // Recalculate sum of digits if the sum is a two-digit number
+            //        sum = CalculateDigitSum(sum.ToString());
+            //    }
+            //    // If the sum is not in the list of required sums, remove the row
+            //    if (!requiredSums.Contains(sum))
+            //    {
+            //        rowDataList.RemoveAt(i);
+            //    }
+            //}
+
+
+            // Loop through all the rows in DataGridView in reverse order to avoid index shifting when removing rows
+            //for (int i = dataGridView2.Rows.Count - 1; i >= 0; i--)
+            //{
+            //    var row = dataGridView2.Rows[i];
+
+            //    if (row.Cells[0].Value != null)
+            //    {
+            //        string rowData = row.Cells[0].Value.ToString();
+
+            //        int sum = CalculateDigitSum(rowData);
+
+            //        // Check if the sum is a two-digit number (between 10 and 99)
+            //        if (sum >=10 && sum <= 99)
+            //        {
+            //            // Recalculate sum of digits if the sum is a two-digit number
+            //            sum = CalculateDigitSum(sum.ToString());
+            //        }
+
+            //        // If the sum is not in the list of required sums, remove the row
+            //        if (!requiredSums.Contains(sum))
+            //        {
+            //            dataGridView2.Rows.RemoveAt(i);
+            //        }
+            //    }
+            //}
+
+            // Clear DataGridView and add all filtered data at once
+            dataGridView4.Rows.Clear();
+
+            foreach (var data in filteredRows)
+            {
+                dataGridView4.Rows.Add(data); // Add rows to DataGridView
             }
 
             if (dataGridView4.Visible == false)
@@ -710,28 +773,9 @@ namespace Vil_Management
                                     .Sum(); // Sum the digits
         }
 
-        // Get the selected digits as a string
-        private int GetRequiredSum()
-        {
-            int requiredSum = 0;
-
-            // Check which checkboxes are checked and add the corresponding digits to the selectedDigits string
-            if (checkBox10.Checked) requiredSum = 0;
-            if (checkBox11.Checked) requiredSum = 1;
-            if (checkBox12.Checked) requiredSum = 2;
-            if (checkBox13.Checked) requiredSum = 3;
-            if (checkBox14.Checked) requiredSum = 4;
-            if (checkBox15.Checked) requiredSum = 5;
-            if (checkBox16.Checked) requiredSum = 6;
-            if (checkBox17.Checked) requiredSum = 7;
-            if (checkBox18.Checked) requiredSum = 8;
-            if (checkBox19.Checked) requiredSum = 9;
-
-            return requiredSum;
-        }
-
         private void btnFltrRptvDgts_Click(object sender, EventArgs e)
         {
+            dataGridView5.Rows.Clear();
             CopyDataToDataGridView(dataGridView4, dataGridView5);
 
             // Loop through all the rows in DataGridView in reverse order
@@ -924,12 +968,12 @@ namespace Vil_Management
 
         private void btnCopy1_Click(object sender, EventArgs e)
         {
-            CopyColumnData(dataGridView2, "Column15");
+            //CopyColumnData(dataGridView2, "Column15");
         }
 
         private void btnCopy2_Click(object sender, EventArgs e)
         {
-            CopyColumnData(dataGridView3, "Column16");
+            //CopyColumnData(dataGridView3, "Column16");
         }
 
         private void btnCopy3_Click(object sender, EventArgs e)
@@ -1076,27 +1120,32 @@ namespace Vil_Management
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            //CopyDataToDataGridView(dataGridView1, dataGridView2);
-            dataGridView2.SuspendLayout();
-            dataGridView2.Rows.Clear();
-            var rowsCount = dataGridView1.Rows.Count;
-            Parallel.For(0, rowsCount, i =>
+            btnGnrtNmrlgy.Enabled = false;
+            foreach (var item in dataGridView1.Rows)
             {
-                if (!dataGridView1.Rows[i].IsNewRow)
-                {
-                    var cellValue = dataGridView1.Rows[i].Cells[0].Value ?? DBNull.Value;
+                modifiedItems.Add(item.ToString());
+            }
+            ////CopyDataToDataGridView(dataGridView1, dataGridView2);
+            //dataGridView2.SuspendLayout();
+            //dataGridView2.Rows.Clear();
+            //var rowsCount = dataGridView1.Rows.Count;
+            //Parallel.For(0, rowsCount, i =>
+            //{
+            //    if (!dataGridView1.Rows[i].IsNewRow)
+            //    {
+            //        var cellValue = dataGridView1.Rows[i].Cells[0].Value ?? DBNull.Value;
 
-                    dataGridView2.Invoke(new Action(() =>
-                    {
-                        dataGridView2.Rows.Add(cellValue);
-                    }));
-                }
-            });
-            dataGridView2.ResumeLayout();
+            //        dataGridView2.Invoke(new Action(() =>
+            //        {
+            //            dataGridView2.Rows.Add(cellValue);
+            //        }));
+            //    }
+            //});
+            //dataGridView2.ResumeLayout();
 
-            btnCopy1.Visible = true;
-            dataGridView2.Visible = true;
-            btnClrList2.Visible = true;
+            //btnCopy1.Visible = true;
+            //dataGridView2.Visible = true;
+            //btnClrList2.Visible = true;
 
         }
 
@@ -1115,12 +1164,12 @@ namespace Vil_Management
 
         private void btnClrList2_Click(object sender, EventArgs e)
         {
-            ClearDataGridRows(dataGridView2);
+            //ClearDataGridRows(dataGridView2);
         }
 
         private void btnClrList3_Click(object sender, EventArgs e)
         {
-            ClearDataGridRows(dataGridView3);
+            //ClearDataGridRows(dataGridView3);
         }
 
         private void btnClrList4_Click(object sender, EventArgs e)
@@ -1219,6 +1268,17 @@ namespace Vil_Management
         private void btnClrDatGrid1_Click(object sender, EventArgs e)
         {
             ClearDataGridRows(dataGridView1);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            modifiedItems.Clear();
+            filteredData.Clear();
+            btnFilterDigit.Enabled = true;
+            btnGnrtNmrlgy.Enabled = true;
+            dataGridView4.Rows.Clear();
+            dataGridView5.Rows.Clear();
+            dataGridView6.Rows.Clear();
         }
     }
 }

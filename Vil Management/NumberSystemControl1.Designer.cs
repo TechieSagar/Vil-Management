@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NumberSystemControl1));
             panel1 = new Panel();
             btnCheckSum = new Button();
@@ -46,6 +45,7 @@
             btnInsertSeries = new Button();
             tbInserSrs = new TextBox();
             panel2 = new Panel();
+            btnReset = new Button();
             btnClear = new Button();
             label3 = new Label();
             label4 = new Label();
@@ -53,14 +53,6 @@
             cbNmbrlgySrs = new ComboBox();
             btnInsertNrlgy = new Button();
             tbNumerology = new TextBox();
-            panel3 = new Panel();
-            btnClrMid2Digit = new Button();
-            label5 = new Label();
-            label6 = new Label();
-            btnRfrshMid2Digit = new Button();
-            cbMid2Digit = new ComboBox();
-            btnInsertMid2Digit = new Button();
-            tbInsertMid2digit = new TextBox();
             panel4 = new Panel();
             btnGenerateByMid = new Button();
             btnGenerate = new Button();
@@ -122,10 +114,6 @@
             label10 = new Label();
             label9 = new Label();
             label8 = new Label();
-            dataGridView2 = new DataGridView();
-            Column15 = new DataGridViewTextBoxColumn();
-            dataGridView3 = new DataGridView();
-            Column16 = new DataGridViewTextBoxColumn();
             dataGridView4 = new DataGridView();
             Column17 = new DataGridViewTextBoxColumn();
             dataGridView5 = new DataGridView();
@@ -143,28 +131,21 @@
             cbPair = new ComboBox();
             tbPair = new TextBox();
             label11 = new Label();
-            btnCopy1 = new Button();
-            btnCopy2 = new Button();
             btnCopy3 = new Button();
             btnCopy4 = new Button();
             btnCopy5 = new Button();
             btnSingleGenerate = new Button();
-            btnClrList3 = new Button();
             btnClrList4 = new Button();
             btnClrList6 = new Button();
             btnClrList5 = new Button();
-            btnClrList2 = new Button();
             btnApplyFilter = new Button();
             btnDoubleZero = new Button();
             btnClrDatGrid1 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView6).BeginInit();
@@ -298,6 +279,7 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(37, 42, 64);
+            panel2.Controls.Add(btnReset);
             panel2.Controls.Add(btnClear);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label4);
@@ -310,10 +292,21 @@
             panel2.Size = new Size(595, 101);
             panel2.TabIndex = 0;
             // 
+            // btnReset
+            // 
+            btnReset.ForeColor = Color.Black;
+            btnReset.Location = new Point(482, 21);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(94, 52);
+            btnReset.TabIndex = 6;
+            btnReset.Text = "Reset";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += btnReset_Click;
+            // 
             // btnClear
             // 
             btnClear.ForeColor = Color.Black;
-            btnClear.Location = new Point(312, 42);
+            btnClear.Location = new Point(210, 44);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(68, 29);
             btnClear.TabIndex = 5;
@@ -325,7 +318,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(312, 19);
+            label3.Location = new Point(210, 21);
             label3.Name = "label3";
             label3.Size = new Size(254, 20);
             label3.TabIndex = 4;
@@ -344,7 +337,7 @@
             // btnRefrshNmrlgy
             // 
             btnRefrshNmrlgy.ForeColor = Color.Black;
-            btnRefrshNmrlgy.Location = new Point(474, 42);
+            btnRefrshNmrlgy.Location = new Point(372, 44);
             btnRefrshNmrlgy.Name = "btnRefrshNmrlgy";
             btnRefrshNmrlgy.Size = new Size(94, 29);
             btnRefrshNmrlgy.TabIndex = 3;
@@ -355,7 +348,7 @@
             // cbNmbrlgySrs
             // 
             cbNmbrlgySrs.FormattingEnabled = true;
-            cbNmbrlgySrs.Location = new Point(386, 42);
+            cbNmbrlgySrs.Location = new Point(284, 44);
             cbNmbrlgySrs.Name = "cbNmbrlgySrs";
             cbNmbrlgySrs.Size = new Size(82, 28);
             cbNmbrlgySrs.TabIndex = 2;
@@ -363,7 +356,7 @@
             // btnInsertNrlgy
             // 
             btnInsertNrlgy.ForeColor = Color.Black;
-            btnInsertNrlgy.Location = new Point(174, 42);
+            btnInsertNrlgy.Location = new Point(91, 43);
             btnInsertNrlgy.Name = "btnInsertNrlgy";
             btnInsertNrlgy.Size = new Size(94, 29);
             btnInsertNrlgy.TabIndex = 1;
@@ -373,95 +366,11 @@
             // 
             // tbNumerology
             // 
-            tbNumerology.Location = new Point(20, 43);
+            tbNumerology.Location = new Point(20, 44);
             tbNumerology.Name = "tbNumerology";
-            tbNumerology.Size = new Size(148, 27);
+            tbNumerology.Size = new Size(62, 27);
             tbNumerology.TabIndex = 0;
             tbNumerology.TextChanged += tbNumerology_TextChanged;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.FromArgb(37, 42, 64);
-            panel3.Controls.Add(btnClrMid2Digit);
-            panel3.Controls.Add(label5);
-            panel3.Controls.Add(label6);
-            panel3.Controls.Add(btnRfrshMid2Digit);
-            panel3.Controls.Add(cbMid2Digit);
-            panel3.Controls.Add(btnInsertMid2Digit);
-            panel3.Controls.Add(tbInsertMid2digit);
-            panel3.Location = new Point(567, 131);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(595, 101);
-            panel3.TabIndex = 0;
-            // 
-            // btnClrMid2Digit
-            // 
-            btnClrMid2Digit.ForeColor = Color.Black;
-            btnClrMid2Digit.Location = new Point(312, 44);
-            btnClrMid2Digit.Name = "btnClrMid2Digit";
-            btnClrMid2Digit.Size = new Size(68, 29);
-            btnClrMid2Digit.TabIndex = 5;
-            btnClrMid2Digit.Text = "Clear";
-            btnClrMid2Digit.UseVisualStyleBackColor = true;
-            btnClrMid2Digit.Click += btnClrMid2Digit_Click;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(312, 20);
-            label5.Name = "label5";
-            label5.Size = new Size(254, 20);
-            label5.TabIndex = 4;
-            label5.Text = "Available series to generate numbers";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(14, 20);
-            label6.Name = "label6";
-            label6.Size = new Size(128, 20);
-            label6.TabIndex = 4;
-            label6.Text = "Enter Mid 2 Digits";
-            // 
-            // btnRfrshMid2Digit
-            // 
-            btnRfrshMid2Digit.ForeColor = Color.Black;
-            btnRfrshMid2Digit.Location = new Point(474, 44);
-            btnRfrshMid2Digit.Name = "btnRfrshMid2Digit";
-            btnRfrshMid2Digit.Size = new Size(94, 29);
-            btnRfrshMid2Digit.TabIndex = 3;
-            btnRfrshMid2Digit.Text = "Refresh";
-            btnRfrshMid2Digit.UseVisualStyleBackColor = true;
-            btnRfrshMid2Digit.Click += btnRfrshMid2Digit_Click;
-            // 
-            // cbMid2Digit
-            // 
-            cbMid2Digit.FormattingEnabled = true;
-            cbMid2Digit.Location = new Point(386, 44);
-            cbMid2Digit.Name = "cbMid2Digit";
-            cbMid2Digit.Size = new Size(82, 28);
-            cbMid2Digit.TabIndex = 2;
-            // 
-            // btnInsertMid2Digit
-            // 
-            btnInsertMid2Digit.ForeColor = Color.Black;
-            btnInsertMid2Digit.Location = new Point(177, 43);
-            btnInsertMid2Digit.Name = "btnInsertMid2Digit";
-            btnInsertMid2Digit.Size = new Size(94, 29);
-            btnInsertMid2Digit.TabIndex = 1;
-            btnInsertMid2Digit.Text = "Insert";
-            btnInsertMid2Digit.UseVisualStyleBackColor = true;
-            btnInsertMid2Digit.Click += btnInsertMid2Digit_Click;
-            // 
-            // tbInsertMid2digit
-            // 
-            tbInsertMid2digit.Location = new Point(23, 45);
-            tbInsertMid2digit.Name = "tbInsertMid2digit";
-            tbInsertMid2digit.Size = new Size(148, 27);
-            tbInsertMid2digit.TabIndex = 0;
-            tbInsertMid2digit.TextChanged += tbInsertMid2digit_TextChanged;
             // 
             // panel4
             // 
@@ -580,34 +489,34 @@
             // dataGridView1
             // 
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = SystemColors.Control;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9, Column10, Column11, Column12, Column13, Column14 });
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = SystemColors.Window;
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle10.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Location = new Point(16, 287);
             dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = SystemColors.Control;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(530, 224);
@@ -769,7 +678,7 @@
             panel5.Controls.Add(label10);
             panel5.Controls.Add(label9);
             panel5.Controls.Add(label8);
-            panel5.Location = new Point(569, 238);
+            panel5.Location = new Point(567, 131);
             panel5.Name = "panel5";
             panel5.Size = new Size(595, 166);
             panel5.TabIndex = 5;
@@ -777,6 +686,8 @@
             // checkBox29
             // 
             checkBox29.AutoSize = true;
+            checkBox29.Checked = true;
+            checkBox29.CheckState = CheckState.Checked;
             checkBox29.ForeColor = Color.White;
             checkBox29.Location = new Point(537, 121);
             checkBox29.Name = "checkBox29";
@@ -799,6 +710,8 @@
             // checkBox9
             // 
             checkBox9.AutoSize = true;
+            checkBox9.Checked = true;
+            checkBox9.CheckState = CheckState.Checked;
             checkBox9.ForeColor = Color.White;
             checkBox9.Location = new Point(537, 17);
             checkBox9.Name = "checkBox9";
@@ -810,6 +723,8 @@
             // checkBox28
             // 
             checkBox28.AutoSize = true;
+            checkBox28.Checked = true;
+            checkBox28.CheckState = CheckState.Checked;
             checkBox28.ForeColor = Color.White;
             checkBox28.Location = new Point(492, 121);
             checkBox28.Name = "checkBox28";
@@ -843,6 +758,8 @@
             // checkBox27
             // 
             checkBox27.AutoSize = true;
+            checkBox27.Checked = true;
+            checkBox27.CheckState = CheckState.Checked;
             checkBox27.ForeColor = Color.White;
             checkBox27.Location = new Point(447, 121);
             checkBox27.Name = "checkBox27";
@@ -865,6 +782,8 @@
             // checkBox7
             // 
             checkBox7.AutoSize = true;
+            checkBox7.Checked = true;
+            checkBox7.CheckState = CheckState.Checked;
             checkBox7.ForeColor = Color.White;
             checkBox7.Location = new Point(447, 17);
             checkBox7.Name = "checkBox7";
@@ -876,6 +795,8 @@
             // checkBox26
             // 
             checkBox26.AutoSize = true;
+            checkBox26.Checked = true;
+            checkBox26.CheckState = CheckState.Checked;
             checkBox26.ForeColor = Color.White;
             checkBox26.Location = new Point(402, 121);
             checkBox26.Name = "checkBox26";
@@ -898,6 +819,8 @@
             // checkBox6
             // 
             checkBox6.AutoSize = true;
+            checkBox6.Checked = true;
+            checkBox6.CheckState = CheckState.Checked;
             checkBox6.ForeColor = Color.White;
             checkBox6.Location = new Point(402, 17);
             checkBox6.Name = "checkBox6";
@@ -909,6 +832,8 @@
             // checkBox25
             // 
             checkBox25.AutoSize = true;
+            checkBox25.Checked = true;
+            checkBox25.CheckState = CheckState.Checked;
             checkBox25.ForeColor = Color.White;
             checkBox25.Location = new Point(357, 121);
             checkBox25.Name = "checkBox25";
@@ -931,6 +856,8 @@
             // checkBox5
             // 
             checkBox5.AutoSize = true;
+            checkBox5.Checked = true;
+            checkBox5.CheckState = CheckState.Checked;
             checkBox5.ForeColor = Color.White;
             checkBox5.Location = new Point(357, 17);
             checkBox5.Name = "checkBox5";
@@ -942,6 +869,8 @@
             // checkBox24
             // 
             checkBox24.AutoSize = true;
+            checkBox24.Checked = true;
+            checkBox24.CheckState = CheckState.Checked;
             checkBox24.ForeColor = Color.White;
             checkBox24.Location = new Point(312, 121);
             checkBox24.Name = "checkBox24";
@@ -975,6 +904,8 @@
             // checkBox23
             // 
             checkBox23.AutoSize = true;
+            checkBox23.Checked = true;
+            checkBox23.CheckState = CheckState.Checked;
             checkBox23.ForeColor = Color.White;
             checkBox23.Location = new Point(267, 121);
             checkBox23.Name = "checkBox23";
@@ -997,6 +928,8 @@
             // checkBox3
             // 
             checkBox3.AutoSize = true;
+            checkBox3.Checked = true;
+            checkBox3.CheckState = CheckState.Checked;
             checkBox3.ForeColor = Color.White;
             checkBox3.Location = new Point(267, 17);
             checkBox3.Name = "checkBox3";
@@ -1008,6 +941,8 @@
             // checkBox22
             // 
             checkBox22.AutoSize = true;
+            checkBox22.Checked = true;
+            checkBox22.CheckState = CheckState.Checked;
             checkBox22.ForeColor = Color.White;
             checkBox22.Location = new Point(222, 121);
             checkBox22.Name = "checkBox22";
@@ -1041,6 +976,8 @@
             // checkBox21
             // 
             checkBox21.AutoSize = true;
+            checkBox21.Checked = true;
+            checkBox21.CheckState = CheckState.Checked;
             checkBox21.ForeColor = Color.White;
             checkBox21.Location = new Point(177, 121);
             checkBox21.Name = "checkBox21";
@@ -1063,6 +1000,8 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
+            checkBox1.Checked = true;
+            checkBox1.CheckState = CheckState.Checked;
             checkBox1.ForeColor = Color.White;
             checkBox1.Location = new Point(177, 17);
             checkBox1.Name = "checkBox1";
@@ -1074,6 +1013,8 @@
             // checkBox20
             // 
             checkBox20.AutoSize = true;
+            checkBox20.Checked = true;
+            checkBox20.CheckState = CheckState.Checked;
             checkBox20.ForeColor = Color.White;
             checkBox20.Location = new Point(132, 121);
             checkBox20.Name = "checkBox20";
@@ -1096,6 +1037,8 @@
             // checkBox0
             // 
             checkBox0.AutoSize = true;
+            checkBox0.Checked = true;
+            checkBox0.CheckState = CheckState.Checked;
             checkBox0.ForeColor = Color.White;
             checkBox0.Location = new Point(132, 17);
             checkBox0.Name = "checkBox0";
@@ -1110,9 +1053,9 @@
             label10.ForeColor = Color.White;
             label10.Location = new Point(14, 123);
             label10.Name = "label10";
-            label10.Size = new Size(103, 20);
+            label10.Size = new Size(114, 20);
             label10.TabIndex = 0;
-            label10.Text = "Del Repetitive";
+            label10.Text = "Keep Repetitive";
             // 
             // label9
             // 
@@ -1134,63 +1077,13 @@
             label8.TabIndex = 0;
             label8.Text = "Required Digits";
             // 
-            // dataGridView2
-            // 
-            dataGridView2.BorderStyle = BorderStyle.None;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.ColumnHeadersVisible = false;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column15 });
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = SystemColors.Control;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            dataGridView2.DefaultCellStyle = dataGridViewCellStyle12;
-            dataGridView2.Location = new Point(251, 561);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersVisible = false;
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(177, 188);
-            dataGridView2.TabIndex = 6;
-            dataGridView2.Visible = false;
-            // 
-            // Column15
-            // 
-            Column15.HeaderText = "Column15";
-            Column15.MinimumWidth = 6;
-            Column15.Name = "Column15";
-            Column15.Width = 176;
-            // 
-            // dataGridView3
-            // 
-            dataGridView3.BorderStyle = BorderStyle.None;
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.ColumnHeadersVisible = false;
-            dataGridView3.Columns.AddRange(new DataGridViewColumn[] { Column16 });
-            dataGridView3.Location = new Point(434, 561);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.RowHeadersVisible = false;
-            dataGridView3.RowHeadersWidth = 51;
-            dataGridView3.Size = new Size(179, 188);
-            dataGridView3.TabIndex = 7;
-            dataGridView3.Visible = false;
-            // 
-            // Column16
-            // 
-            Column16.HeaderText = "Column16";
-            Column16.MinimumWidth = 6;
-            Column16.Name = "Column16";
-            Column16.Width = 178;
-            // 
             // dataGridView4
             // 
             dataGridView4.BorderStyle = BorderStyle.None;
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView4.ColumnHeadersVisible = false;
             dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column17 });
-            dataGridView4.Location = new Point(619, 561);
+            dataGridView4.Location = new Point(566, 456);
             dataGridView4.Name = "dataGridView4";
             dataGridView4.RowHeadersVisible = false;
             dataGridView4.RowHeadersWidth = 51;
@@ -1211,7 +1104,7 @@
             dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView5.ColumnHeadersVisible = false;
             dataGridView5.Columns.AddRange(new DataGridViewColumn[] { Column18 });
-            dataGridView5.Location = new Point(804, 561);
+            dataGridView5.Location = new Point(777, 456);
             dataGridView5.Name = "dataGridView5";
             dataGridView5.RowHeadersVisible = false;
             dataGridView5.RowHeadersWidth = 51;
@@ -1232,7 +1125,7 @@
             dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView6.ColumnHeadersVisible = false;
             dataGridView6.Columns.AddRange(new DataGridViewColumn[] { Column19 });
-            dataGridView6.Location = new Point(989, 561);
+            dataGridView6.Location = new Point(981, 456);
             dataGridView6.Name = "dataGridView6";
             dataGridView6.RowHeadersVisible = false;
             dataGridView6.RowHeadersWidth = 51;
@@ -1251,7 +1144,7 @@
             // 
             btnGnrtNmrlgy.BackColor = SystemColors.Control;
             btnGnrtNmrlgy.ForeColor = Color.Black;
-            btnGnrtNmrlgy.Location = new Point(569, 424);
+            btnGnrtNmrlgy.Location = new Point(567, 317);
             btnGnrtNmrlgy.Name = "btnGnrtNmrlgy";
             btnGnrtNmrlgy.Size = new Size(175, 29);
             btnGnrtNmrlgy.TabIndex = 8;
@@ -1262,7 +1155,7 @@
             // btnFilterDigit
             // 
             btnFilterDigit.ForeColor = Color.Black;
-            btnFilterDigit.Location = new Point(754, 424);
+            btnFilterDigit.Location = new Point(752, 317);
             btnFilterDigit.Name = "btnFilterDigit";
             btnFilterDigit.Size = new Size(94, 29);
             btnFilterDigit.TabIndex = 8;
@@ -1273,7 +1166,7 @@
             // btnFilterSum
             // 
             btnFilterSum.ForeColor = Color.Black;
-            btnFilterSum.Location = new Point(854, 424);
+            btnFilterSum.Location = new Point(852, 317);
             btnFilterSum.Name = "btnFilterSum";
             btnFilterSum.Size = new Size(108, 29);
             btnFilterSum.TabIndex = 8;
@@ -1284,7 +1177,7 @@
             // btnFltrRptvDgts
             // 
             btnFltrRptvDgts.ForeColor = Color.Black;
-            btnFltrRptvDgts.Location = new Point(968, 424);
+            btnFltrRptvDgts.Location = new Point(966, 317);
             btnFltrRptvDgts.Name = "btnFltrRptvDgts";
             btnFltrRptvDgts.Size = new Size(194, 29);
             btnFltrRptvDgts.TabIndex = 8;
@@ -1312,7 +1205,7 @@
             panel6.Controls.Add(btnAdd);
             panel6.Controls.Add(tbPair);
             panel6.Controls.Add(label11);
-            panel6.Location = new Point(568, 465);
+            panel6.Location = new Point(566, 358);
             panel6.Name = "panel6";
             panel6.Size = new Size(594, 46);
             panel6.TabIndex = 9;
@@ -1364,35 +1257,10 @@
             label11.TabIndex = 0;
             label11.Text = "Remove pair from the list";
             // 
-            // btnCopy1
-            // 
-            btnCopy1.BackColor = SystemColors.Control;
-            btnCopy1.ForeColor = Color.Black;
-            btnCopy1.Location = new Point(251, 526);
-            btnCopy1.Name = "btnCopy1";
-            btnCopy1.Size = new Size(94, 29);
-            btnCopy1.TabIndex = 10;
-            btnCopy1.Text = "Copy Data";
-            btnCopy1.UseVisualStyleBackColor = false;
-            btnCopy1.Visible = false;
-            btnCopy1.Click += btnCopy1_Click;
-            // 
-            // btnCopy2
-            // 
-            btnCopy2.ForeColor = Color.Black;
-            btnCopy2.Location = new Point(434, 526);
-            btnCopy2.Name = "btnCopy2";
-            btnCopy2.Size = new Size(94, 29);
-            btnCopy2.TabIndex = 10;
-            btnCopy2.Text = "Copy Data";
-            btnCopy2.UseVisualStyleBackColor = true;
-            btnCopy2.Visible = false;
-            btnCopy2.Click += btnCopy2_Click;
-            // 
             // btnCopy3
             // 
             btnCopy3.ForeColor = Color.Black;
-            btnCopy3.Location = new Point(619, 526);
+            btnCopy3.Location = new Point(566, 421);
             btnCopy3.Name = "btnCopy3";
             btnCopy3.Size = new Size(94, 29);
             btnCopy3.TabIndex = 10;
@@ -1404,7 +1272,7 @@
             // btnCopy4
             // 
             btnCopy4.ForeColor = Color.Black;
-            btnCopy4.Location = new Point(804, 526);
+            btnCopy4.Location = new Point(777, 421);
             btnCopy4.Name = "btnCopy4";
             btnCopy4.Size = new Size(94, 29);
             btnCopy4.TabIndex = 10;
@@ -1416,7 +1284,7 @@
             // btnCopy5
             // 
             btnCopy5.ForeColor = Color.Black;
-            btnCopy5.Location = new Point(989, 526);
+            btnCopy5.Location = new Point(981, 421);
             btnCopy5.Name = "btnCopy5";
             btnCopy5.Size = new Size(94, 29);
             btnCopy5.TabIndex = 10;
@@ -1436,27 +1304,12 @@
             btnSingleGenerate.UseVisualStyleBackColor = true;
             btnSingleGenerate.Click += btnSingleGenerate_Click;
             // 
-            // btnClrList3
-            // 
-            btnClrList3.ForeColor = Color.Black;
-            btnClrList3.Image = (Image)resources.GetObject("btnClrList3.Image");
-            btnClrList3.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList3.Location = new Point(534, 526);
-            btnClrList3.Name = "btnClrList3";
-            btnClrList3.Size = new Size(79, 29);
-            btnClrList3.TabIndex = 14;
-            btnClrList3.Text = "Clear";
-            btnClrList3.TextAlign = ContentAlignment.MiddleLeft;
-            btnClrList3.UseVisualStyleBackColor = true;
-            btnClrList3.Visible = false;
-            btnClrList3.Click += btnClrList3_Click;
-            // 
             // btnClrList4
             // 
             btnClrList4.ForeColor = Color.Black;
             btnClrList4.Image = (Image)resources.GetObject("btnClrList4.Image");
             btnClrList4.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList4.Location = new Point(719, 526);
+            btnClrList4.Location = new Point(666, 421);
             btnClrList4.Name = "btnClrList4";
             btnClrList4.Size = new Size(79, 29);
             btnClrList4.TabIndex = 14;
@@ -1471,7 +1324,7 @@
             btnClrList6.ForeColor = Color.Black;
             btnClrList6.Image = (Image)resources.GetObject("btnClrList6.Image");
             btnClrList6.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList6.Location = new Point(1089, 526);
+            btnClrList6.Location = new Point(1081, 421);
             btnClrList6.Name = "btnClrList6";
             btnClrList6.Size = new Size(79, 29);
             btnClrList6.TabIndex = 14;
@@ -1486,7 +1339,7 @@
             btnClrList5.ForeColor = Color.Black;
             btnClrList5.Image = (Image)resources.GetObject("btnClrList5.Image");
             btnClrList5.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList5.Location = new Point(904, 526);
+            btnClrList5.Location = new Point(877, 421);
             btnClrList5.Name = "btnClrList5";
             btnClrList5.Size = new Size(79, 29);
             btnClrList5.TabIndex = 14;
@@ -1495,22 +1348,6 @@
             btnClrList5.UseVisualStyleBackColor = true;
             btnClrList5.Visible = false;
             btnClrList5.Click += btnClrList5_Click;
-            // 
-            // btnClrList2
-            // 
-            btnClrList2.BackColor = SystemColors.Control;
-            btnClrList2.ForeColor = Color.Black;
-            btnClrList2.Image = (Image)resources.GetObject("btnClrList2.Image");
-            btnClrList2.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList2.Location = new Point(349, 526);
-            btnClrList2.Name = "btnClrList2";
-            btnClrList2.Size = new Size(79, 29);
-            btnClrList2.TabIndex = 14;
-            btnClrList2.Text = "Clear";
-            btnClrList2.TextAlign = ContentAlignment.MiddleLeft;
-            btnClrList2.UseVisualStyleBackColor = false;
-            btnClrList2.Visible = false;
-            btnClrList2.Click += btnClrList2_Click;
             // 
             // btnApplyFilter
             // 
@@ -1557,14 +1394,10 @@
             Controls.Add(btnClrList5);
             Controls.Add(btnClrList6);
             Controls.Add(btnClrList4);
-            Controls.Add(btnClrList2);
-            Controls.Add(btnClrList3);
             Controls.Add(btnSingleGenerate);
             Controls.Add(btnCopy5);
             Controls.Add(btnCopy4);
             Controls.Add(btnCopy3);
-            Controls.Add(btnCopy2);
-            Controls.Add(btnCopy1);
             Controls.Add(panel6);
             Controls.Add(btnFltrRptvDgts);
             Controls.Add(btnFilterSum);
@@ -1573,14 +1406,11 @@
             Controls.Add(dataGridView6);
             Controls.Add(dataGridView5);
             Controls.Add(dataGridView4);
-            Controls.Add(dataGridView3);
-            Controls.Add(dataGridView2);
             Controls.Add(panel5);
             Controls.Add(btnDivide);
             Controls.Add(btnCopy);
             Controls.Add(dataGridView1);
             Controls.Add(panel4);
-            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "NumberSystemControl1";
@@ -1589,15 +1419,11 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView6).EndInit();
@@ -1622,13 +1448,6 @@
         private ComboBox cbNmbrlgySrs;
         private Button btnInsertNrlgy;
         private TextBox tbNumerology;
-        private Panel panel3;
-        private Label label5;
-        private Label label6;
-        private Button btnRfrshMid2Digit;
-        private ComboBox cbMid2Digit;
-        private Button btnInsertMid2Digit;
-        private TextBox tbInsertMid2digit;
         private Panel panel4;
         private RadioButton radioButton4d;
         private RadioButton radioButton3d;
@@ -1656,7 +1475,6 @@
         private DataGridViewTextBoxColumn Column14;
         private Button btnCopy;
         private Button btnDivide;
-        private Button btnClrMid2Digit;
         private Panel panel5;
         private Label label8;
         private CheckBox checkBox29;
@@ -1691,9 +1509,6 @@
         private CheckBox checkBox0;
         private Label label10;
         private Label label9;
-        private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn Column15;
-        private DataGridView dataGridView3;
         private DataGridView dataGridView4;
         private DataGridView dataGridView5;
         private DataGridView dataGridView6;
@@ -1708,12 +1523,9 @@
         private TextBox tbPair;
         private Button btnFilterPair;
         private Button btnClrPairCb;
-        private Button btnCopy1;
-        private Button btnCopy2;
         private Button btnCopy3;
         private Button btnCopy4;
         private Button btnCopy5;
-        private DataGridViewTextBoxColumn Column16;
         private DataGridViewTextBoxColumn Column17;
         private DataGridViewTextBoxColumn Column18;
         private DataGridViewTextBoxColumn Column19;
@@ -1723,14 +1535,13 @@
         private Button btnCheckSum;
         private TextBox tbFinalSum;
         private Button btnSingleGenerate;
-        private Button btnClrList3;
         private Button btnClrList4;
         private Button btnClrList6;
         private Button btnClrList5;
-        private Button btnClrList2;
         private Button btnApplyFilter;
         private Button btnDoubleZero;
         private Button btnGenerateByMid;
         private Button btnClrDatGrid1;
+        private Button btnReset;
     }
 }
