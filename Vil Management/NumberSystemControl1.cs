@@ -31,8 +31,9 @@ namespace Vil_Management
         //ErrorProvider errorProvider = null;
         private int RowLimit = 30000;
 
-        public List<string> modifiedItems = new List<string>(10000000);
+        public List<string> modifiedItemsNew = new List<string>(10000000);
         public List<string> filteredData = new List<string>(10000000);
+        public List<string> modifiedItems = new List<string>(10000000);
         public NumberSystemControl1()
         {
             InitializeComponent();
@@ -324,7 +325,8 @@ namespace Vil_Management
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            List<string> modifiedItems = new List<string>();
+            modifiedItems.Clear();
+            //List<string> modifiedItems = new List<string>();
 
             if (tbUpto6Digit.Text.Length == 6)
             {
@@ -525,7 +527,7 @@ namespace Vil_Management
                             string modifiedItem = item.ToString() + j.ToString("D2") + i.ToString("D4");
 
                             // Avoid lock and add to list directly (fast)
-                            modifiedItems.Add(modifiedItem);
+                            modifiedItemsNew.Add(modifiedItem);
 
                         }
                     }
@@ -581,8 +583,7 @@ namespace Vil_Management
             //        rowDataList.Add(row.Cells[0].Value.ToString());
             //    }
             //}
-            rowDataList.AddRange(modifiedItems);
-
+            rowDataList.AddRange(modifiedItemsNew);
 
             string selectedDigits = GetSelectedDigits();
             HashSet<char> selectedDigitSet = new HashSet<char>(selectedDigits); // Set for fast lookup
@@ -614,9 +615,8 @@ namespace Vil_Management
             //    btnClrList3.Visible = true;
             //}
 
-
             MessageBox.Show("Required digits are filtered.");
-            btnFilterDigit.Enabled = false;
+            //btnFilterDigit.Enabled = false;
         }
 
         // Method to get selected digits from checkboxes
@@ -994,6 +994,9 @@ namespace Vil_Management
         private void btnClrPairCb_Click(object sender, EventArgs e)
         {
             cbPair.Items.Clear();
+            cbPair.Text = string.Empty;
+            cbPair.SelectedItem = null;
+            tbPair.Clear();
         }
 
         private void btnCheckSum_Click(object sender, EventArgs e)
@@ -1045,7 +1048,8 @@ namespace Vil_Management
         private void btnSingleGenerate_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            List<string> numbersList = new List<string>();
+            modifiedItems.Clear();
+            //List<string> numbersList = new List<string>();
 
             if (cbSrsNmbrs.SelectedItem != null)
             {
@@ -1056,7 +1060,7 @@ namespace Vil_Management
                     for (int i = 0; i < 10; ++i)
                     {
                         string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString() + tbUpto6Digit.Text;
-                        numbersList.Add(updatedItem);
+                        modifiedItems.Add(updatedItem);
                     }
                 }
 
@@ -1065,7 +1069,7 @@ namespace Vil_Management
                     for (int i = 0; i < 100; ++i)
                     {
                         string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString("D2") + tbUpto6Digit.Text;
-                        numbersList.Add(updatedItem);
+                        modifiedItems.Add(updatedItem);
                     }
                 }
 
@@ -1074,7 +1078,7 @@ namespace Vil_Management
                     for (int i = 0; i < 1000; ++i)
                     {
                         string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString("D3") + tbUpto6Digit.Text;
-                        numbersList.Add(updatedItem);
+                        modifiedItems.Add(updatedItem);
                     }
                 }
 
@@ -1083,13 +1087,13 @@ namespace Vil_Management
                     for (int i = 0; i < 10000; ++i)
                     {
                         string updatedItem = cbSrsNmbrs.SelectedItem.ToString() + i.ToString("D4") + tbUpto6Digit.Text;
-                        numbersList.Add(updatedItem);
+                        modifiedItems.Add(updatedItem);
                     }
                 }
 
             }
 
-            foreach (var item in numbersList)
+            foreach (var item in modifiedItems)
             {
                 dataGridView1.Rows.Add(item);
             }
@@ -1120,11 +1124,11 @@ namespace Vil_Management
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
+            //List<string> rowDataList = new List<string>();
             btnGnrtNmrlgy.Enabled = false;
-            foreach (var item in dataGridView1.Rows)
-            {
-                modifiedItems.Add(item.ToString());
-            }
+
+            modifiedItemsNew.AddRange(modifiedItems);
+
             ////CopyDataToDataGridView(dataGridView1, dataGridView2);
             //dataGridView2.SuspendLayout();
             //dataGridView2.Rows.Clear();
@@ -1146,7 +1150,7 @@ namespace Vil_Management
             //btnCopy1.Visible = true;
             //dataGridView2.Visible = true;
             //btnClrList2.Visible = true;
-
+            MessageBox.Show("Filter applied successfully.");
         }
 
         private void tbCheckSum_TextChanged(object sender, EventArgs e)
@@ -1213,8 +1217,9 @@ namespace Vil_Management
         {
             String digits = tbUpto6Digit.Text;
 
+            modifiedItems.Clear();
             //dataGridView1.Rows.Clear();
-            List<string> modifiedItems = new List<string>();
+            //List<string> modifiedItems = new List<string>();
 
             if (tbUpto6Digit.Text.Length == 5)
             {
@@ -1273,9 +1278,11 @@ namespace Vil_Management
         private void btnReset_Click(object sender, EventArgs e)
         {
             modifiedItems.Clear();
+            modifiedItemsNew.Clear();
             filteredData.Clear();
             btnFilterDigit.Enabled = true;
             btnGnrtNmrlgy.Enabled = true;
+            dataGridView1.Rows.Clear();
             dataGridView4.Rows.Clear();
             dataGridView5.Rows.Clear();
             dataGridView6.Rows.Clear();
