@@ -1,5 +1,6 @@
 ﻿
 using System.Data;
+using System.Management;
 using OfficeOpenXml;
 
 namespace Vil_Management
@@ -18,11 +19,13 @@ namespace Vil_Management
         public ControlDasboard()
         {
             InitializeComponent();
+            hardDiskId();
             LoadCsvToGridview(); // Load data from 
             LoadTasks();
             DisplayTasks();
             LoadDashboardData();
             LoadContestData();
+            //hardDiskId();
 
         }
 
@@ -384,6 +387,65 @@ namespace Vil_Management
         public string LabelSaleText
         {
             get { return labelSale.Text; }
+        }
+
+        // Method to get the Hard Disk ID (Volume Serial Number)
+        private static string GetHardDiskId()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"SELECT * FROM Win32_PhysicalMedia");
+
+                foreach (ManagementObject disk in searcher.Get())
+                {
+                    // Retrieve the Volume Serial Number from the hard disk
+                    if (disk["SerialNumber"] != null)
+                    {
+                        return disk["SerialNumber"].ToString().Trim();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+            return null;
+        }
+
+        public static void hardDiskId()
+        {
+            /// Get the Hard Disk Serial Number
+            string hardDiskId = GetHardDiskId();
+
+            if (string.IsNullOrEmpty(hardDiskId))
+            {
+                Console.WriteLine("Unable to retrieve the Hard Disk ID.");
+            }
+            else
+            {
+                Console.WriteLine($"Hard Disk ID: {hardDiskId}");
+
+                // Specify the allowed hard disk ID (this would be the ID of the target system)
+                string allowedHardDiskId = "0025_38D4_2144_91F9.";
+
+                // Check if the current system's Hard Disk ID matches the allowed ID
+                if (hardDiskId.Equals(allowedHardDiskId, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Console.WriteLine("This application is authorized to run on this system.");
+                    // Continue with your application logic here...
+                }
+                else
+                {
+                    MessageBox.Show("Unauthorized access detected. This application will now exit.", "Unauthorized Access", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //Console.WriteLine("This application is not authorized to run on this system.");
+                    // Optionally, you can exit the application or disable certain features
+                    //Application.Exit();
+                    Environment.Exit(0); // Uncomment to forcefully exit the application
+                }
+            }
+
+            Console.ReadLine();
         }
 
     }

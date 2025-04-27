@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.12.6" />
     <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
+    <PackageReference Include="System.Management" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>

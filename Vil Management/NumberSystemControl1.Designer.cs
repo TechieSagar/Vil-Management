@@ -141,6 +141,11 @@
             btnApplyFilter = new Button();
             btnDoubleZero = new Button();
             btnClrDatGrid1 = new Button();
+            btnDoublePair = new Button();
+            radioButtonHide = new RadioButton();
+            radioButtonShow = new RadioButton();
+            label5 = new Label();
+            panel3 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -150,6 +155,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView6).BeginInit();
             panel6.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -1083,7 +1089,7 @@
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView4.ColumnHeadersVisible = false;
             dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column17 });
-            dataGridView4.Location = new Point(566, 456);
+            dataGridView4.Location = new Point(568, 488);
             dataGridView4.Name = "dataGridView4";
             dataGridView4.RowHeadersVisible = false;
             dataGridView4.RowHeadersWidth = 51;
@@ -1104,7 +1110,7 @@
             dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView5.ColumnHeadersVisible = false;
             dataGridView5.Columns.AddRange(new DataGridViewColumn[] { Column18 });
-            dataGridView5.Location = new Point(777, 456);
+            dataGridView5.Location = new Point(779, 488);
             dataGridView5.Name = "dataGridView5";
             dataGridView5.RowHeadersVisible = false;
             dataGridView5.RowHeadersWidth = 51;
@@ -1125,7 +1131,7 @@
             dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView6.ColumnHeadersVisible = false;
             dataGridView6.Columns.AddRange(new DataGridViewColumn[] { Column19 });
-            dataGridView6.Location = new Point(981, 456);
+            dataGridView6.Location = new Point(983, 488);
             dataGridView6.Name = "dataGridView6";
             dataGridView6.RowHeadersVisible = false;
             dataGridView6.RowHeadersWidth = 51;
@@ -1144,9 +1150,9 @@
             // 
             btnGnrtNmrlgy.BackColor = SystemColors.Control;
             btnGnrtNmrlgy.ForeColor = Color.Black;
-            btnGnrtNmrlgy.Location = new Point(567, 317);
+            btnGnrtNmrlgy.Location = new Point(748, 316);
             btnGnrtNmrlgy.Name = "btnGnrtNmrlgy";
-            btnGnrtNmrlgy.Size = new Size(175, 29);
+            btnGnrtNmrlgy.Size = new Size(224, 29);
             btnGnrtNmrlgy.TabIndex = 8;
             btnGnrtNmrlgy.Text = "Generate Numerology";
             btnGnrtNmrlgy.UseVisualStyleBackColor = false;
@@ -1155,9 +1161,9 @@
             // btnFilterDigit
             // 
             btnFilterDigit.ForeColor = Color.Black;
-            btnFilterDigit.Location = new Point(752, 317);
+            btnFilterDigit.Location = new Point(978, 316);
             btnFilterDigit.Name = "btnFilterDigit";
-            btnFilterDigit.Size = new Size(94, 29);
+            btnFilterDigit.Size = new Size(179, 29);
             btnFilterDigit.TabIndex = 8;
             btnFilterDigit.Text = "Filter Digits";
             btnFilterDigit.UseVisualStyleBackColor = true;
@@ -1166,9 +1172,9 @@
             // btnFilterSum
             // 
             btnFilterSum.ForeColor = Color.Black;
-            btnFilterSum.Location = new Point(852, 317);
+            btnFilterSum.Location = new Point(748, 351);
             btnFilterSum.Name = "btnFilterSum";
-            btnFilterSum.Size = new Size(108, 29);
+            btnFilterSum.Size = new Size(167, 29);
             btnFilterSum.TabIndex = 8;
             btnFilterSum.Text = "Filter Sum";
             btnFilterSum.UseVisualStyleBackColor = true;
@@ -1177,9 +1183,9 @@
             // btnFltrRptvDgts
             // 
             btnFltrRptvDgts.ForeColor = Color.Black;
-            btnFltrRptvDgts.Location = new Point(966, 317);
+            btnFltrRptvDgts.Location = new Point(921, 351);
             btnFltrRptvDgts.Name = "btnFltrRptvDgts";
-            btnFltrRptvDgts.Size = new Size(194, 29);
+            btnFltrRptvDgts.Size = new Size(236, 29);
             btnFltrRptvDgts.TabIndex = 8;
             btnFltrRptvDgts.Text = "Filter Repetitive Digits";
             btnFltrRptvDgts.UseVisualStyleBackColor = true;
@@ -1205,7 +1211,7 @@
             panel6.Controls.Add(btnAdd);
             panel6.Controls.Add(tbPair);
             panel6.Controls.Add(label11);
-            panel6.Location = new Point(566, 358);
+            panel6.Location = new Point(567, 392);
             panel6.Name = "panel6";
             panel6.Size = new Size(594, 46);
             panel6.TabIndex = 9;
@@ -1260,7 +1266,7 @@
             // btnCopy3
             // 
             btnCopy3.ForeColor = Color.Black;
-            btnCopy3.Location = new Point(566, 421);
+            btnCopy3.Location = new Point(568, 453);
             btnCopy3.Name = "btnCopy3";
             btnCopy3.Size = new Size(94, 29);
             btnCopy3.TabIndex = 10;
@@ -1272,7 +1278,7 @@
             // btnCopy4
             // 
             btnCopy4.ForeColor = Color.Black;
-            btnCopy4.Location = new Point(777, 421);
+            btnCopy4.Location = new Point(779, 453);
             btnCopy4.Name = "btnCopy4";
             btnCopy4.Size = new Size(94, 29);
             btnCopy4.TabIndex = 10;
@@ -1284,7 +1290,7 @@
             // btnCopy5
             // 
             btnCopy5.ForeColor = Color.Black;
-            btnCopy5.Location = new Point(981, 421);
+            btnCopy5.Location = new Point(983, 453);
             btnCopy5.Name = "btnCopy5";
             btnCopy5.Size = new Size(94, 29);
             btnCopy5.TabIndex = 10;
@@ -1309,7 +1315,7 @@
             btnClrList4.ForeColor = Color.Black;
             btnClrList4.Image = (Image)resources.GetObject("btnClrList4.Image");
             btnClrList4.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList4.Location = new Point(666, 421);
+            btnClrList4.Location = new Point(668, 453);
             btnClrList4.Name = "btnClrList4";
             btnClrList4.Size = new Size(79, 29);
             btnClrList4.TabIndex = 14;
@@ -1324,7 +1330,7 @@
             btnClrList6.ForeColor = Color.Black;
             btnClrList6.Image = (Image)resources.GetObject("btnClrList6.Image");
             btnClrList6.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList6.Location = new Point(1081, 421);
+            btnClrList6.Location = new Point(1083, 453);
             btnClrList6.Name = "btnClrList6";
             btnClrList6.Size = new Size(79, 29);
             btnClrList6.TabIndex = 14;
@@ -1339,7 +1345,7 @@
             btnClrList5.ForeColor = Color.Black;
             btnClrList5.Image = (Image)resources.GetObject("btnClrList5.Image");
             btnClrList5.ImageAlign = ContentAlignment.MiddleRight;
-            btnClrList5.Location = new Point(877, 421);
+            btnClrList5.Location = new Point(879, 453);
             btnClrList5.Name = "btnClrList5";
             btnClrList5.Size = new Size(79, 29);
             btnClrList5.TabIndex = 14;
@@ -1383,11 +1389,68 @@
             btnClrDatGrid1.UseVisualStyleBackColor = true;
             btnClrDatGrid1.Click += btnClrDatGrid1_Click;
             // 
+            // btnDoublePair
+            // 
+            btnDoublePair.Location = new Point(239, 526);
+            btnDoublePair.Name = "btnDoublePair";
+            btnDoublePair.Size = new Size(173, 29);
+            btnDoublePair.TabIndex = 18;
+            btnDoublePair.Text = "double pair";
+            btnDoublePair.UseVisualStyleBackColor = true;
+            btnDoublePair.Click += btnDoublePair_Click;
+            // 
+            // radioButtonHide
+            // 
+            radioButtonHide.AutoSize = true;
+            radioButtonHide.Checked = true;
+            radioButtonHide.ForeColor = Color.White;
+            radioButtonHide.Location = new Point(14, 32);
+            radioButtonHide.Name = "radioButtonHide";
+            radioButtonHide.Size = new Size(62, 24);
+            radioButtonHide.TabIndex = 19;
+            radioButtonHide.TabStop = true;
+            radioButtonHide.Text = "Hide";
+            radioButtonHide.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonShow
+            // 
+            radioButtonShow.AutoSize = true;
+            radioButtonShow.ForeColor = Color.White;
+            radioButtonShow.Location = new Point(91, 32);
+            radioButtonShow.Name = "radioButtonShow";
+            radioButtonShow.Size = new Size(66, 24);
+            radioButtonShow.TabIndex = 20;
+            radioButtonShow.Text = "Show";
+            radioButtonShow.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(10, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(158, 20);
+            label5.TabIndex = 21;
+            label5.Text = "Display Numbers View";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(37, 42, 64);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(radioButtonHide);
+            panel3.Controls.Add(radioButtonShow);
+            panel3.Location = new Point(567, 316);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(175, 64);
+            panel3.TabIndex = 22;
+            // 
             // NumberSystemControl1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
+            Controls.Add(panel3);
+            Controls.Add(btnDoublePair);
             Controls.Add(btnClrDatGrid1);
             Controls.Add(btnDoubleZero);
             Controls.Add(btnApplyFilter);
@@ -1429,6 +1492,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView6).EndInit();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1543,5 +1608,10 @@
         private Button btnGenerateByMid;
         private Button btnClrDatGrid1;
         private Button btnReset;
+        private Button btnDoublePair;
+        private RadioButton radioButtonHide;
+        private RadioButton radioButtonShow;
+        private Label label5;
+        private Panel panel3;
     }
 }

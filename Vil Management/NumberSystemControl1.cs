@@ -29,11 +29,15 @@ namespace Vil_Management
         //private TextBox inputDatxtInputData;
         private int digitCount = 0;
         //ErrorProvider errorProvider = null;
-        private int RowLimit = 30000;
+        private int RowLimit = 29999;
 
         public List<string> modifiedItemsNew = new List<string>(10000000);
         public List<string> filteredData = new List<string>(10000000);
         public List<string> modifiedItems = new List<string>(10000000);
+        public List<string> filteredRows = new List<string>(10000000);
+        public List<string> FilterRepetitve = new List<string>(10000000);
+        public List<string> FilterPair = new List<string>(10000000);
+
         public NumberSystemControl1()
         {
             InitializeComponent();
@@ -483,6 +487,7 @@ namespace Vil_Management
                                 dataGridView1.Rows[i - RowLimit].Cells[currentColumn + 1].Value = dataGridView1.Rows[i].Cells[currentColumn].Value;
                                 // Clear the current column after moving data
                                 dataGridView1.Rows[i].Cells[currentColumn].Value = null;
+                                //dataGridView1.Rows.RemoveAt(i);
                             }
                         }
                     }
@@ -497,13 +502,13 @@ namespace Vil_Management
                 else
                 {
                     // If no more columns are available, show a message and break out of the loop
-                    MessageBox.Show("No more columns available to move data.");
+                    //MessageBox.Show("No more columns available to move data.");
                     break;
                 }
             }
 
             // Show a message once the data has been processed
-            MessageBox.Show("Data has been successfully distributed across columns.");
+            MessageBox.Show("Data has been successfully distributed.");
         }
 
         private async void btnGnrtNmrlgy_Click(object sender, EventArgs e)
@@ -560,7 +565,9 @@ namespace Vil_Management
                 //    MessageBox.Show("Generated");
                 //});
 
-                MessageBox.Show("Generated");
+                //MessageBox.Show("Generated");
+                MessageBox.Show("✅ Numbers Generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 btnGnrtNmrlgy.Enabled = false;
             });
 
@@ -615,7 +622,17 @@ namespace Vil_Management
             //    btnClrList3.Visible = true;
             //}
 
-            MessageBox.Show("Required digits are filtered.");
+            Clipboard.Clear();
+            // Join the list into a single string (each item on a new line)
+            string clipboardText = string.Join(Environment.NewLine, filteredData);
+
+            // Copy to clipboard
+            Clipboard.SetText(clipboardText);
+
+
+            //MessageBox.Show("Required digits are filtered.");
+            MessageBox.Show("✅ Required digits are filtered! and Copied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             //btnFilterDigit.Enabled = false;
         }
 
@@ -676,7 +693,7 @@ namespace Vil_Management
             if (checkBox18.Checked) requiredSums.Add(8);
             if (checkBox19.Checked) requiredSums.Add(9);
 
-            List<string> filteredRows = new List<string>();
+            //List<string> filteredRows = new List<string>();
 
             foreach (string rowData in rowDataList)
             {
@@ -696,56 +713,22 @@ namespace Vil_Management
                 }
             }
 
-            //for (int i = 0; i < rowDataList.Count; i++) {
-            //    string rowData = rowDataList[i];
-            //    int sum = CalculateDigitSum(rowData);
-            //    // Check if the sum is a two-digit number (between 10 and 99)
-            //    if (sum >= 10 && sum <= 99)
-            //    {
-            //        // Recalculate sum of digits if the sum is a two-digit number
-            //        sum = CalculateDigitSum(sum.ToString());
-            //    }
-            //    // If the sum is not in the list of required sums, remove the row
-            //    if (!requiredSums.Contains(sum))
-            //    {
-            //        rowDataList.RemoveAt(i);
-            //    }
-            //}
-
-
-            // Loop through all the rows in DataGridView in reverse order to avoid index shifting when removing rows
-            //for (int i = dataGridView2.Rows.Count - 1; i >= 0; i--)
-            //{
-            //    var row = dataGridView2.Rows[i];
-
-            //    if (row.Cells[0].Value != null)
-            //    {
-            //        string rowData = row.Cells[0].Value.ToString();
-
-            //        int sum = CalculateDigitSum(rowData);
-
-            //        // Check if the sum is a two-digit number (between 10 and 99)
-            //        if (sum >=10 && sum <= 99)
-            //        {
-            //            // Recalculate sum of digits if the sum is a two-digit number
-            //            sum = CalculateDigitSum(sum.ToString());
-            //        }
-
-            //        // If the sum is not in the list of required sums, remove the row
-            //        if (!requiredSums.Contains(sum))
-            //        {
-            //            dataGridView2.Rows.RemoveAt(i);
-            //        }
-            //    }
-            //}
 
             // Clear DataGridView and add all filtered data at once
-            dataGridView4.Rows.Clear();
+            //dataGridView4.Rows.Clear();
 
-            foreach (var data in filteredRows)
+            
+
+            if (radioButtonShow.Checked)
             {
-                dataGridView4.Rows.Add(data); // Add rows to DataGridView
+                dataGridView4.Rows.Clear();
+
+                foreach (var data in filteredRows)
+                {
+                    dataGridView4.Rows.Add(data); // Add rows to DataGridView
+                }
             }
+
 
             if (dataGridView4.Visible == false)
             {
@@ -754,7 +737,17 @@ namespace Vil_Management
                 btnClrList4.Visible = true;
             }
 
-            MessageBox.Show("Filtered by sum.");
+            Clipboard.Clear();
+
+            // Join the list into a single string (each item on a new line)
+            string clipboardText = string.Join(Environment.NewLine, filteredRows);
+
+            // Copy to clipboard
+            Clipboard.SetText(clipboardText);
+
+            //MessageBox.Show("Filtered by sum.");
+            MessageBox.Show("✅ Filtered by sum & Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         // Helper method to calculate the sum of digits of a number (string version)
@@ -775,27 +768,72 @@ namespace Vil_Management
 
         private void btnFltrRptvDgts_Click(object sender, EventArgs e)
         {
-            dataGridView5.Rows.Clear();
-            CopyDataToDataGridView(dataGridView4, dataGridView5);
+            FilterRepetitve.Clear();
+            List<string> rowDataList = new List<string>();
 
-            // Loop through all the rows in DataGridView in reverse order
-            for (int i = dataGridView5.Rows.Count - 1; i >= 0; i--)
+            rowDataList.AddRange(filteredRows);
+
+            if (rowDataList.Count == 0)
             {
-                DataGridViewRow row = dataGridView5.Rows[i];
+                MessageBox.Show("No data to filter.");
 
-                // Ensure the row has data in the first column (column 0)
-                if (row.Cells[0].Value != null)
+            }
+            else
+            {
+                //foreach (string data in rowDataList)
+                //{
+                //    // Check if the row contains any repetitive digits based on the selected checkboxes
+                //    //if (ContainsRepetitiveDigits(data))
+                //    //{
+                //    //    // Remove the row if it contains repetitive digits that are not required
+                //    //    //rowDataList.Remove(data);
+                //    //    rowDataList.RemoveAt(rowDataList.IndexOf(data));
+                //    //}
+
+                //    rowDataList.RemoveAll(data => ContainsRepetitiveDigits(data));
+                //}
+                for (int i = rowDataList.Count - 1; i >= 0; i--)
                 {
-                    string rowData = row.Cells[0].Value.ToString();
-
-                    // Check if the row contains any repetitive digits based on the selected checkboxes
-                    if (ContainsRepetitiveDigits(rowData))
+                    if (ContainsRepetitiveDigits(rowDataList[i]))
                     {
-                        // Remove the row if it contains repetitive digits that are not required
-                        dataGridView5.Rows.RemoveAt(i);
+                        rowDataList.RemoveAt(i);
                     }
                 }
+
             }
+
+            FilterRepetitve.AddRange(rowDataList);
+
+            if (radioButtonShow.Checked)
+            {
+                dataGridView5.Rows.Clear();
+                foreach (var data in FilterRepetitve)
+                {
+                    dataGridView5.Rows.Add(data); // Add rows to DataGridView
+                }
+            }
+
+            //dataGridView5.Rows.Clear();
+            //CopyDataToDataGridView(dataGridView4, dataGridView5);
+
+            //// Loop through all the rows in DataGridView in reverse order
+            //for (int i = dataGridView5.Rows.Count - 1; i >= 0; i--)
+            //{
+            //    DataGridViewRow row = dataGridView5.Rows[i];
+
+            //    // Ensure the row has data in the first column (column 0)
+            //    if (row.Cells[0].Value != null)
+            //    {
+            //        string rowData = row.Cells[0].Value.ToString();
+
+            //        // Check if the row contains any repetitive digits based on the selected checkboxes
+            //        if (ContainsRepetitiveDigits(rowData))
+            //        {
+            //            // Remove the row if it contains repetitive digits that are not required
+            //            dataGridView5.Rows.RemoveAt(i);
+            //        }
+            //    }
+            //}
 
             if (dataGridView5.Visible == false)
             {
@@ -804,8 +842,17 @@ namespace Vil_Management
                 btnClrList5.Visible = true;
             }
 
+            Clipboard.Clear();
 
-            MessageBox.Show("Repetitive Filter applied.");
+            // Join the list into a single string (each item on a new line)
+            string clipboardText = string.Join(Environment.NewLine, FilterRepetitve);
+
+            // Copy to clipboard
+            Clipboard.SetText(clipboardText);
+
+            //MessageBox.Show("Repetitive Filter applied.");
+            MessageBox.Show("✅ Repetitive Filter applied and Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
         }
 
@@ -931,39 +978,96 @@ namespace Vil_Management
 
         private void btnFilterPair_Click(object sender, EventArgs e)
         {
-            CopyDataToDataGridView(dataGridView5, dataGridView6);
+            FilterPair.Clear();
+            List<string> rowDataList = new List<string>();
+            rowDataList.Clear();
+            rowDataList.AddRange(FilterRepetitve);
 
-            // Loop through each row in the DataGridView in reverse order (to avoid skipping rows when deleting)
-            for (int i = dataGridView6.Rows.Count - 1; i >= 0; i--)
+            if (rowDataList.Count == 0)
             {
-                DataGridViewRow row = dataGridView6.Rows[i];
+                MessageBox.Show("No data to filter.");
 
-                // Check if the row is not a new row
-                if (!row.IsNewRow)
+            }
+            else
+            {
+
+                for (int i = rowDataList.Count - 1; i >= 0; i--)
                 {
-                    // Loop through each cell in the row
-                    foreach (DataGridViewCell cell in row.Cells)
+                    foreach (string item in cbPair.Items)
                     {
-                        foreach (string item in cbPair.Items)
+                        if (rowDataList[i].Contains(item.ToString()))
                         {
-                            // Check if the cell's value matches the search value
-                            if (cell.Value != null && cell.Value.ToString().Contains(item))
-                            {
-                                // Remove the row if the value is found
-                                dataGridView6.Rows.RemoveAt(i);
-                                break; // Stop checking other cells in this row after deletion
-                            }
+                            rowDataList.RemoveAt(i);
+                            break;
                         }
                     }
+
                 }
 
-                if (dataGridView6.Visible == false)
+
+
+            }
+
+            FilterPair.Clear();
+            FilterPair.AddRange(rowDataList);
+            FilterPair = rowDataList.Distinct().ToList();
+
+            if (radioButtonShow.Checked)
+            {
+                dataGridView6.Rows.Clear();
+
+                foreach (var data in FilterPair)
                 {
-                    dataGridView6.Visible = true;
-                    btnCopy5.Visible = true;
-                    btnClrList6.Visible = true;
+                    dataGridView6.Rows.Add(data); // Add rows to DataGridView
                 }
             }
+
+            
+
+            Clipboard.Clear();
+            // Join the list into a single string (each item on a new line)
+            string clipboardText = string.Join(Environment.NewLine, FilterPair);
+
+            // Copy to clipboard
+            Clipboard.SetText(clipboardText);
+
+            //MessageBox.Show("Filtered by pair.");
+            MessageBox.Show("✅ Filtered by pair & Data copied successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //CopyDataToDataGridView(dataGridView5, dataGridView6);
+
+            //// Loop through each row in the DataGridView in reverse order (to avoid skipping rows when deleting)
+            //for (int i = dataGridView6.Rows.Count - 1; i >= 0; i--)
+            //{
+            //    DataGridViewRow row = dataGridView6.Rows[i];
+
+            //    // Check if the row is not a new row
+            //    if (!row.IsNewRow)
+            //    {
+            //        // Loop through each cell in the row
+            //        foreach (DataGridViewCell cell in row.Cells)
+            //        {
+            //            foreach (string item in cbPair.Items)
+            //            {
+            //                // Check if the cell's value matches the search value
+            //                if (cell.Value != null && cell.Value.ToString().Contains(item))
+            //                {
+            //                    // Remove the row if the value is found
+            //                    dataGridView6.Rows.RemoveAt(i);
+            //                    break; // Stop checking other cells in this row after deletion
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            if (dataGridView6.Visible == false)
+            {
+                dataGridView6.Visible = true;
+                btnCopy5.Visible = true;
+                btnClrList6.Visible = true;
+            }
+            //}
         }
 
         private void btnCopy1_Click(object sender, EventArgs e)
@@ -1184,11 +1288,13 @@ namespace Vil_Management
         private void btnClrList5_Click(object sender, EventArgs e)
         {
             ClearDataGridRows(dataGridView5);
+            FilterRepetitve.Clear();
         }
 
         private void btnClrList6_Click(object sender, EventArgs e)
         {
             ClearDataGridRows(dataGridView6);
+            FilterPair.Clear();
         }
 
         private void btnDoubleZero_Click(object sender, EventArgs e)
@@ -1272,7 +1378,48 @@ namespace Vil_Management
 
         private void btnClrDatGrid1_Click(object sender, EventArgs e)
         {
-            ClearDataGridRows(dataGridView1);
+            //ClearDataGridRows(dataGridView1);
+            if (Clipboard.ContainsText())
+            {
+
+                string clipboardText = Clipboard.GetText();
+
+                // Split the clipboard text by new line character
+                string[] rows = clipboardText.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+
+                // Loop through each row
+                foreach (string row in rows)
+                {
+                    //if (!string.IsNullOrEmpty(row))
+                    //{
+                    //    // Split columns by tab or other delimiter
+                    //    string[] cells = row.Split('\t');
+
+                    //    DataGridViewRow newRow =new DataGridViewRow();
+
+                    //    foreach (string cell in cells)
+                    //    {
+                    //        newRow.Cells.Add(new DataGridViewTextBoxCell { Value = cell });
+                    //    }
+
+                    //    modifiedItems.Add(newRow);
+                    //    dataGridView1.Rows.Add(newRow);
+                    //}
+                    string trimmedRow = row.Trim();
+                    if (!string.IsNullOrEmpty(trimmedRow))
+                    {
+                        modifiedItems.Add(trimmedRow);
+                        dataGridView1.Rows.Add(trimmedRow);
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No data to paste.");
+            }
+
+
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -1280,6 +1427,9 @@ namespace Vil_Management
             modifiedItems.Clear();
             modifiedItemsNew.Clear();
             filteredData.Clear();
+            FilterRepetitve.Clear();
+            FilterPair.Clear();
+            Clipboard.Clear();
             btnFilterDigit.Enabled = true;
             btnGnrtNmrlgy.Enabled = true;
             dataGridView1.Rows.Clear();
@@ -1287,5 +1437,47 @@ namespace Vil_Management
             dataGridView5.Rows.Clear();
             dataGridView6.Rows.Clear();
         }
+
+        private void btnDoublePair_Click(object sender, EventArgs e)
+        {
+            List<string> numbers = new List<string>();
+
+            foreach (var item in cbSrsNmbrs.Items)
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    string number = item.ToString() + item.ToString() + i.ToString("D2");
+                    numbers.Add(number);
+                }
+
+                for (int i = 0; i < 100; i++)
+                {
+                    string number = item.ToString() + i.ToString("D2") + item.ToString();
+                    numbers.Add(number);
+                }
+
+                for (int i = 0; i < 100; i++)
+                {
+                    string twoDigit = item.ToString();
+                    string number = item.ToString() + twoDigit.Substring(twoDigit.Length - 2) + i.ToString("D2") + i.ToString("D2");
+                    numbers.Add(number);
+                }
+
+                for (int i = 0; i < 100; i++)
+                {
+                    string number = item.ToString() + "00" + i.ToString("D2") + "00";
+                    numbers.Add(number);
+                }
+
+            }
+
+            foreach (var i in numbers)
+            {
+                dataGridView1.Rows.Add(i);
+            }
+
+        }
+
+        
     }
 }
