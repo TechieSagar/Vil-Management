@@ -20,10 +20,15 @@ namespace Vil_Management
         {
             InitializeComponent();
 
-            panelNav.Height = btnDashboard.Height;
-            panelNav.Top = btnDashboard.Top;
-            panelNav.Left = btnDashboard.Left;
-            btnDashboard.BackColor = Color.FromArgb(46, 51, 73);
+            //panelNav.Height = btnDashboard.Height;
+            //panelNav.Top = btnDashboard.Top;
+            //panelNav.Left = btnDashboard.Left;
+            //btnDashboard.BackColor = Color.FromArgb(46, 51, 73);
+
+            //btnDashboard.PerformClick();
+            //btnNumberSystem.PerformClick();
+
+
 
             //LoadTasks();
             //DisplayTasks();
@@ -116,6 +121,6 @@ namespace Vil_Management
             btnContactUs.BackColor = Color.FromArgb(24, 30, 54);
         }
 
-        
+       
     }
 }

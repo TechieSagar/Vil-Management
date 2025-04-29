@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -513,11 +514,8 @@ namespace Vil_Management
 
         private async void btnGnrtNmrlgy_Click(object sender, EventArgs e)
         {
-            //btnGnrtNmrlgy.Enabled = false;
-
-            // Pre-allocate capacity for generating items
-            //List<string> modifiedItems = new List<string>(1000000); // Pre-allocate large capacity
-
+           
+            ConcurrentBag<string> tempItems = new ConcurrentBag<string>();
             // Start the number generation process in a background thread without waiting (immediate start)
             Task task = Task.Run(() =>
             {
@@ -532,41 +530,18 @@ namespace Vil_Management
                             string modifiedItem = item.ToString() + j.ToString("D2") + i.ToString("D4");
 
                             // Avoid lock and add to list directly (fast)
-                            modifiedItemsNew.Add(modifiedItem);
+                            tempItems.Add(modifiedItem);
 
                         }
                     }
                 });
 
-                //MessageBox.Show("Generated");
+                modifiedItemsNew.Clear();
+                modifiedItemsNew.AddRange(tempItems);
 
-                //DataTable dataTable = new DataTable();
-                //dataTable.Columns.Add("Items", typeof(string));  // Define a single column for the strings
-
-                //// After generating the items, update the DataGridView in bulk
-                //dataGridView1.Invoke((MethodInvoker)delegate
-                //{
-                //    dataGridView1.Rows.Clear();  // Clear old rows
-                //});
-
-                // Add all items in a single bulk operation (faster than adding one by one)
-                //dataGridView2.Invoke((MethodInvoker)delegate
-                //{
-                //    foreach (var item in modifiedItems)
-                //    {
-                //        dataGridView2.Rows.Add(item);
-                //    }
-                //});
-
-                // Enable the button and show the completion message (in the UI thread)
-                //btnGnrtNmrlgy.Invoke((MethodInvoker)delegate
-                //{
-                //    btnGnrtNmrlgy.Enabled = true;
-                //    MessageBox.Show("Generated");
-                //});
-
-                //MessageBox.Show("Generated");
-                MessageBox.Show("✅ Numbers Generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //modifiedItemsNew = tempItems.Distinct().ToList();
+                int uniqueCount = modifiedItemsNew.Count;
+                MessageBox.Show($"✅ {uniqueCount} Numbers generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 btnGnrtNmrlgy.Enabled = false;
             });
@@ -582,14 +557,6 @@ namespace Vil_Management
         {
             List<string> rowDataList = new List<string>();
 
-            // Collecting data from DataGridView (only the first column)
-            //foreach (DataGridViewRow row in dataGridView2.Rows)
-            //{
-            //    if (row.Cells[0].Value != null)
-            //    {
-            //        rowDataList.Add(row.Cells[0].Value.ToString());
-            //    }
-            //}
             rowDataList.AddRange(modifiedItemsNew);
 
             string selectedDigits = GetSelectedDigits();
@@ -600,38 +567,25 @@ namespace Vil_Management
                 .Where(data => !ContainsUnwantedDigits(data, selectedDigitSet)) // Faster check with HashSet
                 .ToList();
 
-            // Clear DataGridView and add all filtered data at once
-            //dataGridView3.Rows.Clear();
-            //foreach (var data in filteredData)
-            //{
-            //    dataGridView3.Rows.Add(data); // Add rows to DataGridView
-            //}
+            try
+            {
+                string clipboardText = string.Join(Environment.NewLine, filteredData);
 
-            //var rows = filteredData.Select(item => new DataGridViewRow
-            //{
-            //    Cells = { new DataGridViewTextBoxCell { Value = item } }
-            //}).ToArray();
+                // Clipboard code directly in STAMain
+                Clipboard.SetText(clipboardText);
+                Console.WriteLine("Copied to clipboard: \n" + clipboardText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Clipboard error: " + ex.Message);
+            }
 
-            //// Add all rows at once using AddRange
-            //dataGridView3.Rows.AddRange(rows);
 
-            //if (dataGridView3.Visible == false)
-            //{
-            //    dataGridView3.Visible = true;
-            //    btnCopy2.Visible = true;
-            //    btnClrList3.Visible = true;
-            //}
-
-            Clipboard.Clear();
-            // Join the list into a single string (each item on a new line)
-            string clipboardText = string.Join(Environment.NewLine, filteredData);
-
-            // Copy to clipboard
-            Clipboard.SetText(clipboardText);
-
+            int uniqueCount = filteredData.Count;
+            MessageBox.Show($"✅ {uniqueCount} Required digits are filtered! and Copied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //MessageBox.Show("Required digits are filtered.");
-            MessageBox.Show("✅ Required digits are filtered! and Copied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("✅ Required digits are filtered! and Copied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //btnFilterDigit.Enabled = false;
         }
@@ -694,7 +648,7 @@ namespace Vil_Management
             if (checkBox19.Checked) requiredSums.Add(9);
 
             //List<string> filteredRows = new List<string>();
-
+            filteredRows.Clear(); // Clear previous filtered rows
             foreach (string rowData in rowDataList)
             {
                 int sum = CalculateDigitSum(rowData);
@@ -713,11 +667,7 @@ namespace Vil_Management
                 }
             }
 
-
-            // Clear DataGridView and add all filtered data at once
-            //dataGridView4.Rows.Clear();
-
-            
+            filteredRows = filteredRows.Distinct().ToList(); // Remove duplicates
 
             if (radioButtonShow.Checked)
             {
@@ -737,16 +687,27 @@ namespace Vil_Management
                 btnClrList4.Visible = true;
             }
 
-            Clipboard.Clear();
+            try
+            {
+                string clipboardText = string.Join(Environment.NewLine, filteredRows);
 
-            // Join the list into a single string (each item on a new line)
-            string clipboardText = string.Join(Environment.NewLine, filteredRows);
+                // Clipboard code directly in STAMain
+                Clipboard.SetText(clipboardText);
+                Console.WriteLine("Copied to clipboard: \n" + clipboardText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Clipboard error: " + ex.Message);
+            }
 
-            // Copy to clipboard
-            Clipboard.SetText(clipboardText);
+            //Clipboard.Clear();
+
+            int uniqueCount = filteredRows.Count;
+            MessageBox.Show($"✅ {uniqueCount} Filtered by sum & Copied successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
             //MessageBox.Show("Filtered by sum.");
-            MessageBox.Show("✅ Filtered by sum & Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("✅ Filtered by sum & Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
@@ -768,7 +729,7 @@ namespace Vil_Management
 
         private void btnFltrRptvDgts_Click(object sender, EventArgs e)
         {
-            FilterRepetitve.Clear();
+
             List<string> rowDataList = new List<string>();
 
             rowDataList.AddRange(filteredRows);
@@ -780,18 +741,6 @@ namespace Vil_Management
             }
             else
             {
-                //foreach (string data in rowDataList)
-                //{
-                //    // Check if the row contains any repetitive digits based on the selected checkboxes
-                //    //if (ContainsRepetitiveDigits(data))
-                //    //{
-                //    //    // Remove the row if it contains repetitive digits that are not required
-                //    //    //rowDataList.Remove(data);
-                //    //    rowDataList.RemoveAt(rowDataList.IndexOf(data));
-                //    //}
-
-                //    rowDataList.RemoveAll(data => ContainsRepetitiveDigits(data));
-                //}
                 for (int i = rowDataList.Count - 1; i >= 0; i--)
                 {
                     if (ContainsRepetitiveDigits(rowDataList[i]))
@@ -801,9 +750,9 @@ namespace Vil_Management
                 }
 
             }
-
+            FilterRepetitve.Clear(); // Clear previous filtered data
             FilterRepetitve.AddRange(rowDataList);
-
+            FilterRepetitve = rowDataList.Distinct().ToList(); // Remove duplicates
             if (radioButtonShow.Checked)
             {
                 dataGridView5.Rows.Clear();
@@ -813,27 +762,6 @@ namespace Vil_Management
                 }
             }
 
-            //dataGridView5.Rows.Clear();
-            //CopyDataToDataGridView(dataGridView4, dataGridView5);
-
-            //// Loop through all the rows in DataGridView in reverse order
-            //for (int i = dataGridView5.Rows.Count - 1; i >= 0; i--)
-            //{
-            //    DataGridViewRow row = dataGridView5.Rows[i];
-
-            //    // Ensure the row has data in the first column (column 0)
-            //    if (row.Cells[0].Value != null)
-            //    {
-            //        string rowData = row.Cells[0].Value.ToString();
-
-            //        // Check if the row contains any repetitive digits based on the selected checkboxes
-            //        if (ContainsRepetitiveDigits(rowData))
-            //        {
-            //            // Remove the row if it contains repetitive digits that are not required
-            //            dataGridView5.Rows.RemoveAt(i);
-            //        }
-            //    }
-            //}
 
             if (dataGridView5.Visible == false)
             {
@@ -842,16 +770,25 @@ namespace Vil_Management
                 btnClrList5.Visible = true;
             }
 
-            Clipboard.Clear();
+            try
+            {
+                string clipboardText = string.Join(Environment.NewLine, FilterRepetitve);
 
-            // Join the list into a single string (each item on a new line)
-            string clipboardText = string.Join(Environment.NewLine, FilterRepetitve);
+                // Clipboard code directly in STAMain
+                Clipboard.SetText(clipboardText);
+                Console.WriteLine("Copied to clipboard: \n" + clipboardText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Clipboard error: " + ex.Message);
+            }
 
-            // Copy to clipboard
-            Clipboard.SetText(clipboardText);
+            int uniqueCount = FilterRepetitve.Count;
+            MessageBox.Show($"✅ {uniqueCount} Repetitive Filter applied and Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
             //MessageBox.Show("Repetitive Filter applied.");
-            MessageBox.Show("✅ Repetitive Filter applied and Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("✅ Repetitive Filter applied and Copied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
         }
@@ -1022,44 +959,28 @@ namespace Vil_Management
                 }
             }
 
-            
 
-            Clipboard.Clear();
-            // Join the list into a single string (each item on a new line)
-            string clipboardText = string.Join(Environment.NewLine, FilterPair);
 
-            // Copy to clipboard
-            Clipboard.SetText(clipboardText);
+            try
+            {
+                string clipboardText = string.Join(Environment.NewLine, FilterPair);
+
+                // Clipboard code directly in STAMain
+                Clipboard.SetText(clipboardText);
+                Console.WriteLine("Copied to clipboard: \n" + clipboardText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Clipboard error: " + ex.Message);
+            }
+
+            int uniqueCount = FilterPair.Count;
+            MessageBox.Show($"✅ {uniqueCount} Filtered by pair & Data copied successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
             //MessageBox.Show("Filtered by pair.");
-            MessageBox.Show("✅ Filtered by pair & Data copied successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("✅ Filtered by pair & Data copied successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //CopyDataToDataGridView(dataGridView5, dataGridView6);
-
-            //// Loop through each row in the DataGridView in reverse order (to avoid skipping rows when deleting)
-            //for (int i = dataGridView6.Rows.Count - 1; i >= 0; i--)
-            //{
-            //    DataGridViewRow row = dataGridView6.Rows[i];
-
-            //    // Check if the row is not a new row
-            //    if (!row.IsNewRow)
-            //    {
-            //        // Loop through each cell in the row
-            //        foreach (DataGridViewCell cell in row.Cells)
-            //        {
-            //            foreach (string item in cbPair.Items)
-            //            {
-            //                // Check if the cell's value matches the search value
-            //                if (cell.Value != null && cell.Value.ToString().Contains(item))
-            //                {
-            //                    // Remove the row if the value is found
-            //                    dataGridView6.Rows.RemoveAt(i);
-            //                    break; // Stop checking other cells in this row after deletion
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
 
             if (dataGridView6.Visible == false)
             {
@@ -1429,7 +1350,6 @@ namespace Vil_Management
             filteredData.Clear();
             FilterRepetitve.Clear();
             FilterPair.Clear();
-            Clipboard.Clear();
             btnFilterDigit.Enabled = true;
             btnGnrtNmrlgy.Enabled = true;
             dataGridView1.Rows.Clear();
@@ -1478,6 +1398,6 @@ namespace Vil_Management
 
         }
 
-        
+    
     }
 }

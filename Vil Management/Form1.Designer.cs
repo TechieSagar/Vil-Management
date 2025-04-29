@@ -246,6 +246,7 @@
             // toolsControl1
             // 
             toolsControl1.BackColor = Color.FromArgb(46, 51, 73);
+            toolsControl1.ForeColor = Color.Black;
             toolsControl1.Location = new Point(248, 60);
             toolsControl1.Name = "toolsControl1";
             toolsControl1.Size = new Size(1419, 802);
@@ -266,7 +267,7 @@
             Controls.Add(updateControl1);
             ForeColor = Color.FromArgb(158, 176, 161);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Vil Management System";
             panelSide.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

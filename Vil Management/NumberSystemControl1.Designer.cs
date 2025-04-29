@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NumberSystemControl1));
             panel1 = new Panel();
             btnCheckSum = new Button();
@@ -146,6 +146,16 @@
             radioButtonShow = new RadioButton();
             label5 = new Label();
             panel3 = new Panel();
+            btn702703704 = new Button();
+            btn_0_0_0_0_0 = new Button();
+            btn999111_222 = new Button();
+            btn9991000 = new Button();
+            btnSemiMirror = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            button7 = new Button();
+            button8 = new Button();
+            button9 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -495,34 +505,34 @@
             // dataGridView1
             // 
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9, Column10, Column11, Column12, Column13, Column14 });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             dataGridView1.Location = new Point(16, 287);
             dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(530, 224);
@@ -1093,7 +1103,7 @@
             dataGridView4.Name = "dataGridView4";
             dataGridView4.RowHeadersVisible = false;
             dataGridView4.RowHeadersWidth = 51;
-            dataGridView4.Size = new Size(179, 188);
+            dataGridView4.Size = new Size(179, 173);
             dataGridView4.TabIndex = 7;
             dataGridView4.Visible = false;
             // 
@@ -1114,7 +1124,7 @@
             dataGridView5.Name = "dataGridView5";
             dataGridView5.RowHeadersVisible = false;
             dataGridView5.RowHeadersWidth = 51;
-            dataGridView5.Size = new Size(179, 188);
+            dataGridView5.Size = new Size(179, 173);
             dataGridView5.TabIndex = 7;
             dataGridView5.Visible = false;
             // 
@@ -1135,7 +1145,7 @@
             dataGridView6.Name = "dataGridView6";
             dataGridView6.RowHeadersVisible = false;
             dataGridView6.RowHeadersWidth = 51;
-            dataGridView6.Size = new Size(179, 188);
+            dataGridView6.Size = new Size(179, 173);
             dataGridView6.TabIndex = 7;
             dataGridView6.Visible = false;
             // 
@@ -1373,7 +1383,7 @@
             // 
             btnDoubleZero.Location = new Point(16, 526);
             btnDoubleZero.Name = "btnDoubleZero";
-            btnDoubleZero.Size = new Size(203, 29);
+            btnDoubleZero.Size = new Size(158, 29);
             btnDoubleZero.TabIndex = 16;
             btnDoubleZero.Text = "****00**00";
             btnDoubleZero.UseVisualStyleBackColor = true;
@@ -1391,9 +1401,9 @@
             // 
             // btnDoublePair
             // 
-            btnDoublePair.Location = new Point(239, 526);
+            btnDoublePair.Location = new Point(202, 526);
             btnDoublePair.Name = "btnDoublePair";
-            btnDoublePair.Size = new Size(173, 29);
+            btnDoublePair.Size = new Size(158, 29);
             btnDoublePair.TabIndex = 18;
             btnDoublePair.Text = "double pair";
             btnDoublePair.UseVisualStyleBackColor = true;
@@ -1444,11 +1454,111 @@
             panel3.Size = new Size(175, 64);
             panel3.TabIndex = 22;
             // 
+            // btn702703704
+            // 
+            btn702703704.Location = new Point(388, 526);
+            btn702703704.Name = "btn702703704";
+            btn702703704.Size = new Size(158, 29);
+            btn702703704.TabIndex = 23;
+            btn702703704.Text = "702 703 704...";
+            btn702703704.UseVisualStyleBackColor = true;
+            // 
+            // btn_0_0_0_0_0
+            // 
+            btn_0_0_0_0_0.Location = new Point(16, 561);
+            btn_0_0_0_0_0.Name = "btn_0_0_0_0_0";
+            btn_0_0_0_0_0.Size = new Size(157, 29);
+            btn_0_0_0_0_0.TabIndex = 24;
+            btn_0_0_0_0_0.Text = "*0*0*0*0*0";
+            btn_0_0_0_0_0.UseVisualStyleBackColor = true;
+            // 
+            // btn999111_222
+            // 
+            btn999111_222.Location = new Point(202, 561);
+            btn999111_222.Name = "btn999111_222";
+            btn999111_222.Size = new Size(158, 29);
+            btn999111_222.TabIndex = 25;
+            btn999111_222.Text = "999111 , 222";
+            btn999111_222.UseVisualStyleBackColor = true;
+            // 
+            // btn9991000
+            // 
+            btn9991000.Location = new Point(388, 561);
+            btn9991000.Name = "btn9991000";
+            btn9991000.Size = new Size(158, 29);
+            btn9991000.TabIndex = 26;
+            btn9991000.Text = "999*000";
+            btn9991000.UseVisualStyleBackColor = true;
+            // 
+            // btnSemiMirror
+            // 
+            btnSemiMirror.Location = new Point(16, 596);
+            btnSemiMirror.Name = "btnSemiMirror";
+            btnSemiMirror.Size = new Size(157, 29);
+            btnSemiMirror.TabIndex = 27;
+            btnSemiMirror.Text = "Semi Mirror";
+            btnSemiMirror.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(202, 596);
+            button5.Name = "button5";
+            button5.Size = new Size(158, 29);
+            button5.TabIndex = 28;
+            button5.Text = "check";
+            button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(388, 596);
+            button6.Name = "button6";
+            button6.Size = new Size(158, 29);
+            button6.TabIndex = 29;
+            button6.Text = "check";
+            button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(19, 632);
+            button7.Name = "button7";
+            button7.Size = new Size(154, 29);
+            button7.TabIndex = 30;
+            button7.Text = "check";
+            button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(202, 632);
+            button8.Name = "button8";
+            button8.Size = new Size(158, 29);
+            button8.TabIndex = 31;
+            button8.Text = "check";
+            button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(388, 632);
+            button9.Name = "button9";
+            button9.Size = new Size(158, 29);
+            button9.TabIndex = 32;
+            button9.Text = "check";
+            button9.UseVisualStyleBackColor = true;
+            // 
             // NumberSystemControl1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
+            Controls.Add(button9);
+            Controls.Add(button8);
+            Controls.Add(button7);
+            Controls.Add(button6);
+            Controls.Add(button5);
+            Controls.Add(btnSemiMirror);
+            Controls.Add(btn9991000);
+            Controls.Add(btn999111_222);
+            Controls.Add(btn_0_0_0_0_0);
+            Controls.Add(btn702703704);
             Controls.Add(panel3);
             Controls.Add(btnDoublePair);
             Controls.Add(btnClrDatGrid1);
@@ -1613,5 +1723,15 @@
         private RadioButton radioButtonShow;
         private Label label5;
         private Panel panel3;
+        private Button btn702703704;
+        private Button btn_0_0_0_0_0;
+        private Button btn999111_222;
+        private Button btn9991000;
+        private Button btnSemiMirror;
+        private Button button5;
+        private Button button6;
+        private Button button7;
+        private Button button8;
+        private Button button9;
     }
 }
